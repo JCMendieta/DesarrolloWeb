@@ -21,9 +21,11 @@ public class Item
     String wiki_url;
 
     @ManyToOne
-    Room room;
+    Room idRoom;
 
-    
+    @ManyToOne
+    Player idPlayer;
+
     public Item() 
     {
 
@@ -34,7 +36,8 @@ public class Item
         this.name = name;
     }
 
-    public Item(String name, String last_updated, Long cost, Long weight, String examine, String wiki_url) 
+    public Item(String name, String last_updated, Long cost, Long weight, String examine, String wiki_url, Room idRoom,
+            Player idPlayer) 
     {
         this.name = name;
         this.last_updated = last_updated;
@@ -42,6 +45,8 @@ public class Item
         this.weight = weight;
         this.examine = examine;
         this.wiki_url = wiki_url;
+        this.idRoom = idRoom;
+        this.idPlayer = idPlayer;
     }
 
     public Long getId() 
@@ -114,13 +119,23 @@ public class Item
         this.wiki_url = wiki_url;
     }
 
-    public Room getRoom() 
+    public Room getIdRoom() 
     {
-        return room;
+        return idRoom;
     }
 
-    public void setRoom(Room room) 
+    public void setIdRoom(Room idRoom) 
     {
-        this.room = room;
-    }  
+        this.idRoom = idRoom;
+    }
+
+    public Player getIdPlayer() 
+    {
+        return idPlayer;
+    }
+
+    public void setIdPlayer(Player idPlayer) 
+    {
+        this.idPlayer = idPlayer;
+    }
 }

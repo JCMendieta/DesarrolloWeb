@@ -2,13 +2,12 @@ package co.edu.javeriana.proyectoWeb.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Monster 
@@ -30,6 +29,9 @@ public class Monster
     String examine;
     String wiki_url;
 
+    @OneToOne
+    Room idRoom;
+
     public Monster()
     {
 
@@ -41,8 +43,8 @@ public class Monster
         this.size = size;
     }
 
-    public Monster(String name, String last_updated, Long attack_level, Long defence_slash, Long size,
-            Long hitpoints, ArrayList<String> category, String examine, String wiki_url) 
+    public Monster(String name, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
+            List<String> category, String examine, String wiki_url, Room idRoom) 
     {
         this.name = name;
         this.last_updated = last_updated;
@@ -53,6 +55,7 @@ public class Monster
         this.category = category;
         this.examine = examine;
         this.wiki_url = wiki_url;
+        this.idRoom = idRoom;
     }
 
     public Long getId() 
@@ -152,5 +155,15 @@ public class Monster
     public void setWiki_url(String wiki_url) 
     {
         this.wiki_url = wiki_url;
+    }
+
+    public Room getIdRoom() 
+    {
+        return idRoom;
+    }
+
+    public void setIdRoom(Room idRoom) 
+    {
+        this.idRoom = idRoom;
     }
 }

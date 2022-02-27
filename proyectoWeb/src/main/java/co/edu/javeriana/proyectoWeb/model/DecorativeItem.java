@@ -16,16 +16,17 @@ public class DecorativeItem
     String name;
 
     @ManyToOne
-    Room room;
+    Room idRoom;
 
     public DecorativeItem() 
     {
 
     }
 
-    public DecorativeItem(String name) 
-    {  
-        this.name = name;  
+    public DecorativeItem(String name, Room idRoom) 
+    {
+        this.name = name;
+        this.idRoom = idRoom;
     }
 
     public long getId() 
@@ -53,13 +54,13 @@ public class DecorativeItem
         this.id = id;
     }
 
-    public Room getRoomDI() 
+    public Room getIdRoom() 
     {
-        return room;
+        return idRoom;
     }
 
-    public void setRoomDI(Room roomDI) 
+    public void setIdRoom(Room idRoom)
     {
-        this.room = roomDI;
+        this.idRoom = idRoom;
     }
 }

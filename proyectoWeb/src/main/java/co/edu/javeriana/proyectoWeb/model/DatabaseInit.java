@@ -1,9 +1,6 @@
 package co.edu.javeriana.proyectoWeb.model;
 
-import java.util.Optional;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -46,7 +43,7 @@ public class DatabaseInit implements ApplicationRunner
 
         for (Item item : itemRepository.findAll()) 
         {
-            item.setRoom(r);
+            item.setIdRoom(r);
             itemRepository.save(item);
         }
     }

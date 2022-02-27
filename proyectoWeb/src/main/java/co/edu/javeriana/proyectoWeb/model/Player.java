@@ -1,13 +1,18 @@
 package co.edu.javeriana.proyectoWeb.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Player {
+public class Player 
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
@@ -18,18 +23,26 @@ public class Player {
     Long defence_slash;
     Long size;
     Long hitpoints;
+    Long maxWeight;
+    Long clock;
+    Long max_time;
     //ArrayList<String> category;
     //String examine;
     //String wiki_url;
     @ManyToOne
-    Room room;
+    Room idRoom;
+
+    @OneToMany(mappedBy = "idPlayer")
+    @ElementCollection(targetClass = Item.class)
+    List<Item> items = new ArrayList<>();
 
     public Player() 
     {
 
     }
 
-    public Player(String name, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints)
+    public Player(String name, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
+            Long maxWeight, Long clock, Long max_time, Room idRoom, List<Item> items) 
     {
         this.name = name;
         this.last_updated = last_updated;
@@ -37,6 +50,11 @@ public class Player {
         this.defence_slash = defence_slash;
         this.size = size;
         this.hitpoints = hitpoints;
+        this.maxWeight = maxWeight;
+        this.clock = clock;
+        this.max_time = max_time;
+        this.idRoom = idRoom;
+        this.items = items;
     }
 
     public Long getId() 
@@ -109,13 +127,53 @@ public class Player {
         this.hitpoints = hitpoints;
     }
 
-    public Room getRoomP() 
+    public Long getMaxWeight() 
     {
-        return room;
+        return maxWeight;
     }
 
-    public void setRoomP(Room roomP) 
+    public void setMaxWeight(Long maxWeight) 
     {
-        this.room = roomP;
+        this.maxWeight = maxWeight;
+    }
+
+    public Long getClock() 
+    {
+        return clock;
+    }
+
+    public void setClock(Long clock) 
+    {
+        this.clock = clock;
+    }
+
+    public Long getMax_time() 
+    {
+        return max_time;
+    }
+
+    public void setMax_time(Long max_time) 
+    {
+        this.max_time = max_time;
+    }
+
+    public List<Item> getItems() 
+    {
+        return items;
+    }
+
+    public void setItems(List<Item> items) 
+    {
+        this.items = items;
+    }
+
+    public Room getIdRoom() 
+    {
+        return idRoom;
+    }
+
+    public void setIdRoom(Room idRoom) 
+    {
+        this.idRoom = idRoom;
     }
 }

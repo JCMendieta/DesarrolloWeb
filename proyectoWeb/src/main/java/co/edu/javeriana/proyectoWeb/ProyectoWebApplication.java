@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class ProyectoWebApplication {
-
-	public static void main(String[] args) {
+public class ProyectoWebApplication 
+{
+	public static void main(String[] args) 
+	{
 		SpringApplication.run(ProyectoWebApplication.class, args);
 	}
 }

@@ -2,17 +2,13 @@ package co.edu.javeriana.proyectoWeb.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import org.hibernate.annotations.ManyToAny;
 
 @Entity
 public class Room 
@@ -21,24 +17,24 @@ public class Room
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "idRoom")
     @ElementCollection(targetClass = Item.class)
-    List <Item> rItems = new ArrayList<>();
+    List<Item> rItems = new ArrayList<>();
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "idRoom")
     @ElementCollection(targetClass = DecorativeItem.class)
-    List <DecorativeItem> rDecorativeItems = new ArrayList<>();
+    List<DecorativeItem> rDecorativeItems = new ArrayList<>();
     
-    @OneToOne
+    @OneToOne(mappedBy = "idRoom")
     Monster rMonster;
 
-    //@ManyToMany
-    @ElementCollection(targetClass = Room.class)
-    List<Room> rExits = new ArrayList<>();
+    @OneToMany(mappedBy = "idFRoom")
+    @ElementCollection(targetClass = Exit.class)
+    List<Exit> rExits = new ArrayList<>();
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "idRoom")
     @ElementCollection(targetClass = Player.class)
-    List <Player> rPlayers = new ArrayList<>();
+    List<Player> rPlayers = new ArrayList<>();
 
     public Room() 
     {
@@ -50,8 +46,8 @@ public class Room
         this.rMonster = rMonster;
     }
 
-    public Room(ArrayList<Item> rItems, ArrayList<DecorativeItem> rDecorativeItems, Monster rMonster,
-            ArrayList<Room> rExits, ArrayList<Player> rPlayers) 
+    public Room(List<Item> rItems, List<DecorativeItem> rDecorativeItems, Monster rMonster, List<Exit> rExits,
+            List<Player> rPlayers) 
     {
         this.rItems = rItems;
         this.rDecorativeItems = rDecorativeItems;
@@ -100,12 +96,12 @@ public class Room
         this.rDecorativeItems = rDecorativeItems;
     }
 
-    public List<Room> getrExits() 
+    public List<Exit> getrExits() 
     {
         return rExits;
     }
 
-    public void setrExits(List<Room> rExits) 
+    public void setrExits(List<Exit> rExits) 
     {
         this.rExits = rExits;
     }
