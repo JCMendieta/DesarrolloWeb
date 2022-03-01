@@ -23,6 +23,11 @@ public class DecorativeItem
 
     }
 
+    public DecorativeItem(String name) 
+    {
+        this.name = name;
+    }
+
     public DecorativeItem(String name, Room idRoom) 
     {
         this.name = name;

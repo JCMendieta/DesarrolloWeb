@@ -15,6 +15,8 @@ public class DatabaseInit implements ApplicationRunner
     RoomRepository roomRepository;
     @Autowired
     ItemRepository itemRepository;
+    @Autowired
+    DecorativeItemRepository decorativeItemRepository;
 
     @Override
     @Transactional
@@ -31,6 +33,8 @@ public class DatabaseInit implements ApplicationRunner
         itemRepository.save(new Item("Mesa"));
         itemRepository.save(new Item("Silla"));
 
+        //decorativeItemRepository.save(new DecorativeItem("Flor"));
+
         Room r = null;
 
         for (Room room : roomRepository.findAll()) 
@@ -46,5 +50,11 @@ public class DatabaseInit implements ApplicationRunner
             item.setIdRoom(r);
             itemRepository.save(item);
         }
+
+        /*for (DecorativeItem decorativeItem : decorativeItemRepository.findAll()) 
+        {
+            //decorativeItem.setIdRoom(r);
+            decorativeItemRepository.save(decorativeItem);
+        }*/
     }
 }
