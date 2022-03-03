@@ -41,6 +41,11 @@ public class Player
 
     }
 
+    public Player(String name)
+    {
+        this.name = name;
+    }
+
     public Player(String name, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
             Long maxWeight, Long clock, Long max_time, Room idRoom, List<Item> items) 
     {

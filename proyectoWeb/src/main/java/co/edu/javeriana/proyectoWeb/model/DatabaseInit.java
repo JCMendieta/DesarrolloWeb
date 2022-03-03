@@ -1,5 +1,8 @@
 package co.edu.javeriana.proyectoWeb.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -17,6 +20,8 @@ public class DatabaseInit implements ApplicationRunner
     ItemRepository itemRepository;
     @Autowired
     DecorativeItemRepository decorativeItemRepository;
+    @Autowired
+    PlayerRepository playerRepository;
 
     @Override
     @Transactional
@@ -33,7 +38,10 @@ public class DatabaseInit implements ApplicationRunner
         itemRepository.save(new Item("Mesa"));
         itemRepository.save(new Item("Silla"));
 
-        //decorativeItemRepository.save(new DecorativeItem("Flor"));
+        decorativeItemRepository.save(new DecorativeItem("Flor"));
+
+        playerRepository.save(new Player("Carlos Escobar"));
+
 
         Room r = null;
 
@@ -51,10 +59,9 @@ public class DatabaseInit implements ApplicationRunner
             itemRepository.save(item);
         }
 
-        /*for (DecorativeItem decorativeItem : decorativeItemRepository.findAll()) 
+        for (DecorativeItem decorativeItem : decorativeItemRepository.findAll()) 
         {
-            //decorativeItem.setIdRoom(r);
             decorativeItemRepository.save(decorativeItem);
-        }*/
+        }
     }
 }

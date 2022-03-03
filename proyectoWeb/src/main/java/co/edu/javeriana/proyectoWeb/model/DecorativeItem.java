@@ -34,12 +34,12 @@ public class DecorativeItem
         this.idRoom = idRoom;
     }
 
-    public long getId() 
+    public Long getId() 
     {
         return id;
     }
 
-    public void setId(long id) 
+    public void setId(Long id) 
     {
         this.id = id;
     }
@@ -54,11 +54,6 @@ public class DecorativeItem
         this.name = name;
     }
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
     public Room getIdRoom() 
     {
         return idRoom;
@@ -68,4 +63,6 @@ public class DecorativeItem
     {
         this.idRoom = idRoom;
     }
+
+
 }

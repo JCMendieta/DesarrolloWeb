@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset ="UTF-8">
+    <title>Lista jugadores</title>
+</head>
+
+<body>
+    <h1>Players</h1> 
+    <ul>
+        <li th:each="player: ${players}" th:text="${player.name}"></li>
+    </ul>
+</body>
+</html>

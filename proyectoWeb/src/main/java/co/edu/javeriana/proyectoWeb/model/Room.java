@@ -46,6 +46,12 @@ public class Room
         this.rMonster = rMonster;
     }
 
+    public Room(List<DecorativeItem> rDecorativeItems, Monster rMonster) 
+    {
+        this.rDecorativeItems = rDecorativeItems;
+        this.rMonster = rMonster;
+    }
+
     public Room(List<Item> rItems, List<DecorativeItem> rDecorativeItems, Monster rMonster, List<Exit> rExits,
             List<Player> rPlayers) 
     {

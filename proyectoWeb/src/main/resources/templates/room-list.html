@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset ="UTF-8">
+    <title>Lista habitaciones</title>
+</head>
+
+<body>
+    <h1>Rooms</h1> 
+    <ul>
+        <li th:each="room: ${rooms}" th:text="${room.id}"></li>
+    </ul>
+</body>
+</html>

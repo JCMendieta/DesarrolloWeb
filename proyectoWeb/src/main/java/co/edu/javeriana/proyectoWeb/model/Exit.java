@@ -30,4 +30,34 @@ public class Exit
         this.idFRoom = idFRoom;
         this.idSRoom = idSRoom;
     }
+
+    public Long getId() 
+    {
+        return id;
+    }
+
+    public void setId(Long id) 
+    {
+        this.id = id;
+    }
+
+    public Room getIdFRoom() 
+    {
+        return idFRoom;
+    }
+
+    public void setIdFRoom(Room idFRoom) 
+    {
+        this.idFRoom = idFRoom;
+    }
+
+    public Room getIdSRoom() 
+    {
+        return idSRoom;
+    }
+
+    public void setIdSRoom(Room idSRoom)
+    {
+        this.idSRoom = idSRoom;
+    }
 }
