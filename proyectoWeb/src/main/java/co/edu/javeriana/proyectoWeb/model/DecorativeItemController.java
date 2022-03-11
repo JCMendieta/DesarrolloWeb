@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/monster")
-public class MonsterController 
+@RequestMapping("/decorative_item")
+public class DecorativeItemController 
 {   
     Logger log = LoggerFactory.getLogger(getClass());
-
+    
     @Autowired
-    MonsterRepository monsterRepository;
+    DecorativeItemRepository decorativeItemRepository;
 
     @GetMapping("/list")
-    public String monsterList(Model model)
+    public String decorativeItemList(Model model)
     {
-        Iterable<Monster> monsters = monsterRepository.findAll();
-        model.addAttribute("monsters", monsters);
-        return "monster-list";
+        Iterable<DecorativeItem>  decorativeItems = decorativeItemRepository.findAll();
+        model.addAttribute("decorativeItems", decorativeItems);
+        return "decorativeItem-list";
     }
 }

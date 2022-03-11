@@ -2,13 +2,13 @@
 <html xlmns:th="http://www.thymeleaf.org">
 <head>
     <meta charset ="UTF-8">
-    <title>Lista monstruos</title>
+    <title>Lista jugadores</title>
 </head>
 
 <body>
-    <h1>Monsters</h1> 
+    <h1>Players</h1> 
     <ul>
-        <li th:each="monster: ${monsters}" th:text="${monster.hitpoints}"></li>
+        <li th:each="player: ${players}" th:text="${player.name}"></li>
     </ul>
 </body>
 </html>

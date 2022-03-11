@@ -7,11 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Player 
+public class MonsterType
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,29 +22,29 @@ public class Player
     Long defence_slash;
     Long size;
     Long hitpoints;
-    Long maxWeight;
-    Long clock;
-    Long max_time;
+
+    @ElementCollection(targetClass = String.class)
+    List<String> category = new ArrayList<>();
+
+    @OneToMany(mappedBy = "idMonsterType")
+    @ElementCollection(targetClass = Monster.class)
+    List<Monster> monsters = new ArrayList<>();
     
-    @ManyToOne
-    Room idRoom;
+    String examine;
+    String wiki_url;
 
-    @OneToMany(mappedBy = "idPlayer")
-    @ElementCollection(targetClass = Item.class)
-    List<Item> items = new ArrayList<>();
-
-    public Player() 
+    public MonsterType() 
     {
 
     }
 
-    public Player(String name)
+    public MonsterType(String name) 
     {
         this.name = name;
     }
 
-    public Player(String name, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
-            Long maxWeight, Long clock, Long max_time, Room idRoom, List<Item> items) 
+    public MonsterType(String name, String last_updated, Long attack_level, Long defence_slash, Long size,
+            Long hitpoints, List<String> category, List<Monster> monsters, String examine, String wiki_url) 
     {
         this.name = name;
         this.last_updated = last_updated;
@@ -53,11 +52,10 @@ public class Player
         this.defence_slash = defence_slash;
         this.size = size;
         this.hitpoints = hitpoints;
-        this.maxWeight = maxWeight;
-        this.clock = clock;
-        this.max_time = max_time;
-        this.idRoom = idRoom;
-        this.items = items;
+        this.category = category;
+        this.monsters = monsters;
+        this.examine = examine;
+        this.wiki_url = wiki_url;
     }
 
     public Long getId() 
@@ -90,18 +88,18 @@ public class Player
         this.last_updated = last_updated;
     }
 
-    public Long getAttack_level()
+    public Long getAttack_level() 
     {
         return attack_level;
     }
 
     public void setAttack_level(Long attack_level) 
     {
+
         this.attack_level = attack_level;
     }
 
-    public Long getDefence_slash() 
-    {
+    public Long getDefence_slash() {
         return defence_slash;
     }
 
@@ -120,8 +118,7 @@ public class Player
         this.size = size;
     }
 
-    public Long getHitpoints() 
-    {
+    public Long getHitpoints() {
         return hitpoints;
     }
 
@@ -130,53 +127,45 @@ public class Player
         this.hitpoints = hitpoints;
     }
 
-    public Long getMaxWeight() 
+    public List<String> getCategory() 
     {
-        return maxWeight;
+        return category;
     }
 
-    public void setMaxWeight(Long maxWeight) 
+    public void setCategory(List<String> category) 
     {
-        this.maxWeight = maxWeight;
+        this.category = category;
     }
 
-    public Long getClock() 
+    public List<Monster> getMonsters() 
     {
-        return clock;
+        return monsters;
     }
 
-    public void setClock(Long clock) 
+    public void setMonsters(List<Monster> monsters) 
     {
-        this.clock = clock;
+        this.monsters = monsters;
     }
 
-    public Long getMax_time() 
+    public String getExamine() 
     {
-        return max_time;
+        return examine;
     }
 
-    public void setMax_time(Long max_time) 
+    public void setExamine(String examine) 
     {
-        this.max_time = max_time;
+        this.examine = examine;
     }
 
-    public List<Item> getItems() 
+    public String getWiki_url() 
     {
-        return items;
+        return wiki_url;
     }
 
-    public void setItems(List<Item> items) 
+    public void setWiki_url(String wiki_url) 
     {
-        this.items = items;
-    }
+        this.wiki_url = wiki_url;
+    } 
 
-    public Room getIdRoom() 
-    {
-        return idRoom;
-    }
-
-    public void setIdRoom(Room idRoom) 
-    {
-        this.idRoom = idRoom;
-    }
+    
 }

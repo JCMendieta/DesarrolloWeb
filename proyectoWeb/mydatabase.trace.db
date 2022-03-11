@@ -1,0 +1,12 @@
+2022-02-25 21:07:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "R_MONSTER_ID[*]"; se esperaba "ROLLBACK, REVOKE, RUNSCRIPT, RELEASE"
+Syntax error in SQL statement "R_MONSTER_ID[*]"; expected "ROLLBACK, REVOKE, RUNSCRIPT, RELEASE"; SQL statement:
+R_MONSTER_ID [42001-200]
+2022-02-25 22:00:27 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "ROOM_ID[*]"; se esperaba "ROLLBACK, REVOKE, RUNSCRIPT, RELEASE"
+Syntax error in SQL statement "ROOM_ID[*]"; expected "ROLLBACK, REVOKE, RUNSCRIPT, RELEASE"; SQL statement:
+ROOM_ID [42001-200]
+2022-02-25 22:15:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "MONSTER_ID[*]"; se esperaba "MERGE"
+Syntax error in SQL statement "MONSTER_ID[*]"; expected "MERGE"; SQL statement:
+MONSTER_ID [42001-200]

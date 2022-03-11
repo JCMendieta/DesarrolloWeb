@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset ="UTF-8">
+    <title>Lista tipos de monstruos</title>
+</head>
+
+<body>
+    <h1>Monster types</h1> 
+    <ul>
+        <li th:each="monsterType: ${monsterTypes}" th:text="${monsterType.name}"></li>
+    </ul>
+</body>
+</html>
