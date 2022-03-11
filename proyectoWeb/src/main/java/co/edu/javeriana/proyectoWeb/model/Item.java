@@ -25,8 +25,7 @@ public class Item
     String examine;
     String wiki_url;
 
-    @ManyToMany
-    @ElementCollection(targetClass = Room.class)
+    @ManyToMany(mappedBy = "rItems")
     List<Room> idRoom = new ArrayList<>();
 
     @ManyToOne

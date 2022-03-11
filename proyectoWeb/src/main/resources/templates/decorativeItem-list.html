@@ -6,9 +6,11 @@
 </head>
 
 <body>
-    <h1>Decorative items</h1> 
+    <h1>Decorative items</h1>
     <ul>
-        <li th:each="decorativeItem: ${decorativeItems}" th:text="${decorativeItem.name}"></li>
+        <li th:each="p : ${decorativeItems}" th:if="${p.name}">
+            <a th:href="@{/decorative_item/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
+        </li>
     </ul>
 </body>
 </html>

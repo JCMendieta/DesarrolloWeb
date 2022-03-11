@@ -25,6 +25,11 @@ public class Exit
 
     }
 
+    public Exit(Room idSRoom) 
+    {
+        this.idSRoom = idSRoom;
+    }
+
     public Exit(Room idFRoom, Room idSRoom) 
     {
         this.idFRoom = idFRoom;
