@@ -31,6 +31,18 @@ public class Monster
         this.hitpoints = hitpoints;
     }
 
+    public Monster(Long hitpoints, Room idRoom) 
+    {
+        this.hitpoints = hitpoints;
+        this.idRoom = idRoom;
+    }
+
+    public Monster(Long hitpoints, MonsterType idMonsterType) 
+    {
+        this.hitpoints = hitpoints;
+        this.idMonsterType = idMonsterType;
+    }
+
     public Monster(Long hitpoints, Room idRoom, MonsterType idMonsterType) 
     {
         this.hitpoints = hitpoints;

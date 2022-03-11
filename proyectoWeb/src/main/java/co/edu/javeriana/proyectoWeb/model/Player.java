@@ -26,12 +26,11 @@ public class Player
     Long maxWeight;
     Long clock;
     Long max_time;
-    
+
     @ManyToOne
     Room idRoom;
 
     @OneToMany(mappedBy = "idPlayer")
-    @ElementCollection(targetClass = Item.class)
     List<Item> items = new ArrayList<>();
 
     public Player() 

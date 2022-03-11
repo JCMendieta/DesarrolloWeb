@@ -19,8 +19,7 @@ public class DecorativeItem
 
     String name;
 
-    @ManyToMany
-    @ElementCollection(targetClass = Room.class)
+    @ManyToMany(mappedBy = "idDecorativeItem")
     List<Room> idRoom = new ArrayList<>();
 
     public DecorativeItem() 

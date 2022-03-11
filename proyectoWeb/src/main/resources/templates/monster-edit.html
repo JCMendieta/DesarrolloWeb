@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+    </head>
+
+    <body>
+        <h1>Monster</h1>
+            <form action="#" th:action="@{/monster/save}" th:object="${monster}" method="post">
+                <input type="hidden" th:field="${monster.id}" id="monster-id">
+                <label for="monster-hitpoints">Hitpoints: </label>
+                <input type="text" th:field="${monster.hitpoints}" id="monster-hitpoints">
+                <button type="submit">Enviar</button>
+            </form>
+
+            <!--<form action="#" th:action="@{/exit/save}" th:object="${exit}" method="post">
+                <input type="hidden" th:field="${exit.id}" id="exit-id">
+                <label for="exit-idFRoom">IDSRoom: </label>
+                <input type="text" th:field="${exit.idSRoom}" id="exit-idSRoom">
+                <button type="submit">Enviar</button>
+            </form>-->
+    </body>
+</html>

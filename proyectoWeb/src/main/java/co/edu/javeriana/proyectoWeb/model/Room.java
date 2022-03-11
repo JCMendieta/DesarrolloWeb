@@ -18,23 +18,19 @@ public class Room
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @ManyToMany(mappedBy = "idRoom")
-    @ElementCollection(targetClass = Item.class)
+    @ManyToMany
     List<Item> rItems = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "idRoom")
-    @ElementCollection(targetClass = DecorativeItem.class)
+    @ManyToMany
     List<DecorativeItem> idDecorativeItem = new ArrayList<>();
     
-    @OneToOne(mappedBy = "idRoom")
+    @OneToOne
     Monster rMonster;
 
     @OneToMany(mappedBy = "idFRoom")
-    @ElementCollection(targetClass = Exit.class)
     List<Exit> rExits = new ArrayList<>();
 
     @OneToMany(mappedBy = "idRoom")
-    @ElementCollection(targetClass = Player.class)
     List<Player> rPlayers = new ArrayList<>();
 
     public Room() 
@@ -44,6 +40,11 @@ public class Room
     public Room(Monster rMonster) 
     {
         this.rMonster = rMonster;
+    }
+    
+    public Room(List<Exit> rExits) 
+    {
+        this.rExits = rExits;
     }
 
     public Room(List<Item> rItems, List<DecorativeItem> idDecorativeItem, Monster rMonster, List<Exit> rExits,

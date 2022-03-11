@@ -27,7 +27,6 @@ public class MonsterType
     List<String> category = new ArrayList<>();
 
     @OneToMany(mappedBy = "idMonsterType")
-    @ElementCollection(targetClass = Monster.class)
     List<Monster> monsters = new ArrayList<>();
     
     String examine;
