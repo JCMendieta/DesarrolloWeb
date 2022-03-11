@@ -24,7 +24,6 @@ public class Monster
 
     public Monster()
     {
-
     }
 
     public Monster(Long hitpoints) 

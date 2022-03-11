@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -17,13 +18,13 @@ public class Room
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @OneToMany(mappedBy = "idRoom")
+    @ManyToMany(mappedBy = "idRoom")
     @ElementCollection(targetClass = Item.class)
     List<Item> rItems = new ArrayList<>();
 
-    @OneToMany(mappedBy = "idRoom")
+    @ManyToMany(mappedBy = "idRoom")
     @ElementCollection(targetClass = DecorativeItem.class)
-    List<DecorativeItem> rDecorativeItems = new ArrayList<>();
+    List<DecorativeItem> idDecorativeItem = new ArrayList<>();
     
     @OneToOne(mappedBy = "idRoom")
     Monster rMonster;
@@ -38,7 +39,6 @@ public class Room
 
     public Room() 
     {
-
     }
 
     public Room(Monster rMonster) 
@@ -46,23 +46,17 @@ public class Room
         this.rMonster = rMonster;
     }
 
-    public Room(List<DecorativeItem> rDecorativeItems, Monster rMonster) 
-    {
-        this.rDecorativeItems = rDecorativeItems;
-        this.rMonster = rMonster;
-    }
-
-    public Room(List<Item> rItems, List<DecorativeItem> rDecorativeItems, Monster rMonster, List<Exit> rExits,
+    public Room(List<Item> rItems, List<DecorativeItem> idDecorativeItem, Monster rMonster, List<Exit> rExits,
             List<Player> rPlayers) 
     {
         this.rItems = rItems;
-        this.rDecorativeItems = rDecorativeItems;
+        this.idDecorativeItem = idDecorativeItem;
         this.rMonster = rMonster;
         this.rExits = rExits;
         this.rPlayers = rPlayers;
     }
 
-    public Long getId()
+    public Long getId() 
     {
         return id;
     }
@@ -70,16 +64,6 @@ public class Room
     public void setId(Long id) 
     {
         this.id = id;
-    }
-
-    public Monster getrMonster()
-    {
-        return rMonster;
-    }
-
-    public void setrMonster(Monster rMonster) 
-    {
-        this.rMonster = rMonster;
     }
 
     public List<Item> getrItems() 
@@ -92,17 +76,27 @@ public class Room
         this.rItems = rItems;
     }
 
-    public List<DecorativeItem> getrDecorativeItems() 
+    public List<DecorativeItem> getIdDecorativeItem() 
     {
-        return rDecorativeItems;
+        return idDecorativeItem;
     }
 
-    public void setrDecorativeItems(List<DecorativeItem> rDecorativeItems) 
+    public void setIdDecorativeItem(List<DecorativeItem> idDecorativeItem) 
     {
-        this.rDecorativeItems = rDecorativeItems;
+        this.idDecorativeItem = idDecorativeItem;
     }
 
-    public List<Exit> getrExits() 
+    public Monster getrMonster() 
+    {
+        return rMonster;
+    }
+
+    public void setrMonster(Monster rMonster) 
+    {
+        this.rMonster = rMonster;
+    }
+
+    public List<Exit> getrExits()
     {
         return rExits;
     }

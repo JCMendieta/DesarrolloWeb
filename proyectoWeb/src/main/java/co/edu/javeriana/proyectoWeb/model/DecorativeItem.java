@@ -1,10 +1,14 @@
 package co.edu.javeriana.proyectoWeb.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class DecorativeItem 
@@ -15,12 +19,12 @@ public class DecorativeItem
 
     String name;
 
-    @ManyToOne
-    Room idRoom;
+    @ManyToMany
+    @ElementCollection(targetClass = Room.class)
+    List<Room> idRoom = new ArrayList<>();
 
     public DecorativeItem() 
     {
-
     }
 
     public DecorativeItem(String name) 
@@ -28,7 +32,7 @@ public class DecorativeItem
         this.name = name;
     }
 
-    public DecorativeItem(String name, Room idRoom) 
+    public DecorativeItem(String name, List<Room> idRoom) 
     {
         this.name = name;
         this.idRoom = idRoom;
@@ -54,15 +58,13 @@ public class DecorativeItem
         this.name = name;
     }
 
-    public Room getIdRoom() 
+    public List<Room> getIdRoom() 
     {
         return idRoom;
     }
 
-    public void setIdRoom(Room idRoom)
+    public void setIdRoom(List<Room> idRoom) 
     {
         this.idRoom = idRoom;
     }
-
-
 }

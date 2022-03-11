@@ -26,9 +26,7 @@ public class Player
     Long maxWeight;
     Long clock;
     Long max_time;
-    //ArrayList<String> category;
-    //String examine;
-    //String wiki_url;
+    
     @ManyToOne
     Room idRoom;
 

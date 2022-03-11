@@ -1,9 +1,14 @@
 package co.edu.javeriana.proyectoWeb.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -20,15 +25,15 @@ public class Item
     String examine;
     String wiki_url;
 
-    @ManyToOne
-    Room idRoom;
+    @ManyToMany
+    @ElementCollection(targetClass = Room.class)
+    List<Room> idRoom = new ArrayList<>();
 
     @ManyToOne
     Player idPlayer;
 
     public Item() 
     {
-
     }
 
     public Item(String name) 
@@ -36,8 +41,8 @@ public class Item
         this.name = name;
     }
 
-    public Item(String name, String last_updated, Long cost, Long weight, String examine, String wiki_url, Room idRoom,
-            Player idPlayer) 
+    public Item(String name, String last_updated, Long cost, Long weight, String examine, String wiki_url,
+            List<Room> idRoom, Player idPlayer) 
     {
         this.name = name;
         this.last_updated = last_updated;
@@ -64,7 +69,7 @@ public class Item
         return name;
     }
 
-    public void setName(String name)
+    public void setName(String name) 
     {
         this.name = name;
     }
@@ -119,12 +124,12 @@ public class Item
         this.wiki_url = wiki_url;
     }
 
-    public Room getIdRoom() 
+    public List<Room> getIdRoom() 
     {
         return idRoom;
     }
 
-    public void setIdRoom(Room idRoom) 
+    public void setIdRoom(List<Room> idRoom) 
     {
         this.idRoom = idRoom;
     }
