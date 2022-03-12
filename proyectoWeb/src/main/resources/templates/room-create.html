@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        
+    </head>
+
+    <body>
+        <h1>Room creation</h1>
+        <form action="#" th:action="@{/room/save}" th:object="${room}" method="post">
+            <button type="submit">Create room</button>
+        </form>
+    </body>
+    
+</html>

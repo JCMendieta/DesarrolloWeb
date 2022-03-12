@@ -8,7 +8,12 @@
 <body>
     <h1>Rooms</h1> 
     <ul>
-        <li th:each="room: ${rooms}" th:text="${room.id}"></li>
+        <li th:each="p : ${rooms}" th:if="${p.id}">
+            <a th:href="@{/room/edit/{id}(id=${p.id})}" th:text="${p.id}"></a>
+        </li>
+        <form action="#" th:action="@{/room/save}" th:object="${room}" method="post">
+            <button type="submit">Create room</button>
+        </form>
     </ul>
 </body>
 </html>

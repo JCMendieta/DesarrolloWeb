@@ -53,4 +53,12 @@ public class ExitController
         exitRepository.save(exit);
         return "redirect:/exit/list";
     }
+
+    @GetMapping("/create")
+    public String create(Model model) 
+    {
+        Exit exit = new Exit(new Room(), new Room());
+        model.addAttribute("exit", exit);
+        return "exit-create";
+    }
 }

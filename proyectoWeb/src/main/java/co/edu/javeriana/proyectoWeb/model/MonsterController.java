@@ -53,4 +53,12 @@ public class MonsterController
         monsterRepository.save(monster);
         return "redirect:/monster/list";
     }
+
+    @GetMapping("/create")
+    public String create(Model model) 
+    {
+        Monster monster = new Monster((long)0);
+        model.addAttribute("monster", monster);
+        return "monster-create";
+    }
 }

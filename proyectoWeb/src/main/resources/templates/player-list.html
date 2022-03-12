@@ -8,7 +8,9 @@
 <body>
     <h1>Players</h1> 
     <ul>
-        <li th:each="player: ${players}" th:text="${player.name}"></li>
+        <li th:each="p : ${players}" th:if="${p.name}">
+            <a th:href="@{/player/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
+        </li>
     </ul>
 </body>
 </html>

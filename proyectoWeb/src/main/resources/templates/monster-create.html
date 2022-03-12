@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        
+    </head>
+
+    <body>
+        <h1>Monster creation</h1>
+        <form action="#" th:action="@{/monster/save}" th:object="${monster}" method="post">
+            
+            <label for="monster-hitpoints">Hitpoints: </label>
+            <input type="text" th:field="${monster.hitpoints}" id="monster-hitpoints">
+            <button type="submit">Enviar</button>
+
+        </form>
+
+
+    </body>
+    
+</html>
