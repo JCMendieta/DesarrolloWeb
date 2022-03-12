@@ -47,6 +47,15 @@ public class ItemController
         }
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable Long id) throws NotFoundException 
+    {
+        
+        
+        itemRepository.deleteById(id);
+        return "redirect:/item/list";
+    }
+
     @PostMapping("/save")
     public String save(@ModelAttribute Item item, Model model) 
     {

@@ -3,6 +3,7 @@ package co.edu.javeriana.proyectoWeb.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,8 @@ public class Item
     String examine;
     String wiki_url;
 
-    @ManyToMany(mappedBy = "rItems")
+
+    @ManyToMany(mappedBy = "rItems" , cascade = CascadeType.REMOVE)
     List<Room> idRoom = new ArrayList<>();
 
     @ManyToOne

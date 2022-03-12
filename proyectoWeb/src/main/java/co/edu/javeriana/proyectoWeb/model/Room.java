@@ -24,13 +24,13 @@ public class Room
     @ManyToMany
     List<DecorativeItem> idDecorativeItem = new ArrayList<>();
     
-    @OneToOne
+    @OneToOne (orphanRemoval = true)
     Monster rMonster;
 
-    @OneToMany(mappedBy = "idFRoom")
+    @OneToMany(mappedBy = "idFRoom", orphanRemoval = true)
     List<Exit> rExits = new ArrayList<>();
 
-    @OneToMany(mappedBy = "idRoom")
+    @OneToMany(mappedBy = "idRoom", orphanRemoval = true)
     List<Player> rPlayers = new ArrayList<>();
 
     public Room() 

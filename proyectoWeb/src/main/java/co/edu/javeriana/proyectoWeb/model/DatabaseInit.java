@@ -33,7 +33,10 @@ public class DatabaseInit implements ApplicationRunner
     public void run(ApplicationArguments args) throws Exception
     {
         ArrayList<Item> alI = new ArrayList<>();
-        Item i = new Item ("Dildo");
+        Item i = new Item ("Casco");
+        alI.add(i);
+        itemRepository.save(i);
+        i = new Item("Zapatos");
         alI.add(i);
         itemRepository.save(i);
 
