@@ -1,7 +1,6 @@
 package co.edu.javeriana.proyectoWeb.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Optional;
 
 import org.slf4j.Logger;

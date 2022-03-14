@@ -43,6 +43,8 @@ public class RoomController
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
+        Iterable<Item> items = itemRepository.findAll();
+        model.addAttribute("items", items);
         Optional<Room> p = roomRepository.findById(id);
         
         if (p != null) 
