@@ -10,6 +10,7 @@
     <ul>
         <li th:each="p : ${monsters}" th:if="${p.hitpoints}">
             <a th:href="@{/monster/edit/{id}(id=${p.id})}" th:text="${p.hitpoints}"></a>
+            <a class="deleteLink" th:href="@{/monster/delete/{id}(id=${p.id})}">Eliminar</a>
         </li>
     </ul>
 </body>

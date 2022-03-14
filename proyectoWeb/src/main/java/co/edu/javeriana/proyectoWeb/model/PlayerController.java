@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -17,6 +18,9 @@ public class PlayerController
     @Autowired
     PlayerRepository playerRepository;
 
+    @Autowired
+    RoomRepository roomRepository;
+
     @GetMapping("/list")
     public String itemList(Model model)
     {
@@ -24,4 +28,17 @@ public class PlayerController
         model.addAttribute("players", players);
         return "player-list";
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable Long id)
+    {
+        Player player = playerRepository.findById(id).get();
+        Room r=player.idRoom;
+        if(r != null){
+            player.unlinkRoomPlayer(r);
+        }
+        playerRepository.deleteById(id);
+        return "redirect:/player/list";
+    }
+
 }

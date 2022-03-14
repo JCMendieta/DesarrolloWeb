@@ -10,6 +10,7 @@
     <ul>
         <li th:each="p : ${decorativeItems}" th:if="${p.name}">
             <a th:href="@{/decorative_item/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
+            <a class="deleteLink" th:href="@{/decorative_item/delete/{id}(id=${p.id})}">Eliminar</a>
         </li>
     </ul>
 </body>

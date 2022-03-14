@@ -116,4 +116,16 @@ public class Room
     {
         this.rPlayers = rPlayers;
     }
+
+    public void unlinkRoomAttributes(){
+        if(getrMonster()!= null){
+            getrMonster().setIdRoom(null);
+            setrMonster(null);
+        } 
+        getIdDecorativeItem().removeAll(idDecorativeItem);
+        getrExits().removeAll(rExits);
+        getrItems().removeAll(rItems);
+        getrPlayers().removeAll(rPlayers);
+    }
+
 }

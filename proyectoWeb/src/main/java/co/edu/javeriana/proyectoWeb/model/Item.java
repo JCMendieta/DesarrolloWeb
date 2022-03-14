@@ -27,7 +27,7 @@ public class Item
     String wiki_url;
 
 
-    @ManyToMany(mappedBy = "rItems" , cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "rItems")
     List<Room> idRoom = new ArrayList<>();
 
     @ManyToOne
@@ -143,5 +143,10 @@ public class Item
     public void setIdPlayer(Player idPlayer) 
     {
         this.idPlayer = idPlayer;
+    }
+
+    public void unlinkRoomItem(Room r){
+        this.idRoom.remove(r);
+        r.getrItems().remove(this);
     }
 }
