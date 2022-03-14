@@ -24,7 +24,7 @@ public class PlayerController
     PlayerRepository playerRepository;
 
     @GetMapping("/list")
-    public String itemList(Model model)
+    public String list(Model model)
     {
         Iterable<Player> players = playerRepository.findAll();
         model.addAttribute("players", players);

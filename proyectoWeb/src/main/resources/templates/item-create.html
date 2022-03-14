@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        
+        <meta charset ="UTF-8">
+        <title>Item creation</title>
     </head>
 
     <body>
-        <h1>Item creation</h1>
+        <h1>Welcome to creation of items</h1>
         <form action="#" th:action="@{/item/save}" th:object="${item}" method="post">
             <li>
                 <label for="item-name">Name: </label>
@@ -31,8 +32,14 @@
                 <label for="item-wiki_url">Wiki URL: </label>
                 <input type="text" th:field="${item.wiki_url}" id="item-wiki_url">
             </li>
+            <!--
+            <li>
+                <label for="item-idPlayer">Player: </label>
+                <input type="text" th:field="${item.idPlayer}" id="item-idPlayer">
+            </li>
+            !-->
 
-            <button type="submit">Enviar</button>
+            <button type="submit">Creation done!</button>
         </form>
     </body> 
 </html>

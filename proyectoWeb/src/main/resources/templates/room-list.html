@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html xlmns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset ="UTF-8">
-    <title>Lista habitaciones</title>
-</head>
+    <head>
+        <meta charset ="UTF-8">
+        <title>Room list</title>
+    </head>
 
-<body>
-    <h1>Rooms</h1> 
-    <ul>
-        <li th:each="p : ${rooms}" th:if="${p.id}">
-            <a th:href="@{/room/edit/{id}(id=${p.id})}" th:text="${p.id}"></a>
-        </li>
-        <form action="#" th:action="@{/room/save}" th:object="${room}" method="post">
-            <button type="submit">Create room</button>
-        </form>
-    </ul>
-</body>
+    <body>
+        <h1>Here's the room list</h1> 
+        <ul>
+            <li th:each="p : ${rooms}" th:if="${p.id}">
+                <a th:href="@{/room/edit/{id}(id=${p.id})}" th:text="${p.id}"></a>
+            </li>
+            <form action="#" th:action="@{/room/create}" th:object="${room}" method="post">
+                <button type="submit">Create room</button>
+            </form>
+        </ul>
+    </body>
 </html>

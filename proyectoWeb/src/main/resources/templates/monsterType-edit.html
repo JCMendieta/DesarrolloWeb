@@ -1,15 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
+        <meta charset ="UTF-8">
+        <title>Monster edition</title>
     </head>
 
     <body>
-        <h1>Monster</h1>
-            <form action="#" th:action="@{/monster_type/save}" th:object="${monsterType}" method="post">
-                <input type="hidden" th:field="${monsterType.id}" id="monsterType-id">
+        <h1>Behold! Edition of monster types</h1>
+        <form action="#" th:action="@{/monster_type/save}" th:object="${monsterType}" method="post">
+            <input type="hidden" th:field="${monsterType.id}" id="monsterType-id">
+            <li>
                 <label for="monsterType-name">Name: </label>
                 <input type="text" th:field="${monsterType.name}" id="monsterType-name">
-                <button type="submit">Enviar</button>
-            </form>
+            </li>
+            <li>
+                <label for="monsterType-last_updated">Last updated: </label>
+                <input type="text" th:field="${monsterType.last_updated}" id="monsterType-last_updated">
+            </li>
+            <li>
+                <label for="monsterType-attack_level">Attack level: </label>
+                <input type="text" th:field="${monsterType.attack_level}" id="monsterType-attack_level">
+            </li>
+            <li>
+                <label for="monsterType-defence_slash">Defense slash: </label>
+                <input type="text" th:field="${monsterType.defence_slash}" id="monsterType-defence_slash">
+            </li>
+            <li>
+                <label for="monsterType-size">Size: </label>
+                <input type="text" th:field="${monsterType.size}" id="monsterType-size">
+            </li>
+            <li>
+                <label for="monsterType-hitpoints">Hitpoints: </label>
+                <input type="text" th:field="${monsterType.hitpoints}" id="monsterType-hitpoints">
+            </li>
+            <li>
+                <label for="monsterType-category">Categories: </label>
+                <input type="text" th:field="${monsterType.category}" id="monsterType-category">
+            </li>
+            <li>
+                <label for="monsterType-examine">Examine: </label>
+                <input type="text" th:field="${monsterType.examine}" id="monsterType-examine">
+            </li>
+            <li>
+                <label for="monsterType-wiki_url">Wiki URL: </label>
+                <input type="text" th:field="${monsterType.wiki_url}" id="monsterType-wiki_url">
+            </li>
+    
+            <button type="submit">Edit monster type</button>
+        </form>
     </body>
 </html>

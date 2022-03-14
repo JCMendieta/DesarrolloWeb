@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        
+        <meta charset ="UTF-8">
+        <title>Monster type creation</title>
     </head>
 
     <body>
-        <h1>Monster type creation</h1>
+        <h1>Welcome to the creation of monster types</h1>
         <form action="#" th:action="@{/monster_type/save}" th:object="${monsterType}" method="post">
             <li>
                 <label for="monsterType-name">Name: </label>
@@ -32,6 +33,10 @@
                 <input type="text" th:field="${monsterType.hitpoints}" id="monsterType-hitpoints">
             </li>
             <li>
+                <label for="monsterType-category">Categories: </label>
+                <input type="text" th:field="${monsterType.category}" id="monsterType-category">
+            </li>
+            <li>
                 <label for="monsterType-examine">Examine: </label>
                 <input type="text" th:field="${monsterType.examine}" id="monsterType-examine">
             </li>
@@ -40,8 +45,7 @@
                 <input type="text" th:field="${monsterType.wiki_url}" id="monsterType-wiki_url">
             </li>
 
-            <button type="submit">Enviar</button>
+            <button type="submit">Creation done!</button>
         </form>
     </body>
-    
 </html>

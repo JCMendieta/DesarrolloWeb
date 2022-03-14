@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
+        <meta charset ="UTF-8">
+        <title>Exit edition</title>
     </head>
 
     <body>
-        <h1>Exit</h1>
-            <form action="#" th:action="@{/exit/save}" th:object="${exit}" method="post">
+        <h1>Behold! Edition of exits</h1>
+        <form action="#" th:action="@{/exit/save}" th:object="${exit}" method="post">
+            <li>
                 <input type="hidden" th:field="${exit.id}" id="exit-id">
-                <label for="exit-idFRoom">IDFRoom: </label>
-                <input type="text" th:field="${exit.idFRoom}" id="exit-idFRoom">
-                <button type="submit">Enviar</button>
-            </form>
 
-            <form action="#" th:action="@{/exit/save}" th:object="${exit}" method="post">
-                <input type="hidden" th:field="${exit.id}" id="exit-id">
-                <label for="exit-idFRoom">IDSRoom: </label>
+                <label for="exit-idFRoom">From room #: </label>
+                <input type="text" th:field="${exit.idFRoom}" id="exit-idFRoom">
+            </li>
+            <li>
+                <label for="exit-idFRoom">To room #: </label>
                 <input type="text" th:field="${exit.idSRoom}" id="exit-idSRoom">
-                <button type="submit">Enviar</button>
-            </form>
+            </li>
+
+            <button type="submit">Edit exit</button>
+        </form>
     </body>
 </html>

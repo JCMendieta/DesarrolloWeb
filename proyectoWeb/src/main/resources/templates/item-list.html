@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html xlmns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset ="UTF-8">
-    <title>Lista items</title>
-</head>
+    <head>
+        <meta charset ="UTF-8">
+        <title>Item list</title>
+    </head>
 
-<body>
-    <h1>Items</h1> 
-    <ul>
-        <li th:each="p : ${items}" th:if="${p.name}">
-            <a th:href="@{/item/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
-        </li>
-    </ul>
-</body>
+    <body>
+        <h1>Here's the item list</h1> 
+        <ul>
+            <li th:each="p : ${items}" th:if="${p.name}">
+                <a th:href="@{/item/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
+            </li>
+        </ul>
+        <form action="#" th:action="@{/item/create}" th:object="${item}" method="post">
+            <button type="submit">Create an item</button>
+        </form>
+    </body>
 </html>

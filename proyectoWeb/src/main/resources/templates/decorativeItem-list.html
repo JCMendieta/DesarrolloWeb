@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html xlmns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset ="UTF-8">
-    <title>Lista ítems decorativos</title>
-</head>
+    <head>
+        <meta charset ="UTF-8">
+        <title>Decorative item list</title>
+    </head>
 
-<body>
-    <h1>Decorative items</h1>
-    <ul>
-        <li th:each="p : ${decorativeItems}" th:if="${p.name}">
-            <a th:href="@{/decorative_item/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
-        </li>
-    </ul>
-</body>
+    <body>
+        <h1>Here's the decorative item list</h1>
+        <ul>
+            <li th:each="p : ${decorativeItems}" th:if="${p.name}">
+                <a th:href="@{/decorative_item/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
+            </li>
+        </ul>
+        <form action="#" th:action="@{/decorative_item/create}" th:object="${decorative_item}" method="post">
+            <button type="submit">Create a decorative item</button>
+        </form>
+    </body>
 </html>

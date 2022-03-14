@@ -24,7 +24,7 @@ public class ExitController
     ExitRepository exitRepository;
 
     @GetMapping("/list")
-    public String decorativeItemList(Model model)
+    public String list(Model model)
     {
         Iterable<Exit> exits = exitRepository.findAll();
         model.addAttribute("exits", exits);
@@ -54,11 +54,27 @@ public class ExitController
         return "redirect:/exit/list";
     }
 
-    @GetMapping("/create")
+    @PostMapping("/create")
     public String create(Model model) 
     {
         Exit exit = new Exit(new Room(), new Room());
         model.addAttribute("exit", exit);
         return "exit-create";
+    }
+
+    @GetMapping("/view/{id}")
+    public String view(Model model, @PathVariable Long id) throws NotFoundException 
+    {
+        Optional<Exit> p = exitRepository.findById(id);
+
+        if (p != null) 
+        {
+            model.addAttribute("exit", p);
+            return "exit-view";
+        } 
+        else 
+        {
+            throw new NotFoundException();
+        }
     }
 }

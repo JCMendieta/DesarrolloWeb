@@ -38,6 +38,7 @@ public class DatabaseInit implements ApplicationRunner
         itemRepository.save(i);
 
         ArrayList<DecorativeItem> alDI = new ArrayList<>();
+        ArrayList<DecorativeItem> alDI2 = new ArrayList<>();
         DecorativeItem dI = new DecorativeItem ("Lampara");
         alDI.add(dI);
         decorativeItemRepository.save(dI);
@@ -57,7 +58,7 @@ public class DatabaseInit implements ApplicationRunner
         playerRepository.save(p);
 
         Room a = new Room (alI, alDI, m, alE, alP);
-        Room b = new Room ();
+        Room b = new Room (alDI2, m);
         roomRepository.save(a);
         roomRepository.save(b);
         

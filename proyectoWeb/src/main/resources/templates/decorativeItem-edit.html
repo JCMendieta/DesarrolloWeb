@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        
+        <meta charset ="UTF-8">
+        <title>Decorative item edition</title>
     </head>
 
     <body>
-        <h1>Decorative Item</h1>
+        <h1>Behold! Edition of decorative items</h1>
         <form action="#" th:action="@{/decorative_item/save}" th:object="${decorativeItem}" method="post">
-            <input type="hidden" th:field="${decorativeItem.id}" id="decorativeItem-id">
-            <label for="decorativeItem-name">Name: </label>
-            <input type="text" th:field="${decorativeItem.name}" id="decorativeItem-name">
-            <button type="submit">Enviar</button>
+            <li>
+                <input type="hidden" th:field="${decorativeItem.id}" id="decorativeItem-id">
 
+                <label for="decorativeItem-name">Name: </label>
+                <input type="text" th:field="${decorativeItem.name}" id="decorativeItem-name">
+            </li>
+
+            <button type="submit">Edit decorative item</button>
         </form>
-
-
     </body>
-    
 </html>

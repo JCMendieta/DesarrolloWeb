@@ -1,5 +1,6 @@
 package co.edu.javeriana.proyectoWeb.model;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class ItemController
     ItemRepository itemRepository;
 
     @GetMapping("/list")
-    public String itemList(Model model)
+    public String list(Model model)
     {
         Iterable<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
@@ -52,5 +53,29 @@ public class ItemController
     {
         itemRepository.save(item);
         return "redirect:/item/list";
+    }
+
+    @PostMapping("/create")
+    public String create(Model model) 
+    {
+        Item item = new Item("", "", (long)0, (long)0, "", "", new ArrayList<Room>(), new Player());
+        model.addAttribute("item", item);
+        return "item-create";
+    }
+
+    @GetMapping("/view/{id}")
+    public String view(Model model, @PathVariable Long id) throws NotFoundException 
+    {
+        Optional<Item> p = itemRepository.findById(id);
+
+        if (p != null) 
+        {
+            model.addAttribute("item", p);
+            return "item-view";
+        } 
+        else 
+        {
+            throw new NotFoundException();
+        }
     }
 }

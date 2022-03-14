@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        
+        <meta charset ="UTF-8">
+        <title>Exit creation</title>
     </head>
 
     <body>
-        <h1>Exit creation</h1>
+        <h1>Welcome to creation of exits</h1>
         <form action="#" th:action="@{/exit/save}" th:object="${exit}" method="post">
-            <label for="exit-idFRoom">Entry room: </label>
-            <input type="text" th:field="${exit.idFRoom}" id="exit-idFRoom">
-            <label for="exit-idSRoom">Exit room: </label>
-            <input type="text" th:field="${exit.idSRoom}" id="exit-idSRoom">
-            <button type="submit">Create exit</button>
+            <li>
+                <label for="exit-idFRoom">From room #: </label>
+                <input type="text" th:field="${exit.idFRoom}" id="exit-idFRoom">
+            </li>
+            <li>
+                <label for="exit-idSRoom">To room #: </label>
+                <input type="text" th:field="${exit.idSRoom}" id="exit-idSRoom">
+            </li>
+
+            <button type="submit">Creation done!</button>
         </form>
     </body>
 </html>

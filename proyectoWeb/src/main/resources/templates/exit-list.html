@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html xlmns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset ="UTF-8">
-    <title>Lista items</title>
-</head>
+    <head>
+        <meta charset ="UTF-8">
+        <title>Exit list</title>
+    </head>
 
-<body>
-    <h1>Exits</h1> 
-    <ul>
-        <li th:each="p : ${exits}" th:if="${p.idFRoom}">
-            <a th:href="@{/exit/edit/{id}(id=${p.id})}" th:text="${p.id}"></a>
-        </li>
-    </ul>
-</body>
+    <body>
+        <h1>Here's the exit list</h1> 
+        <ul>
+            <li th:each="p : ${exits}" th:if="${p.idFRoom}">
+                <a th:href="@{/exit/edit/{id}(id=${p.id})}" th:text="${p.id}"></a>
+            </li>
+        </ul>
+        <form action="#" th:action="@{/exit/create}" th:object="${exit}" method="post">
+            <button type="submit">Create an exit</button>
+        </form>
+    </body>
 </html>

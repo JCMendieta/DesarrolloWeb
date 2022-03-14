@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
+        <meta charset ="UTF-8">
+        <title>Monster edition</title>
     </head>
 
     <body>
-        <h1>Monster</h1>
-            <form action="#" th:action="@{/monster/save}" th:object="${monster}" method="post">
+        <h1>Behold! Edition of monsters</h1>
+        <form action="#" th:action="@{/monster/save}" th:object="${monster}" method="post">
+            <li>
                 <input type="hidden" th:field="${monster.id}" id="monster-id">
+
                 <label for="monster-hitpoints">Hitpoints: </label>
                 <input type="text" th:field="${monster.hitpoints}" id="monster-hitpoints">
-                <button type="submit">Enviar</button>
-            </form>
+            </li>
+            <li>
+                <label for="monster-idRoom">Room: </label>
+                <input type="text" th:field="${monster.idRoom}" id="monster-idRoom">
+            </li>
+            <li>
+                <label for="monster-idMonsterType">Monster type: </label>
+                <input type="text" th:field="${monster.idMonsterType}" id="monster-idMonsterType">
+            </li>
+
+            <button type="submit">Edit monster</button>
+        </form>
     </body>
 </html>

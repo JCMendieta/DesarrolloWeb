@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html xlmns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset ="UTF-8">
-    <title>Lista monstruos</title>
-</head>
+    <head>
+        <meta charset ="UTF-8">
+        <title>Monster list</title>
+    </head>
 
-<body>
-    <h1>Monsters</h1> 
-    <ul>
-        <li th:each="p : ${monsters}" th:if="${p.hitpoints}">
-            <a th:href="@{/monster/edit/{id}(id=${p.id})}" th:text="${p.hitpoints}"></a>
-        </li>
-    </ul>
-</body>
+    <body>
+        <h1>Here's the monster list</h1> 
+        <ul>
+            <li th:each="p : ${monsters}" th:if="${p.hitpoints}">
+                <a th:href="@{/monster/edit/{id}(id=${p.id})}" th:text="${p.hitpoints}"></a>
+            </li>
+        </ul>
+        <form action="#" th:action="@{/monster/create}" th:object="${monster}" method="post">
+            <button type="submit">Create a monster</button>
+        </form>
+    </body>
 </html>

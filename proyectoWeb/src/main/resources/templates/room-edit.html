@@ -1,46 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
+        <meta charset ="UTF-8">
+        <title>Room edition</title>
     </head>
 
     <body>
-        <h1>Room edition</h1>
+        <h1>Behold! Edition of rooms</h1>
             <form action="#" th:action="@{/room/save}" th:object="${room}" method="post">
                 <input type="hidden" th:field="${room.id}" id="room-id">
-                <label for="room-rMonster">Monster: </label>
-                <input type="text" th:field="${room.rMonster}" id="room-rMonster">
-                <button type="submit">Enviar</button>
+                <li>
+                    <label for="room-rItems">Items: </label>
+                    <input type="text" th:field="${room.rItems}" id="room-rItems">
+                </li>
+                <li>
+                    <label for="room-idDecorativeItem">Decorative items: </label>
+                    <input type="text" th:field="${room.idDecorativeItem}" id="room-idDecorativeItem">
+                </li>
+                <li>
+                    <label for="room-rMonster">Monster: </label>
+                    <input type="text" th:field="${room.rMonster}" id="room-rMonster">
+                </li>
+                <li>
+                    <label for="room-rExits">Exits: </label>
+                    <input type="text" th:field="${room.rExits}" id="room-rExits">
+                </li>
+                <li>
+                    <label for="room-rPlayers">Players: </label>
+                    <input type="text" th:field="${room.rPlayers}" id="room-rPlayers">
+                </li>
+                <button type="submit">Edit room</button>
             </form>
-
-            <form action="#" th:action="@{/room/create_exit}" th:object="${exit}" method="post">
-                <button type="submit">Create exit</button>
-            </form>
-
-            <form action="#" th:action="@{/room/create_item}" th:object="${item}" method="post">
-                <button type="submit">Create item</button>
-            </form>
-
-            <form action="#" th:action="@{/room/create_ditem}" th:object="${decorative_item}" method="post">
-                <button type="submit">Create decorative item</button>
-            </form>
-
-            <form action="#" th:action="@{/room/create_monster}" th:object="${monster}" method="post">
-                <button type="submit">Create monster</button>
-            </form>
-            
-            <form action="#" th:action="@{/room/create_monstertype}" th:object="${monster_type}" method="post">
-                <button type="submit">Create monster type</button>
-            </form>
-
-
-            
- 
-    
-            <!--<form action="#" th:action="@{/exit/save}" th:object="${exit}" method="post">
-                <input type="hidden" th:field="${exit.id}" id="exit-id">
-                <label for="exit-idFRoom">IDSRoom: </label>
-                <input type="text" th:field="${exit.idSRoom}" id="exit-idSRoom">
-                <button type="submit">Enviar</button>
-            </form>-->
     </body>
 </html>

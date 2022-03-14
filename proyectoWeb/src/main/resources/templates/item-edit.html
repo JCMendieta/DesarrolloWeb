@@ -4,12 +4,41 @@
     </head>
 
     <body>
-        <h1>Exit</h1>
-            <form action="#" th:action="@{/item/save}" th:object="${item}" method="post">
-                <input type="hidden" th:field="${item.id}" id="item-id">
+        <h1>Behold! Edition of items</h1>
+        <form action="#" th:action="@{/item/save}" th:object="${item}" method="post">
+            <input type="hidden" th:field="${item.id}" id="item-id">
+            <li>
                 <label for="item-name">Name: </label>
                 <input type="text" th:field="${item.name}" id="item-name">
-                <button type="submit">Enviar</button>
-            </form>
+            </li>
+            <li>
+                <label for="item-last_updated">Last updated: </label>
+                <input type="text" th:field="${item.last_updated}" id="item-last_updated">
+            </li>
+            <li>
+                <label for="item-cost">Cost: </label>
+                <input type="text" th:field="${item.cost}" id="item-cost">
+            </li>
+            <li>
+                <label for="item-weight">Weight: </label>
+                <input type="text" th:field="${item.weight}" id="item-weight">
+            </li>
+            <li>
+                <label for="item-examine">Examine: </label>
+                <input type="text" th:field="${item.examine}" id="item-examine">
+            </li>
+            <li>
+                <label for="item-wiki_url">Wiki URL: </label>
+                <input type="text" th:field="${item.wiki_url}" id="item-wiki_url">
+            </li>
+            <!-- 
+            <li>
+                <label for="item-idPlayer">Player: </label>
+                <input type="text" th:field="${item.idPlayer}" id="item-idPlayer">
+            </li>
+            !-->
+
+            <button type="submit">Edit item</button>
+        </form>
     </body>
 </html>

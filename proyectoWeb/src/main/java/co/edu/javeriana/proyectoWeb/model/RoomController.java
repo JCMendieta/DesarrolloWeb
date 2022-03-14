@@ -33,7 +33,7 @@ public class RoomController
     MonsterRepository monsterRepository;
 
     @GetMapping("/list")
-    public String monsterList(Model model)
+    public String list(Model model)
     {
         Iterable<Room> rooms = roomRepository.findAll();
         model.addAttribute("rooms", rooms);
@@ -63,52 +63,27 @@ public class RoomController
         return "redirect:/room/list";
     }
 
-    @GetMapping("/create")
-    public String createRoom(Model model) 
+    @PostMapping("/create")
+    public String create(Model model) 
     {
         Room room = new Room(new ArrayList<Item>(), new ArrayList<DecorativeItem>(), new Monster(), new ArrayList<Exit>(), new ArrayList<Player>());
         model.addAttribute("room", room);
         return "room-create";
     }
 
-    @PostMapping("/create_exit")
-    public String createExit(Model model)
+    @GetMapping("/view/{id}")
+    public String view(Model model, @PathVariable Long id) throws NotFoundException 
     {
-        Exit exit = new Exit(new Room(), new Room());
-        model.addAttribute("exit", exit);
-        return "exit-create";
-    }
+        Optional<Room> p = roomRepository.findById(id);
 
-    @PostMapping("/create_item")
-    public String createItem(Model model) 
-    {
-        Item item = new Item("", "", (long)0, (long)0, "", "", new ArrayList<Room>(), new Player());
-        model.addAttribute("item", item);
-        return "item-create";
-    }
-
-    @PostMapping("/create_ditem")
-    public String createDItem(Model model) 
-    {
-        DecorativeItem decorativeItem = new DecorativeItem("", new ArrayList<Room>());
-        model.addAttribute("decorativeItem", decorativeItem);
-        return "decorativeItem-create";
-    }
-
-    @PostMapping("/create_monster")
-    public String createMonster(Model model) 
-    {
-        Monster monster = new Monster ((long)0, new Room (), new MonsterType ());
-        model.addAttribute("monster", monster);
-        return "monster-create";
-    }
-
-    
-    @PostMapping("/create_monstertype")
-    public String createMonsterType(Model model) 
-    {
-        MonsterType monsterType = new MonsterType("", "", (long)0, (long)0, (long)0, (long)0, new ArrayList<String>(), new ArrayList<Monster>(), "", "");
-        model.addAttribute("monsterType", monsterType);
-        return "monsterType-create";
+        if (p != null) 
+        {
+            model.addAttribute("room", p);
+            return "room-view";
+        } 
+        else 
+        {
+            throw new NotFoundException();
+        }
     }
 }
