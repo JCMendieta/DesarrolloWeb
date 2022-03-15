@@ -33,23 +33,17 @@ public class RoomController
     public String delete(Model model, @PathVariable Long id)
     {
         for(Room room : roomRepository.findAll()){
-            if(room != null){
                 for (Exit exit : room.getrExits()){
-                    if (exit != null){
-                        if(exit.idFRoom != null && exit.idFRoom.getId() == id){
+                        if(exit.idFRoom != null && exit.idFRoom.getId() == id || exit.idSRoom != null && exit.idSRoom.getId() == id){
                             exit.setIdFRoom(null);
                             exit.setIdSRoom(null);
                         }
-                        if(exit.idSRoom != null && exit.idSRoom.getId() == id){
-                            exit.setIdSRoom(null);
-                            exit.setIdFRoom(null);
-                        }
-                    }
-                }
-            }
+                }  
         }
-        for(Exit exit : roomRepository.findById(id).get().getrExits()){
-            exitRepository.delete(exit);
+        Room room=roomRepository.findById(id).get();
+        for(Exit exit : room.getrExits()){
+                exit.unlinkRoomExit(room);
+                exitRepository.delete(exit); 
         }
         roomRepository.findById(id).get().unlinkRoomAttributes();
         roomRepository.save(roomRepository.findById(id).get());

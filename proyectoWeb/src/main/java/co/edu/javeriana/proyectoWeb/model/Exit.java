@@ -66,8 +66,12 @@ public class Exit
         this.idSRoom = idSRoom;
     }
     public void unlinkRoomExit(Room r){
-        this.idFRoom=null;
-        this.idSRoom=null;
+        if(idFRoom!= null){
+            this.idFRoom=null;
+        }
+        if(idSRoom!=null){
+            this.idSRoom=null;
+        }        
     }
 
 }
