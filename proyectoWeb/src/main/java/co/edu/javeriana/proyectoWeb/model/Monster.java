@@ -94,4 +94,9 @@ public class Monster
         this.idRoom=null;
         r.setrMonster(null); 
     }
+    public void unlinkMonster(Room r){
+        this.idRoom=null;
+        this.idMonsterType =null; 
+        r.setrMonster(null);
+    }
 }

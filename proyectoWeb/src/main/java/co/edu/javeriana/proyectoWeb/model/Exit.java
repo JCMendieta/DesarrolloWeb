@@ -68,7 +68,6 @@ public class Exit
     public void unlinkRoomExit(Room r){
         this.idFRoom=null;
         this.idSRoom=null;
-        r.setrExits(null); 
     }
 
 }
