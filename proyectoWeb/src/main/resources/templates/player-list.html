@@ -11,6 +11,7 @@
             <li th:each="p : ${players}" th:if="${p.name}">
                 <a th:href="@{/player/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
                 <a class="deleteLink" th:href="@{/player/delete/{id}(id=${p.id})}">Eliminar</a>
+                <a class="viewLink" th:href="@{/player/view/{id}(id=${p.id})}">Información</a>
             </li>
         </ul>
     </body>

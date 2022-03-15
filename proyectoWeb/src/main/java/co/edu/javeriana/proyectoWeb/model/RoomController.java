@@ -75,21 +75,6 @@ public class RoomController
         return "room-create";
     }
 
-    @GetMapping("/view/{id}")
-    public String view(Model model, @PathVariable Long id) throws NotFoundException 
-    {
-        Optional<Room> p = roomRepository.findById(id);
-
-        if (p != null) 
-        {
-            model.addAttribute("room", p);
-            return "room-view";
-        } 
-        else 
-        {
-            throw new NotFoundException();
-        }
-    }
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable Long id)
     {
@@ -124,6 +109,23 @@ public class RoomController
 
        
         return "redirect:/room/list";
+    }
+
+    @GetMapping("/view/{id}")
+    public String view(Model model, @PathVariable Long id) throws NotFoundException 
+    {
+        Optional<Room> p = roomRepository.findById(id);
+
+        if (p != null) 
+        {
+            Room room =  roomRepository.findById(id).get();
+            model.addAttribute("room", room);
+            return "room-view";
+        } 
+        else 
+        {
+            throw new NotFoundException();
+        }
     }
 
 }

@@ -86,7 +86,8 @@ public class MonsterTypeController
 
         if (p != null) 
         {
-            model.addAttribute("monsterType", p);
+            MonsterType monsterType = monsterTypeRepository.findById(id).get();
+            model.addAttribute("monsterType", monsterType);
             return "monsterType-view";
         } 
         else 

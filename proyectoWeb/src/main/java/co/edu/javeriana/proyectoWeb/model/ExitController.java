@@ -83,7 +83,8 @@ public class ExitController
 
         if (p != null) 
         {
-            model.addAttribute("exit", p);
+            Exit  exit = exitRepository.findById(id).get();
+            model.addAttribute("exit", exit);
             return "exit-view";
         } 
         else 

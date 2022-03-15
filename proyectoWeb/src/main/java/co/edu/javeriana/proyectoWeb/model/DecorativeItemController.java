@@ -83,7 +83,8 @@ public class DecorativeItemController
 
         if (p != null) 
         {
-            model.addAttribute("decorativeItem", p);
+            DecorativeItem  decorativeItem = decorativeItemRepository.findById(id).get();
+            model.addAttribute("decorativeItem", decorativeItem);
             return "decorativeItem-view";
         } 
         else 

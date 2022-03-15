@@ -11,6 +11,7 @@
             <li th:each="p : ${monsterTypes}" th:if="${p.name}">
                 <a th:href="@{/monster_type/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
                 <a class="deleteLink" th:href="@{/monster_type/delete/{id}(id=${p.id})}">Eliminar</a>
+                <a class="viewLink" th:href="@{/monster_type/view/{id}(id=${p.id})}">Información</a>
             </li>
         </ul>
         <form action="#" th:action="@{/monster_type/create}" th:object="${monster_type}" method="post">
