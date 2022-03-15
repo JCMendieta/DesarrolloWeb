@@ -2,7 +2,6 @@ package co.edu.javeriana.proyectoWeb.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,6 +44,12 @@ public class Room
     public Room(List<Exit> rExits) 
     {
         this.rExits = rExits;
+    }
+
+    public Room(List<DecorativeItem> idDecorativeItem, Monster rMonster) 
+    {
+        this.idDecorativeItem = idDecorativeItem;
+        this.rMonster = rMonster;
     }
 
     public Room(List<Item> rItems, List<DecorativeItem> idDecorativeItem, Monster rMonster, List<Exit> rExits,

@@ -27,7 +27,7 @@ public class MonsterController
     RoomRepository roomRepository;
 
     @GetMapping("/list")
-    public String monsterList(Model model)
+    public String list(Model model)
     {
         Iterable<Monster> monsters = monsterRepository.findAll();
         model.addAttribute("monsters", monsters);
@@ -65,5 +65,29 @@ public class MonsterController
     {
         monsterRepository.save(monster);
         return "redirect:/monster/list";
+    }
+
+    @PostMapping("/create")
+    public String create(Model model) 
+    {
+        Monster monster = new Monster ((long)0, new Room (), new MonsterType ());
+        model.addAttribute("monster", monster);
+        return "monster-create";
+    }
+
+    @GetMapping("/view/{id}")
+    public String view(Model model, @PathVariable Long id) throws NotFoundException 
+    {
+        Optional<Monster> p = monsterRepository.findById(id);
+
+        if (p != null) 
+        {
+            model.addAttribute("monster", p);
+            return "monster-view";
+        } 
+        else 
+        {
+            throw new NotFoundException();
+        }
     }
 }

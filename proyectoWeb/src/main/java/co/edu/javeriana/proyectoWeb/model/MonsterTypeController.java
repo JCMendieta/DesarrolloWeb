@@ -1,5 +1,6 @@
 package co.edu.javeriana.proyectoWeb.model;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -27,7 +28,7 @@ public class MonsterTypeController
     MonsterRepository monsterRepository;
 
     @GetMapping("/list")
-    public String monsterTypeList(Model model)
+    public String list(Model model)
     {
         Iterable<MonsterType> monsterTypes = monsterTypeRepository.findAll();
         model.addAttribute("monsterTypes", monsterTypes);
@@ -68,5 +69,29 @@ public class MonsterTypeController
     {
         monsterTypeRepository.save(monsterType);
         return "redirect:/monster_type/list";
+    }
+
+    @PostMapping("/create")
+    public String create(Model model) 
+    {
+        MonsterType monsterType = new MonsterType("", "", (long)0, (long)0, (long)0, (long)0, new ArrayList<String>(), new ArrayList<Monster>(), "", "");
+        model.addAttribute("monsterType", monsterType);
+        return "monsterType-create";
+    }
+
+    @GetMapping("/view/{id}")
+    public String view(Model model, @PathVariable Long id) throws NotFoundException 
+    {
+        Optional<MonsterType> p = monsterTypeRepository.findById(id);
+
+        if (p != null) 
+        {
+            model.addAttribute("monsterType", p);
+            return "monsterType-view";
+        } 
+        else 
+        {
+            throw new NotFoundException();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package co.edu.javeriana.proyectoWeb.model;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -26,9 +27,8 @@ public class DecorativeItemController
     @Autowired
     RoomRepository roomRepository;
 
-
     @GetMapping("/list")
-    public String decorativeItemList(Model model)
+    public String list(Model model)
     {
         Iterable<DecorativeItem>  decorativeItems = decorativeItemRepository.findAll();
         model.addAttribute("decorativeItems", decorativeItems);
@@ -66,5 +66,29 @@ public class DecorativeItemController
     {
         decorativeItemRepository.save(decorativeItem);
         return "redirect:/decorative_item/list";
+    }
+
+    @PostMapping("/create")
+    public String create(Model model) 
+    {
+        DecorativeItem decorativeItem = new DecorativeItem("", new ArrayList<Room>());
+        model.addAttribute("decorativeItem", decorativeItem);
+        return "decorativeItem-create";
+    }
+
+    @GetMapping("/view/{id}")
+    public String view(Model model, @PathVariable Long id) throws NotFoundException 
+    {
+        Optional<DecorativeItem> p = decorativeItemRepository.findById(id);
+
+        if (p != null) 
+        {
+            model.addAttribute("decorativeItem", p);
+            return "decorativeItem-view";
+        } 
+        else 
+        {
+            throw new NotFoundException();
+        }
     }
 }

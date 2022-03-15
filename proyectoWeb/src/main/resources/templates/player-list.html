@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xlmns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset ="UTF-8">
-    <title>Lista jugadores</title>
-</head>
+    <head>
+        <meta charset ="UTF-8">
+        <title>Lista jugadores</title>
+    </head>
 
-<body>
-    <h1>Players</h1> 
-    <ul>
-        <li th:each="p: ${players}" th:if="${p.name}">
-            <a th:text="${p.name}"></a>
-            <a class="deleteLink" th:href="@{/player/delete/{id}(id=${p.id})}">Eliminar</a>
-        </li>
-    </ul>
-</body>
+    <body>
+        <h1>Players</h1> 
+        <ul>
+            <li th:each="p : ${players}" th:if="${p.name}">
+                <a th:href="@{/player/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
+                <a class="deleteLink" th:href="@{/player/delete/{id}(id=${p.id})}">Eliminar</a>
+            </li>
+        </ul>
+    </body>
 </html>

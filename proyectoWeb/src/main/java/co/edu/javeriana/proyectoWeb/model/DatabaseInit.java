@@ -8,8 +8,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import antlr.collections.List;
-
 @Component
 public class DatabaseInit implements ApplicationRunner
 {
@@ -32,17 +30,17 @@ public class DatabaseInit implements ApplicationRunner
     @Transactional
     public void run(ApplicationArguments args) throws Exception
     {
-        ArrayList<Item> itemArrayList = new ArrayList<>();
+        ArrayList<Item> alI = new ArrayList<>();
         Item i = new Item ("Casco");
-        itemArrayList.add(i);
+        alI.add(i);
         itemRepository.save(i);
         i = new Item("Zapatos");
-        itemArrayList.add(i);
+        alI.add(i);
         itemRepository.save(i);
 
-        ArrayList<DecorativeItem> decorativeItemArrayList = new ArrayList<>();
+        ArrayList<DecorativeItem> alDI = new ArrayList<>();
+        ArrayList<DecorativeItem> alDI2 = new ArrayList<>();
         DecorativeItem dI = new DecorativeItem ("Lampara");
-        decorativeItemArrayList.add(dI);
         decorativeItemRepository.save(dI);
 
         
@@ -59,8 +57,8 @@ public class DatabaseInit implements ApplicationRunner
         alP.add(p);
         playerRepository.save(p);
 
-        Room a = new Room (itemArrayList, decorativeItemArrayList, m, alE, alP);
-        Room b = new Room ();
+        Room a = new Room (alI, alDI, m, alE, alP);
+        Room b = new Room (alDI2, m);
         roomRepository.save(a);
         roomRepository.save(b);
         

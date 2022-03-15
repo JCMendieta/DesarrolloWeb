@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html xlmns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset ="UTF-8">
-    <title>Lista tipos de monstruos</title>
-</head>
+    <head>
+        <meta charset ="UTF-8">
+        <title>Monster type list</title>
+    </head>
 
-<body>
-    <h1>Monster types</h1> 
-    <ul>
-        <li th:each="p : ${monsterTypes}" th:if="${p.name}">
-            <a th:href="@{/monster_type/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
-            <a class="deleteLink" th:href="@{/monster_type/delete/{id}(id=${p.id})}">Eliminar</a>
-        </li>
-    </ul>
-</body>
+    <body>
+        <h1>Here's the monster type list</h1> 
+        <ul>
+            <li th:each="p : ${monsterTypes}" th:if="${p.name}">
+                <a th:href="@{/monster_type/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
+                <a class="deleteLink" th:href="@{/monster_type/delete/{id}(id=${p.id})}">Eliminar</a>
+            </li>
+        </ul>
+        <form action="#" th:action="@{/monster_type/create}" th:object="${monster_type}" method="post">
+            <button type="submit">Create monster type</button>
+        </form>
+    </body>
 </html>

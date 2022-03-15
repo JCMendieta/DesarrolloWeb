@@ -2,20 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset ="UTF-8">
-        <title>Decorative item edition</title>
+        <title>Decorative item creation</title>
     </head>
 
     <body>
-        <h1>Behold! Edition of decorative items</h1>
+        <h1>Welcome to creation of decorative items</h1>
         <form action="#" th:action="@{/decorative_item/save}" th:object="${decorativeItem}" method="post">
-            <li>
-                <input type="hidden" th:field="${decorativeItem.id}" id="decorativeItem-id">
-
+            <li>            
                 <label for="decorativeItem-name">Name: </label>
                 <input type="text" th:field="${decorativeItem.name}" id="decorativeItem-name">
             </li>
 
-            <button type="submit">Edit decorative item</button>
+            <button type="submit">Creation done!</button>
         </form>
-    </body>
+    </body> 
 </html>
