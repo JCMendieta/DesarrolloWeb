@@ -48,7 +48,9 @@ public class DatabaseInit implements ApplicationRunner
         monsterTypeRepository.save(mT);
         
         Monster m = new Monster((long)1200, mT);
+        Monster m2 = new Monster((long)12300, mT);
         monsterRepository.save(m);
+        monsterRepository.save(m2);
 
         ArrayList<Exit> alE = new ArrayList<>();
 
@@ -58,11 +60,14 @@ public class DatabaseInit implements ApplicationRunner
         playerRepository.save(p);
 
         Room a = new Room (alI, alDI, m, alE, alP);
-        Room b = new Room (alDI2, m);
+        Room b = new Room (alDI2, m2);
         roomRepository.save(a);
         roomRepository.save(b);
         
         m.setIdRoom(a);
+        m2.setIdRoom(b);
+        monsterRepository.save(m);
+        monsterRepository.save(m2);
 
         Exit e = new Exit (a, b);
         alE.add(e);

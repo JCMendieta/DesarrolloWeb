@@ -96,17 +96,26 @@ public class RoomController
                         if(exit.idFRoom != null && exit.idFRoom.getId() == id || exit.idSRoom != null && exit.idSRoom.getId() == id){
                             exit.setIdFRoom(null);
                             exit.setIdSRoom(null);
+                            exitRepository.save(exit);
                         }
                 }  
         }
         Room room=roomRepository.findById(id).get();
+        
         for(Exit exit : room.getrExits()){
                 exit.unlinkRoomExit(room);
                 exitRepository.delete(exit); 
         }
+
+        room.getrMonster().setIdRoom(null);
+
+      
+
         roomRepository.findById(id).get().unlinkRoomAttributes();
-        roomRepository.save(roomRepository.findById(id).get());
+        roomRepository.save(room);
         roomRepository.deleteById(id);
+
+       
         return "redirect:/room/list";
     }
 

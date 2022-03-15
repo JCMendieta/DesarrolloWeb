@@ -23,7 +23,7 @@ public class Room
     @ManyToMany
     List<DecorativeItem> idDecorativeItem = new ArrayList<>();
     
-    @OneToOne (orphanRemoval = true)
+    @OneToOne
     Monster rMonster;
 
     @OneToMany(mappedBy = "idFRoom", orphanRemoval = true)
