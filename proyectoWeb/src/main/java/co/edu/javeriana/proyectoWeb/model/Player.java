@@ -57,6 +57,20 @@ public class Player
         this.idRoom = idRoom;
         this.items = items;
     }
+    public Player(String name, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
+            Long maxWeight, Long clock, Long max_time, List<Item> items) 
+    {
+        this.name = name;
+        this.last_updated = last_updated;
+        this.attack_level = attack_level;
+        this.defence_slash = defence_slash;
+        this.size = size;
+        this.hitpoints = hitpoints;
+        this.maxWeight = maxWeight;
+        this.clock = clock;
+        this.max_time = max_time;
+        this.items = items;
+    }
 
     public Long getId() 
     {

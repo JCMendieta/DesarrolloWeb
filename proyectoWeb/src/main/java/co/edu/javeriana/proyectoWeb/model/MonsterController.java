@@ -54,9 +54,13 @@ public class MonsterController
     public String delete(Model model, @PathVariable Long id)
     {
         Monster monster =monsterRepository.findById(id).get();
-        Room r=monster.idRoom;
-        monster.unlinkRoomMonster(r);
-        monsterRepository.deleteById(id);
+        Room room = monster.getIdRoom();
+        if(room != null){
+            room.rMonster.setIdRoom(null);
+            room.setrMonster(null);
+            roomRepository.save(room);
+        }
+        monsterRepository.delete(monster);
         return "redirect:/monster/list";
     }
 
