@@ -51,6 +51,16 @@ public class DecorativeItemController
         }
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable Long id)
+    {
+        for( Room room : roomRepository.findAll() ){
+            decorativeItemRepository.findById(id).get().unlinkRoomDecorativeItem(room);
+        }
+        decorativeItemRepository.deleteById(id);
+        return "redirect:/decorative_item/list";
+    }
+
     @PostMapping("/save")
     public String save(@ModelAttribute DecorativeItem decorativeItem, Model model) 
     {

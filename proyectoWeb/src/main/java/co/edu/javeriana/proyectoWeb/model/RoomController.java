@@ -88,4 +88,26 @@ public class RoomController
             throw new NotFoundException();
         }
     }
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable Long id)
+    {
+        for(Room room : roomRepository.findAll()){
+                for (Exit exit : room.getrExits()){
+                        if(exit.idFRoom != null && exit.idFRoom.getId() == id || exit.idSRoom != null && exit.idSRoom.getId() == id){
+                            exit.setIdFRoom(null);
+                            exit.setIdSRoom(null);
+                        }
+                }  
+        }
+        Room room=roomRepository.findById(id).get();
+        for(Exit exit : room.getrExits()){
+                exit.unlinkRoomExit(room);
+                exitRepository.delete(exit); 
+        }
+        roomRepository.findById(id).get().unlinkRoomAttributes();
+        roomRepository.save(roomRepository.findById(id).get());
+        roomRepository.deleteById(id);
+        return "redirect:/room/list";
+    }
+
 }

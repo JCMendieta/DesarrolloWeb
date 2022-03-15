@@ -177,4 +177,10 @@ public class Player
     {
         this.idRoom = idRoom;
     }
+
+    public void unlinkRoomPlayer(Room r){
+        this.idRoom=null;
+        r.setrPlayers(null); 
+    }
+
 }

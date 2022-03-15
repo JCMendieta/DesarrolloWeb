@@ -23,6 +23,9 @@ public class PlayerController
     @Autowired
     PlayerRepository playerRepository;
 
+    @Autowired
+    RoomRepository roomRepository;
+
     @GetMapping("/list")
     public String list(Model model)
     {
@@ -53,4 +56,16 @@ public class PlayerController
         playerRepository.save(player);
         return "redirect:/player/list";
     }
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable Long id)
+    {
+        Player player = playerRepository.findById(id).get();
+        Room r=player.idRoom;
+        if(r != null){
+            player.unlinkRoomPlayer(r);
+        }
+        playerRepository.deleteById(id);
+        return "redirect:/player/list";
+    }
+
 }

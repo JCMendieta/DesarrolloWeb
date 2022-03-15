@@ -10,6 +10,7 @@
         <ul>
             <li th:each="p : ${exits}" th:if="${p.idFRoom}">
                 <a th:href="@{/exit/edit/{id}(id=${p.id})}" th:text="${p.id}"></a>
+                <a class="deleteLink" th:href="@{/exit/delete/{id}(id=${p.id})}">Eliminar</a>
             </li>
         </ul>
         <form action="#" th:action="@{/exit/create}" th:object="${exit}" method="post">

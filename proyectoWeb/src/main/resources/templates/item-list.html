@@ -10,6 +10,7 @@
         <ul>
             <li th:each="p : ${items}" th:if="${p.name}">
                 <a th:href="@{/item/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
+                <a class="deleteLink" th:href="@{/item/delete/{id}(id=${p.id})}">Eliminar</a>
             </li>
         </ul>
         <form action="#" th:action="@{/item/create}" th:object="${item}" method="post">
