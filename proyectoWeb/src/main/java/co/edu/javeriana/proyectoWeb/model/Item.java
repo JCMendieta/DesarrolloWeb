@@ -54,6 +54,15 @@ public class Item
         this.idRoom = idRoom;
         this.idPlayer = idPlayer;
     }
+    public Item(String name, String last_updated, Long cost, Long weight, String examine, String wiki_url) 
+    {
+        this.name = name;
+        this.last_updated = last_updated;
+        this.cost = cost;
+        this.weight = weight;
+        this.examine = examine;
+        this.wiki_url = wiki_url;
+    }
 
     public Long getId() 
     {

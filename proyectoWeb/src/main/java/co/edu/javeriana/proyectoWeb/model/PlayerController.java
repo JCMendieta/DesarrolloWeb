@@ -26,6 +26,9 @@ public class PlayerController
     @Autowired
     RoomRepository roomRepository;
 
+    @Autowired
+    ItemRepository itemRepository;
+
     @GetMapping("/list")
     public String list(Model model)
     {
@@ -63,7 +66,13 @@ public class PlayerController
         Room r=player.idRoom;
         if(r != null){
             player.unlinkRoomPlayer(r);
+            roomRepository.save(r);
         }
+        for(Item item : player.getItems() ){
+            item.setIdPlayer(null);
+            itemRepository.save(item);
+        }
+        
         playerRepository.deleteById(id);
         return "redirect:/player/list";
     }

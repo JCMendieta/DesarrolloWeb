@@ -31,6 +31,8 @@ public class RoomController
     DecorativeItemRepository decorativeItemRepository;
     @Autowired
     MonsterRepository monsterRepository;
+    @Autowired
+    PlayerRepository playerRepository;
 
     @GetMapping("/list")
     public String list(Model model)
@@ -105,6 +107,11 @@ public class RoomController
         for(Exit exit : room.getrExits()){
                 exit.unlinkRoomExit(room);
                 exitRepository.delete(exit); 
+        }
+        for (Player player : room.getrPlayers()){
+            player.setIdRoom(null);
+            playerRepository.save(player);
+            
         }
 
         room.getrMonster().setIdRoom(null);

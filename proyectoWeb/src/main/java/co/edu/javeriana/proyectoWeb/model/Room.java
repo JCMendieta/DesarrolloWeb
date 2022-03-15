@@ -26,10 +26,10 @@ public class Room
     @OneToOne
     Monster rMonster;
 
-    @OneToMany(mappedBy = "idFRoom", orphanRemoval = true)
+    @OneToMany(mappedBy = "idFRoom")
     List<Exit> rExits = new ArrayList<>();
 
-    @OneToMany(mappedBy = "idRoom", orphanRemoval = true)
+    @OneToMany(mappedBy = "idRoom")
     List<Player> rPlayers = new ArrayList<>();
 
     public Room() 
