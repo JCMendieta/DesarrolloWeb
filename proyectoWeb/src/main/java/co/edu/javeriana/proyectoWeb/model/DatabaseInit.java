@@ -32,14 +32,17 @@ public class DatabaseInit implements ApplicationRunner
     @Transactional
     public void run(ApplicationArguments args) throws Exception
     {
-        ArrayList<Item> alI = new ArrayList<>();
-        Item i = new Item ("Dildo");
-        alI.add(i);
+        ArrayList<Item> itemArrayList = new ArrayList<>();
+        Item i = new Item ("Casco");
+        itemArrayList.add(i);
+        itemRepository.save(i);
+        i = new Item("Zapatos");
+        itemArrayList.add(i);
         itemRepository.save(i);
 
-        ArrayList<DecorativeItem> alDI = new ArrayList<>();
+        ArrayList<DecorativeItem> decorativeItemArrayList = new ArrayList<>();
         DecorativeItem dI = new DecorativeItem ("Lampara");
-        alDI.add(dI);
+        decorativeItemArrayList.add(dI);
         decorativeItemRepository.save(dI);
 
         
@@ -56,7 +59,7 @@ public class DatabaseInit implements ApplicationRunner
         alP.add(p);
         playerRepository.save(p);
 
-        Room a = new Room (alI, alDI, m, alE, alP);
+        Room a = new Room (itemArrayList, decorativeItemArrayList, m, alE, alP);
         Room b = new Room ();
         roomRepository.save(a);
         roomRepository.save(b);

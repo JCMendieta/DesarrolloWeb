@@ -23,6 +23,9 @@ public class MonsterTypeController
     @Autowired
     MonsterTypeRepository monsterTypeRepository;
 
+    @Autowired 
+    MonsterRepository monsterRepository;
+
     @GetMapping("/list")
     public String monsterTypeList(Model model)
     {
@@ -45,6 +48,19 @@ public class MonsterTypeController
         {
             throw new NotFoundException();
         }
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable Long id)
+    {
+        MonsterType monsterType=monsterTypeRepository.findById(id).get();
+        for ( Monster monster : monsterType.getMonsters()){
+            Room r = monster.getIdRoom();
+            monster.unlinkMonster(r);
+            monsterRepository.delete(monster);
+        }
+        monsterTypeRepository.deleteById(id);
+        return "redirect:/monster_type/list";
     }
 
     @PostMapping("/save")

@@ -3,6 +3,7 @@ package co.edu.javeriana.proyectoWeb.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ public class Item
     Long weight;
     String examine;
     String wiki_url;
+
 
     @ManyToMany(mappedBy = "rItems")
     List<Room> idRoom = new ArrayList<>();
@@ -141,5 +143,10 @@ public class Item
     public void setIdPlayer(Player idPlayer) 
     {
         this.idPlayer = idPlayer;
+    }
+
+    public void unlinkRoomItem(Room r){
+        this.idRoom.remove(r);
+        r.getrItems().remove(this);
     }
 }

@@ -23,6 +23,10 @@ public class DecorativeItemController
     @Autowired
     DecorativeItemRepository decorativeItemRepository;
 
+    @Autowired
+    RoomRepository roomRepository;
+
+
     @GetMapping("/list")
     public String decorativeItemList(Model model)
     {
@@ -45,6 +49,16 @@ public class DecorativeItemController
         {
             throw new NotFoundException();
         }
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable Long id)
+    {
+        for( Room room : roomRepository.findAll() ){
+            decorativeItemRepository.findById(id).get().unlinkRoomDecorativeItem(room);
+        }
+        decorativeItemRepository.deleteById(id);
+        return "redirect:/decorative_item/list";
     }
 
     @PostMapping("/save")

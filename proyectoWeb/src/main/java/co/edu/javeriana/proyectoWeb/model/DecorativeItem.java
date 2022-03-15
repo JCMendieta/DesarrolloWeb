@@ -66,4 +66,9 @@ public class DecorativeItem
     {
         this.idRoom = idRoom;
     }
+
+    public void unlinkRoomDecorativeItem(Room r){
+        this.idRoom.remove(r);
+        r.getIdDecorativeItem().remove(this);
+    }
 }

@@ -8,8 +8,9 @@
 <body>
     <h1>Exits</h1> 
     <ul>
-        <li th:each="p : ${exits}" th:if="${p.idFRoom}">
-            <a th:href="@{/exit/edit/{id}(id=${p.id})}" th:text="${p.id}"></a>
+        <li th:each="p : ${exits}" th:if="${p.id}">
+            <a th:text="${p.id}"></a>
+            <a class="deleteLink" th:href="@{/exit/delete/{id}(id=${p.id})}">Eliminar</a>
         </li>
     </ul>
 </body>

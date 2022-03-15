@@ -164,6 +164,9 @@ public class MonsterType
     public void setWiki_url(String wiki_url) 
     {
         this.wiki_url = wiki_url;
+    }
+
+    public void deleteById(Long id2) {
     } 
 
     

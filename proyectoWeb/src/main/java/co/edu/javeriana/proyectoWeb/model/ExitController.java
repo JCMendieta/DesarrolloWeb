@@ -23,6 +23,9 @@ public class ExitController
     @Autowired
     ExitRepository exitRepository;
 
+    @Autowired
+    RoomRepository roomRepository;
+
     @GetMapping("/list")
     public String decorativeItemList(Model model)
     {
@@ -46,6 +49,17 @@ public class ExitController
             throw new NotFoundException();
         }
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable Long id)
+    {
+        for( Room room : roomRepository.findAll() ){
+            exitRepository.findById(id).get().unlinkRoomExit(room);
+        }
+        exitRepository.deleteById(id);
+        return "redirect:/exit/list";
+    }
+
 
     @PostMapping("/save")
     public String save(@ModelAttribute Exit exit, Model model) 

@@ -8,7 +8,10 @@
 <body>
     <h1>Players</h1> 
     <ul>
-        <li th:each="player: ${players}" th:text="${player.name}"></li>
+        <li th:each="p: ${players}" th:if="${p.name}">
+            <a th:text="${p.name}"></a>
+            <a class="deleteLink" th:href="@{/player/delete/{id}(id=${p.id})}">Eliminar</a>
+        </li>
     </ul>
 </body>
 </html>

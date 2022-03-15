@@ -8,7 +8,10 @@
 <body>
     <h1>Rooms</h1> 
     <ul>
-        <li th:each="room: ${rooms}" th:text="${room.id}"></li>
+        <li th:each="room: ${rooms}" th:if="${room.id}">
+            <a th:text="${room.id}"></a>
+            <a class="deleteLink" th:href="@{/room/delete/{id}(id=${room.id})}">Eliminar</a>
+        </li>
     </ul>
 </body>
 </html>

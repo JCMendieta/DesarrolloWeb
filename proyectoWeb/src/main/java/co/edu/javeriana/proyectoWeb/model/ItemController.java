@@ -23,6 +23,9 @@ public class ItemController
     @Autowired
     ItemRepository itemRepository;
 
+    @Autowired
+    RoomRepository roomRepository;
+
     @GetMapping("/list")
     public String itemList(Model model)
     {
@@ -45,6 +48,16 @@ public class ItemController
         {
             throw new NotFoundException();
         }
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable Long id)
+    {
+        for( Room room : roomRepository.findAll() ){
+            itemRepository.findById(id).get().unlinkRoomItem(room);
+        }
+        itemRepository.deleteById(id);
+        return "redirect:/item/list";
     }
 
     @PostMapping("/save")
