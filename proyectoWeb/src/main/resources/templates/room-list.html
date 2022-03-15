@@ -11,6 +11,7 @@
             <li th:each="p : ${rooms}" th:if="${p.id}">
                 <a th:href="@{/room/edit/{id}(id=${p.id})}" th:text="${p.id}"></a>
                 <a class="deleteLink" th:href="@{/room/delete/{id}(id=${p.id})}">Eliminar</a>
+                <a class="viewLink" th:href="@{/room/view/{id}(id=${p.id})}">Información</a>
             </li>
             <form action="#" th:action="@{/room/create}" th:object="${room}" method="post">
                 <button type="submit">Create room</button>

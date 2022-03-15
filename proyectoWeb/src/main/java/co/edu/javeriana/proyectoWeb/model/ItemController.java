@@ -83,7 +83,8 @@ public class ItemController
 
         if (p != null) 
         {
-            model.addAttribute("item", p);
+            Item  item = itemRepository.findById(id).get();
+            model.addAttribute("item", item);
             return "item-view";
         } 
         else 

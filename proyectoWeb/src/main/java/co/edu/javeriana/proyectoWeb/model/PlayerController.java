@@ -77,4 +77,21 @@ public class PlayerController
         return "redirect:/player/list";
     }
 
+    @GetMapping("/view/{id}")
+    public String view(Model model, @PathVariable Long id) throws NotFoundException 
+    {
+        Optional<Player> p = playerRepository.findById(id);
+
+        if (p != null) 
+        {
+            Player player = playerRepository.findById(id).get();
+            model.addAttribute("player", player);
+            return "player-view";
+        } 
+        else 
+        {
+            throw new NotFoundException();
+        }
+    }
+
 }

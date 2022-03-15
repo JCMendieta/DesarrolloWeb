@@ -11,6 +11,7 @@
             <li th:each="p : ${decorativeItems}" th:if="${p.name}">
                 <a th:href="@{/decorative_item/edit/{id}(id=${p.id})}" th:text="${p.name}"></a>
                 <a class="deleteLink" th:href="@{/decorative_item/delete/{id}(id=${p.id})}">Eliminar</a>
+                <a class="viewLink" th:href="@{/decorative_item/view/{id}(id=${p.id})}">Información</a>
             </li>
         </ul>
         <form action="#" th:action="@{/decorative_item/create}" th:object="${decorative_item}" method="post">
