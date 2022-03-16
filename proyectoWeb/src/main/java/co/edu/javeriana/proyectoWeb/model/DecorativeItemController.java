@@ -1,8 +1,6 @@
 package co.edu.javeriana.proyectoWeb.model;
 
 import java.util.ArrayList;
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +36,7 @@ public class DecorativeItemController
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
-        Optional<DecorativeItem> p = decorativeItemRepository.findById(id);
+        DecorativeItem p = decorativeItemRepository.findById(id).get();
         
         if (p != null) 
         {
@@ -79,7 +77,7 @@ public class DecorativeItemController
     @GetMapping("/view/{id}")
     public String view(Model model, @PathVariable Long id) throws NotFoundException 
     {
-        Optional<DecorativeItem> p = decorativeItemRepository.findById(id);
+        DecorativeItem p = decorativeItemRepository.findById(id).get();
 
         if (p != null) 
         {

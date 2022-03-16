@@ -1,7 +1,5 @@
 package co.edu.javeriana.proyectoWeb.model;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +35,7 @@ public class ExitController
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
-        Optional<Exit> p = exitRepository.findById(id);
+        Exit p = exitRepository.findById(id).get();
         
         if (p != null) 
         {
@@ -79,7 +77,7 @@ public class ExitController
     @GetMapping("/view/{id}")
     public String view(Model model, @PathVariable Long id) throws NotFoundException 
     {
-        Optional<Exit> p = exitRepository.findById(id);
+        Exit p = exitRepository.findById(id).get();
 
         if (p != null) 
         {

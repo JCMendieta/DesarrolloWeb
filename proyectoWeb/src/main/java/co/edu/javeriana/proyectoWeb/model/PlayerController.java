@@ -1,7 +1,5 @@
 package co.edu.javeriana.proyectoWeb.model;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +38,7 @@ public class PlayerController
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
-        Optional<Player> p = playerRepository.findById(id);
+        Player p = playerRepository.findById(id).get();
         
         if (p != null) 
         {
@@ -80,7 +78,7 @@ public class PlayerController
     @GetMapping("/view/{id}")
     public String view(Model model, @PathVariable Long id) throws NotFoundException 
     {
-        Optional<Player> p = playerRepository.findById(id);
+        Player p = playerRepository.findById(id).get();
 
         if (p != null) 
         {

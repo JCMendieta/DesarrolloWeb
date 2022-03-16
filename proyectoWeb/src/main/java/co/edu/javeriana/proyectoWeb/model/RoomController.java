@@ -1,8 +1,6 @@
 package co.edu.javeriana.proyectoWeb.model;
 
 import java.util.ArrayList;
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +43,11 @@ public class RoomController
     @GetMapping("/edit/{id}")
     public String edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
+        Iterable<Room> rooms = roomRepository.findAll();
+        model.addAttribute("rooms", rooms);
         Iterable<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
-        Optional<Room> p = roomRepository.findById(id);
+        Room p = roomRepository.findById(id).get();
         
         if (p != null) 
         {
@@ -114,7 +114,7 @@ public class RoomController
     @GetMapping("/view/{id}")
     public String view(Model model, @PathVariable Long id) throws NotFoundException 
     {
-        Optional<Room> p = roomRepository.findById(id);
+        Room p = roomRepository.findById(id).get();
 
         if (p != null) 
         {
@@ -128,4 +128,62 @@ public class RoomController
         }
     }
 
+    @GetMapping("/item_list/{id}")
+    public String itemList (Model model, @PathVariable Long id)
+    {
+        Iterable<Item> items = itemRepository.findAll();
+        Room r = roomRepository.findById(id).get();
+        model.addAttribute("items", items);
+        model.addAttribute("room", r);
+        return "room-items";
+    }
+
+    @GetMapping("/item_list_c/{id}")
+    public String currentItems(Model model, @PathVariable Long id)
+    {
+        
+        Room r = roomRepository.findById(id).get();
+        Iterable<Item> items = r.rItems;
+        model.addAttribute("items", items);
+        return "room-current-items";
+    }
+
+    @GetMapping("/add_item/{idRoom}/{idItem}")
+    public String addItem (@PathVariable Long idRoom, @PathVariable Long idItem)
+    {
+        Room r = roomRepository.findById(idRoom).get();
+        Item i = itemRepository.findById(idItem).get();
+        r.rItems.add(i);
+        itemRepository.save(i);
+        return "redirect:/room/list";
+    }
+
+    @GetMapping("/ditem_list/{id}")
+    public String decorativeItemList (Model model, @PathVariable Long id)
+    {
+        Iterable<DecorativeItem> decorativeItems = decorativeItemRepository.findAll();
+        Room r = roomRepository.findById(id).get();
+        model.addAttribute("decorativeItems", decorativeItems);
+        model.addAttribute("room", r);
+        return "room-ditems";
+    }
+
+    @GetMapping("/ditem_list_c/{id}")
+    public String currentDecorativeItems(Model model, @PathVariable Long id)
+    {
+        Room r = roomRepository.findById(id).get();
+        Iterable<DecorativeItem> decorativeItems = r.idDecorativeItem;
+        model.addAttribute("decorativeItems", decorativeItems);
+        return "room-current-ditems";
+    }
+
+    @GetMapping("/add_ditem/{idRoom}/{idItem}")
+    public String addDecorativeItem (@PathVariable Long idRoom, @PathVariable Long idItem)
+    {
+        Room r = roomRepository.findById(idRoom).get();
+        DecorativeItem di = decorativeItemRepository.findById(idItem).get();
+        r.idDecorativeItem.add(di);
+        decorativeItemRepository.save(di);
+        return "redirect:/room/list";
+    }
 }

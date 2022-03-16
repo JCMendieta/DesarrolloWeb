@@ -7,16 +7,9 @@
 
     <body>
         <h1>Behold! Edition of rooms</h1>
+            
             <form action="#" th:action="@{/room/save}" th:object="${room}" method="post">
                 <input type="hidden" th:field="${room.id}" id="room-id">
-                <li>
-                    <label for="room-rItems">Items: </label>
-                    <input type="text" th:field="${room.rItems}" id="room-rItems">
-                </li>
-                <li>
-                    <label for="room-idDecorativeItem">Decorative items: </label>
-                    <input type="text" th:field="${room.idDecorativeItem}" id="room-idDecorativeItem">
-                </li>
                 <li>
                     <label for="room-rMonster">Monster: </label>
                     <input type="text" th:field="${room.rMonster}" id="room-rMonster">
@@ -25,10 +18,16 @@
                     <label for="room-rExits">Exits: </label>
                     <input type="text" th:field="${room.rExits}" id="room-rExits">
                 </li>
+                <!--
                 <li>
                     <label for="room-rPlayers">Players: </label>
                     <input type="text" th:field="${room.rPlayers}" id="room-rPlayers">
                 </li>
+                !-->
+                <p><a th:href="@{/room/item_list/{id}(id=${room.id})}">Add items</a></p>
+                <p><a th:href="@{/room/item_list_c/{id}(id=${room.id})}">Current items</a></p>
+                <p><a th:href="@{/room/ditem_list/{id}(id=${room.id})}">Add decorative items</a></p>
+                <p><a th:href="@{/room/ditem_list_c/{id}(id=${room.id})}">Current decorative items</a></p>
                 <button type="submit">Edit room</button>
             </form>
     </body>
