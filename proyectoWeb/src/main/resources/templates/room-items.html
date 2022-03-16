@@ -2,11 +2,11 @@
 <html xlmns:th="http://www.thymeleaf.org">
     <head>
         <meta charset ="UTF-8">
-        <title>Item list</title>
+        <title>Item addition</title>
     </head>
 
     <body>
-        <h1>Here's the item list</h1> 
+        <h1>Select an item</h1> 
         <ul>
             <li th:each="p : ${items}" th:if="${p.id}">
                 <a th:href="@{{id}(id='/room/add_item/'+ ${room.id} + '/' + ${p.id})} " th:text="${p.name}"></a></li>
