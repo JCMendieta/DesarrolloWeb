@@ -5,8 +5,10 @@
     </head>
 
     <body>
-        <h1>Decorative item</h1>
-        <h2 th:text="'>Id: ' +${monster.id}"></h2>
-        
+        <h1>Monster information</h1>
+        <h3 th:text="'>Id: ' +${monster.id}"></h3>
+        <h3 th:text="'>Hitpoints: ' +${monster.hitpoints}"></h3>
+        <h3 th:text="'>Id from room containing monster: ' +${monster.idRoom}"></h3>
+        <h3 th:text="'>Id from monster type: ' +${monster.idMonsterType}"></h3>
     </body>
 </html>
