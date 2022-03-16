@@ -5,8 +5,16 @@
     </head>
 
     <body>
-        <h1>Decorative item</h1>
-        <h2 th:text="'>Id: ' +${item.id}"></h2>
-        
+        <h1>Item information</h1>
+        <h3 th:text="'>Id: ' +${item.id}"></h3>
+        <h3 th:text="'>Name: ' +${item.name}"></h3>
+        <h3 th:text="'>Last updated: ' +${item.last_updated}"></h3>
+        <h3 th:text="'>Cost: ' +${item.cost}"></h3>
+        <h3 th:text="'>Weight: ' +${item.weight}"></h3>
+        <h3 th:text="'>Examine: ' +${item.examine}"></h3>
+        <h3 th:text="'>Wiki url: ' +${item.wiki_url}"></h3>
+        <h3 th:text="'>Rooms containing item: ' +${item.idRoom}"></h3>
+        <h3 th:text="'>Players with item: ' +${item.idPlayer}"></h3>
+
     </body>
 </html>

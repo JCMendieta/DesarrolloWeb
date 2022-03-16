@@ -6,7 +6,11 @@
 
     <body>
         <h1>Decorative item</h1>
-        <h2 th:text="'>Id: ' +${room.id}"></h2>
-     
+        <h3 th:text="'>Id: ' +${room.id}"></h3>
+        <h3 th:text="'>Items in the room: ' +${room.rItems}"></h3>
+        <h3 th:text="'>Decorative items in the room: ' +${room.idDecorativeItem}"></h3>
+        <h3 th:text="'>Monster in the room: ' +${room.rMonster}"></h3>
+        <h3 th:text="'>Exits in the room: ' +${room.rExits}"></h3>
+        <h3 th:text="'>Players in the room: ' +${room.rPlayers}"></h3>
     </body>
 </html>
