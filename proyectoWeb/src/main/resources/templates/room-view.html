@@ -5,12 +5,20 @@
     </head>
 
     <body>
-        <h1>Decorative item</h1>
+        <h1>Room</h1>
         <h3 th:text="'>Id: ' +${room.id}"></h3>
-        <h3 th:text="'>Items in the room: ' +${room.rItems}"></h3>
-        <h3 th:text="'>Decorative items in the room: ' +${room.idDecorativeItem}"></h3>
-        <h3 th:text="'>Monster in the room: ' +${room.rMonster}"></h3>
-        <h3 th:text="'>Exits in the room: ' +${room.rExits}"></h3>
-        <h3 th:text="'>Players in the room: ' +${room.rPlayers}"></h3>
+        <h3> 
+            >Items: <a th:href="@{/room/view_item_list/{id}(id=${room.id})}">Current items</a>
+        </h3>
+        <h3> 
+            >Decorative items: <a th:href="@{/room/view_decorativeItem_list/{id}(id=${room.id})}">Current decorative items</a>
+        </h3>
+        <h3 th:text="'>Monster in the room: ' +${room.rMonster.idMonsterType.name}"></h3>
+        <h3> 
+            >Exits: <a th:href="@{/room/view_exit_list/{id}(id=${room.id})}">Current exits</a>
+        </h3>
+        <h3> 
+            >Players: <a th:href="@{/room/view_player_list/{id}(id=${room.id})}">Current players in the room</a>
+        </h3>
     </body>
 </html>

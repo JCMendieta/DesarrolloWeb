@@ -92,4 +92,13 @@ public class PlayerController
         }
     }
 
+    @GetMapping("/item_list/{id}")
+    public String currentItems(Model model, @PathVariable Long id)
+    {
+        Player p = playerRepository.findById(id).get();
+        Iterable<Item> items = p.items;
+        model.addAttribute("items", items);
+        return "player-items";
+    }
+
 }

@@ -127,6 +127,40 @@ public class RoomController
         }
     }
 
+    @GetMapping("/view_item_list/{id}")
+    public String viewCurrentItems(Model model, @PathVariable Long id)
+    {
+        Room room = roomRepository.findById(id).get();
+        Iterable<Item> items = room.rItems;
+        model.addAttribute("items", items);
+        return "room-view-itemList";
+    }
+    @GetMapping("/view_decorativeItem_list/{id}")
+    public String viewCurrentDecorativeItems(Model model, @PathVariable Long id)
+    {
+        Room room = roomRepository.findById(id).get();
+        Iterable<DecorativeItem> decorativeItems = room.idDecorativeItem;
+        model.addAttribute("decorativeItems", decorativeItems);
+        return "room-view-decorativeItemList";
+    }
+    @GetMapping("view_exit_list/{id}")
+    public String viewCurrentExits(Model model, @PathVariable Long id)
+    {
+        Room room = roomRepository.findById(id).get();
+        Iterable<Exit> exits = room.rExits;
+        model.addAttribute("exits", exits);
+        return "room-view-exits";
+    }
+    @GetMapping("view_player_list/{id}")
+    public String viewCurrentPlayers(Model model, @PathVariable Long id)
+    {
+        Room room = roomRepository.findById(id).get();
+        Iterable<Player> players = room.rPlayers;
+        model.addAttribute("players", players);
+        return "room-view-players";
+    }
+    
+
     @GetMapping("/item_list/{id}")
     public String itemList (Model model, @PathVariable Long id)
     {

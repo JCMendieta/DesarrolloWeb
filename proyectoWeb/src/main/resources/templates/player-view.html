@@ -16,7 +16,10 @@
         <h3 th:text="'>Max weight: ' +${player.maxWeight}"></h3>
         <h3 th:text="'>Clock: ' +${player.clock}"></h3>
         <h3 th:text="'>Max time: ' +${player.max_time}"></h3>
-        <h3 th:text="'>Items: ' +${player.items}"></h3>
+        <h3> 
+            Items: <a th:href="@{/player/item_list/{id}(id=${player.id})}">Current items</a>
+        </h3>
+        
     
     </body>
 </html>

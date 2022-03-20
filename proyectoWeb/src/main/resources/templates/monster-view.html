@@ -8,7 +8,11 @@
         <h1>Monster information</h1>
         <h3 th:text="'>Id: ' +${monster.id}"></h3>
         <h3 th:text="'>Hitpoints: ' +${monster.hitpoints}"></h3>
-        <h3 th:text="'>Id from room containing monster: ' +${monster.idRoom}"></h3>
-        <h3 th:text="'>Id from monster type: ' +${monster.idMonsterType}"></h3>
+        <h3> 
+            >Room: <a th:href="@{/monster/room/{id}(id=${monster.id})}">Current room</a>
+        </h3>
+        <h3> 
+            <a th:href="@{/monster/monster_type/{id}(id=${monster.id})}">>Monster type</a>
+        </h3>
     </body>
 </html>
