@@ -98,10 +98,9 @@ public class RoomController
             playerRepository.save(player);
             
         }
-
-        room.getrMonster().setIdRoom(null);
-
-      
+        if(room.getrMonster() != null){
+            room.getrMonster().setIdRoom(null);
+        }
 
         roomRepository.findById(id).get().unlinkRoomAttributes();
         roomRepository.save(room);
