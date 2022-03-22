@@ -13,8 +13,13 @@
         <h3 th:text="'>Weight: ' +${item.weight}"></h3>
         <h3 th:text="'>Examine: ' +${item.examine}"></h3>
         <h3 th:text="'>Wiki url: ' +${item.wiki_url}"></h3>
-        <h3 th:text="'>Rooms containing item: ' +${item.idRoom}"></h3>
-        <h3 th:text="'>Players with item: ' +${item.idPlayer}"></h3>
+        <h3> 
+            >Rooms with item: <a th:href="@{/item/view_room_list/{id}(id=${item.id})}">Current rooms with item</a>
+        </h3>
+        <h3> 
+            >Player with item: <a th:href="@{/item/view_player_list/{id}(id=${item.id})}">Current player with item</a>
+        </h3>
+        
 
     </body>
 </html>

@@ -90,4 +90,26 @@ public class ItemController
             throw new NotFoundException();
         }
     }
+
+    @GetMapping("view_room_list/{id}")
+    public String viewCurrentRoomsWithItem(Model model, @PathVariable Long id)
+    {
+        Item item = itemRepository.findById(id).get();
+        Iterable<Room> rooms = item.idRoom;
+        model.addAttribute("rooms", rooms);
+        return "item-view-rooms";
+    }
+    @GetMapping("view_player_list/{id}")
+    public String viewCurrentPlayerWithItem(Model model, @PathVariable Long id)
+    {
+        Item item = itemRepository.findById(id).get();
+        Player player= item.idPlayer;
+        if(player == null){
+            player = new Player();
+            player.name ="None";
+        }
+        model.addAttribute("player", player);
+        return "item-view-player";
+    }
+  
 }

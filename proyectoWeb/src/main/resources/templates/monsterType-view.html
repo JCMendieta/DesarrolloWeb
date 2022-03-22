@@ -15,6 +15,9 @@
         <h3 th:text="'>Hitpoints: ' +${monsterType.hitpoints}"></h3>
         <h3 th:text="'>Category: ' +${monsterType.category}"></h3>
         <h3 th:text="'>Monster: ' +${monsterType.monsters}"></h3>
+        <h3> 
+            >Monsters: <a th:href="@{/monster_type/view_monsters_list/{id}(id=${monsterType.id})}">Current monsters</a>
+        </h3>
         <h3 th:text="'>Examine: ' +${monsterType.examine}"></h3>
         <h3 th:text="'>wiki url: ' +${monsterType.wiki_url}"></h3>
 

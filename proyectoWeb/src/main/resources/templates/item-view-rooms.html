@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset ="UTF-8">
+        <title>Room that contain the item</title>
+    </head>
+
+    <body>
+        <h1>Here's the current rooms that contain the item</h1> 
+        <ul>
+            <li th:each="p : ${rooms}" th:if="${p.id}">
+                <a th:text="${p.id}"></a></li>
+            </li>    
+        </ul>
+    </body>
+</html>
