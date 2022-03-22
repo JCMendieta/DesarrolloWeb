@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset ="UTF-8">
+        <title>Monster type</title>
+    </head>
+
+    <body>
+        <h1>Here's the current type of the monster</h1> 
+        <h3 th:text="'Monster type: '+${monster.idMonsterType.name}"></h3>
+    </body>
+</html>

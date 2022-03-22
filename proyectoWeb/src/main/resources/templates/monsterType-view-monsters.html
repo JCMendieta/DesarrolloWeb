@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset ="UTF-8">
+        <title>Monsters</title>
+    </head>
+
+    <body>
+        <h1>Here's the current monster list</h1> 
+        <ul>
+            <li th:each="p : ${monsters}" th:if="${p.id}">
+                <a th:text="${p.id}"></a></li>
+            </li>    
+        </ul>
+    </body>
+</html>

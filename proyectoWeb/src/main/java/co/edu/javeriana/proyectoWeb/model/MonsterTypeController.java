@@ -93,4 +93,12 @@ public class MonsterTypeController
             throw new NotFoundException();
         }
     }
+    @GetMapping("view_monsters_list/{id}")
+    public String viewMonsters(Model model, @PathVariable Long id)
+    {
+        MonsterType monsterType = monsterTypeRepository.findById(id).get();
+        Iterable<Monster> monsters = monsterType.monsters;
+        model.addAttribute("monsters", monsters);
+        return "monsterType-view-monsters";
+    }
 }

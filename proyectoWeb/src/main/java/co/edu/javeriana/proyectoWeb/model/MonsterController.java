@@ -96,6 +96,24 @@ public class MonsterController
         }
     }
 
+    @GetMapping("/room/{id}")
+    public String currentItems(Model model, @PathVariable Long id)
+    {
+        
+        Monster m = monsterRepository.findById(id).get();
+        Room room = m.idRoom;
+        model.addAttribute("room", room);
+        return "monster-room";
+    }
+
+    @GetMapping("/monster_type/{id}")
+    public String monsterType(Model model, @PathVariable Long id)
+    {
+        Monster monster = monsterRepository.findById(id).get();
+        model.addAttribute("monster", monster);
+        return "monster-view-monstertype";
+    }
+
     @GetMapping("/monster_type_list/{id}")
     public String itemList (Model model, @PathVariable Long id)
     {

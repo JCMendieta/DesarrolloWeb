@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xlmns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset ="UTF-8">
+        <title>Player current items</title>
+    </head>
+
+    <body>
+        <h1>Here's the current item list of the player</h1> 
+        <ul>
+            <li th:each="p : ${items}" th:if="${p.id}">
+                <a th:text="${p.name}"></a></li>
+            </li>    
+        </ul>
+    </body>
+</html>
