@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "proyectoDWeb": {
+    "proyectoWeb": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/proyecto-dweb",
+            "outputPath": "dist/proyecto-web",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "proyectoDWeb:build:production"
+              "browserTarget": "proyectoWeb:build:production"
             },
             "development": {
-              "browserTarget": "proyectoDWeb:build:development"
+              "browserTarget": "proyectoWeb:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "proyectoDWeb:build"
+            "browserTarget": "proyectoWeb:build"
           }
         },
         "test": {
@@ -102,5 +102,5 @@
       }
     }
   },
-  "defaultProject": "proyectoDWeb"
+  "defaultProject": "proyectoWeb"
 }
