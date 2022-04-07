@@ -1,4 +1,4 @@
-package co.edu.javeriana.proyectoWeb.model;
+package co.edu.javeriana.proyectoWeb.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import co.edu.javeriana.proyectoWeb.model.Exit;
+import co.edu.javeriana.proyectoWeb.model.Room;
+import co.edu.javeriana.proyectoWeb.repository.ExitRepository;
+import co.edu.javeriana.proyectoWeb.repository.RoomRepository;
 
 @Controller
 @RequestMapping("/exit")
@@ -51,13 +56,15 @@ public class ExitController
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable Long id)
     {
-        for( Room room : roomRepository.findAll() ){
+        for (Room room : roomRepository.findAll())
+        {
             exitRepository.findById(id).get().unlinkRoomExit(room);
         }
+
         exitRepository.deleteById(id);
+
         return "redirect:/exit/list";
     }
-
 
     @PostMapping("/save")
     public String save(@ModelAttribute Exit exit, Model model) 

@@ -1,4 +1,4 @@
-package co.edu.javeriana.proyectoWeb.model;
+package co.edu.javeriana.proyectoWeb.controller;
 
 import java.util.ArrayList;
 import org.slf4j.Logger;
@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import co.edu.javeriana.proyectoWeb.model.Monster;
+import co.edu.javeriana.proyectoWeb.model.MonsterType;
+import co.edu.javeriana.proyectoWeb.model.Room;
+import co.edu.javeriana.proyectoWeb.repository.MonsterRepository;
+import co.edu.javeriana.proyectoWeb.repository.MonsterTypeRepository;
 
 @Controller
 @RequestMapping("/monster_type")
@@ -53,12 +59,16 @@ public class MonsterTypeController
     public String delete(Model model, @PathVariable Long id)
     {
         MonsterType monsterType=monsterTypeRepository.findById(id).get();
-        for ( Monster monster : monsterType.getMonsters()){
+        
+        for (Monster monster : monsterType.getMonsters())
+        {
             Room r = monster.getIdRoom();
             monster.unlinkMonster(r);
             monsterRepository.delete(monster);
         }
+
         monsterTypeRepository.deleteById(id);
+
         return "redirect:/monster_type/list";
     }
 
@@ -97,7 +107,7 @@ public class MonsterTypeController
     public String viewMonsters(Model model, @PathVariable Long id)
     {
         MonsterType monsterType = monsterTypeRepository.findById(id).get();
-        Iterable<Monster> monsters = monsterType.monsters;
+        Iterable<Monster> monsters = monsterType.getMonsters();
         model.addAttribute("monsters", monsters);
         return "monsterType-view-monsters";
     }

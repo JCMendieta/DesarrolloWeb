@@ -1,4 +1,4 @@
-package co.edu.javeriana.proyectoWeb.model;
+package co.edu.javeriana.proyectoWeb.controller;
 
 import java.util.ArrayList;
 import org.slf4j.Logger;
@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import co.edu.javeriana.proyectoWeb.model.Item;
+import co.edu.javeriana.proyectoWeb.model.Player;
+import co.edu.javeriana.proyectoWeb.model.Room;
+import co.edu.javeriana.proyectoWeb.repository.ItemRepository;
+import co.edu.javeriana.proyectoWeb.repository.RoomRepository;
 
 @Controller
 @RequestMapping("/item")
@@ -52,10 +58,13 @@ public class ItemController
     @GetMapping("/delete/{id}")
     public String delete(Model model, @PathVariable Long id)
     {
-        for( Room room : roomRepository.findAll() ){
+        for (Room room : roomRepository.findAll())
+        {
             itemRepository.findById(id).get().unlinkRoomItem(room);
         }
+
         itemRepository.deleteById(id);
+        
         return "redirect:/item/list";
     }
 
@@ -95,7 +104,7 @@ public class ItemController
     public String viewCurrentRoomsWithItem(Model model, @PathVariable Long id)
     {
         Item item = itemRepository.findById(id).get();
-        Iterable<Room> rooms = item.idRoom;
+        Iterable<Room> rooms = item.getIdRoom();
         model.addAttribute("rooms", rooms);
         return "item-view-rooms";
     }
@@ -103,13 +112,12 @@ public class ItemController
     public String viewCurrentPlayerWithItem(Model model, @PathVariable Long id)
     {
         Item item = itemRepository.findById(id).get();
-        Player player= item.idPlayer;
+        Player player= item.getIdPlayer();
         if(player == null){
             player = new Player();
-            player.name ="None";
+            player.setName("None");
         }
         model.addAttribute("player", player);
         return "item-view-player";
-    }
-  
+    } 
 }

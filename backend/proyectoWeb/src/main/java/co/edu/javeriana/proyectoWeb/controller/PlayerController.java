@@ -1,4 +1,4 @@
-package co.edu.javeriana.proyectoWeb.model;
+package co.edu.javeriana.proyectoWeb.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import co.edu.javeriana.proyectoWeb.model.Item;
+import co.edu.javeriana.proyectoWeb.model.Player;
+import co.edu.javeriana.proyectoWeb.model.Room;
+import co.edu.javeriana.proyectoWeb.repository.ItemRepository;
+import co.edu.javeriana.proyectoWeb.repository.PlayerRepository;
+import co.edu.javeriana.proyectoWeb.repository.RoomRepository;
 
 @Controller
 @RequestMapping("/player")
@@ -61,17 +68,22 @@ public class PlayerController
     public String delete(Model model, @PathVariable Long id)
     {
         Player player = playerRepository.findById(id).get();
-        Room r=player.idRoom;
-        if(r != null){
+        Room r = player.getIdRoom();
+
+        if(r != null)
+        {
             player.unlinkRoomPlayer(r);
             roomRepository.save(r);
         }
-        for(Item item : player.getItems() ){
+        
+        for (Item item : player.getItems())
+        {
             item.setIdPlayer(null);
             itemRepository.save(item);
         }
         
         playerRepository.deleteById(id);
+        
         return "redirect:/player/list";
     }
 
@@ -96,9 +108,8 @@ public class PlayerController
     public String currentItems(Model model, @PathVariable Long id)
     {
         Player p = playerRepository.findById(id).get();
-        Iterable<Item> items = p.items;
+        Iterable<Item> items = p.getItems();
         model.addAttribute("items", items);
         return "player-items";
     }
-
 }

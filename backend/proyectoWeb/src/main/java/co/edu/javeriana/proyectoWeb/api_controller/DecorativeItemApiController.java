@@ -1,21 +1,29 @@
-package co.edu.javeriana.proyectoWeb.model;
+package co.edu.javeriana.proyectoWeb.api_controller;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/decorative_item")
-public class DecorativeItemController 
+import co.edu.javeriana.proyectoWeb.model.DecorativeItem;
+import co.edu.javeriana.proyectoWeb.model.Room;
+import co.edu.javeriana.proyectoWeb.repository.DecorativeItemRepository;
+import co.edu.javeriana.proyectoWeb.repository.RoomRepository;
+
+@RestController
+@RequestMapping("/decorative_item_api")
+public class DecorativeItemApiController 
 {   
     Logger log = LoggerFactory.getLogger(getClass());
     
@@ -26,22 +34,23 @@ public class DecorativeItemController
     RoomRepository roomRepository;
 
     @GetMapping("/list")
-    public String list(Model model)
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<DecorativeItem> list(Model model)
     {
-        Iterable<DecorativeItem>  decorativeItems = decorativeItemRepository.findAll();
+        List<DecorativeItem>  decorativeItems = decorativeItemRepository.findAll();
         model.addAttribute("decorativeItems", decorativeItems);
-        return "decorativeItem-list";
+        return decorativeItems;
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(Model model, @PathVariable Long id) throws NotFoundException 
+    public DecorativeItem edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
         DecorativeItem p = decorativeItemRepository.findById(id).get();
         
         if (p != null) 
         {
             model.addAttribute("decorativeItem", p);
-            return "decorativeItem-edit";
+            return p;
         } 
         else 
         {
@@ -50,32 +59,32 @@ public class DecorativeItemController
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(Model model, @PathVariable Long id)
+    public void delete(Model model, @PathVariable Long id)
     {
-        for( Room room : roomRepository.findAll() ){
+        for (Room room : roomRepository.findAll())
+        {
             decorativeItemRepository.findById(id).get().unlinkRoomDecorativeItem(room);
         }
+
         decorativeItemRepository.deleteById(id);
-        return "redirect:/decorative_item/list";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute DecorativeItem decorativeItem, Model model) 
+    public DecorativeItem save(@ModelAttribute DecorativeItem decorativeItem, Model model) 
     {
-        decorativeItemRepository.save(decorativeItem);
-        return "redirect:/decorative_item/list";
+        return decorativeItemRepository.save(decorativeItem);
     }
 
     @PostMapping("/create")
-    public String create(Model model) 
+    public DecorativeItem create(Model model) 
     {
         DecorativeItem decorativeItem = new DecorativeItem("", new ArrayList<Room>());
         model.addAttribute("decorativeItem", decorativeItem);
-        return "decorativeItem-create";
+        return decorativeItem;
     }
 
     @GetMapping("/view/{id}")
-    public String view(Model model, @PathVariable Long id) throws NotFoundException 
+    public DecorativeItem view(Model model, @PathVariable Long id) throws NotFoundException 
     {
         DecorativeItem p = decorativeItemRepository.findById(id).get();
 
@@ -83,7 +92,7 @@ public class DecorativeItemController
         {
             DecorativeItem  decorativeItem = decorativeItemRepository.findById(id).get();
             model.addAttribute("decorativeItem", decorativeItem);
-            return "decorativeItem-view";
+            return decorativeItem;
         } 
         else 
         {

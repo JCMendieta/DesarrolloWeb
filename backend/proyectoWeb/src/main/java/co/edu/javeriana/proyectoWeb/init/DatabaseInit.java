@@ -1,4 +1,4 @@
-package co.edu.javeriana.proyectoWeb.model;
+package co.edu.javeriana.proyectoWeb.init;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+
+import co.edu.javeriana.proyectoWeb.model.DecorativeItem;
+import co.edu.javeriana.proyectoWeb.model.Exit;
+import co.edu.javeriana.proyectoWeb.model.Item;
+import co.edu.javeriana.proyectoWeb.model.Monster;
+import co.edu.javeriana.proyectoWeb.model.MonsterType;
+import co.edu.javeriana.proyectoWeb.model.Player;
+import co.edu.javeriana.proyectoWeb.model.Room;
+import co.edu.javeriana.proyectoWeb.repository.DecorativeItemRepository;
+import co.edu.javeriana.proyectoWeb.repository.ExitRepository;
+import co.edu.javeriana.proyectoWeb.repository.ItemRepository;
+import co.edu.javeriana.proyectoWeb.repository.MonsterRepository;
+import co.edu.javeriana.proyectoWeb.repository.MonsterTypeRepository;
+import co.edu.javeriana.proyectoWeb.repository.PlayerRepository;
+import co.edu.javeriana.proyectoWeb.repository.RoomRepository;
 
 @Component
 public class DatabaseInit implements ApplicationRunner
@@ -55,11 +70,7 @@ public class DatabaseInit implements ApplicationRunner
         decorativeItemRepository.save(decorativeItem3);
         DecorativeItem decorativeItem4 = new DecorativeItem("Pile of skulls");
         decorativeItemRepository.save(decorativeItem4);
-        decorativeItems1.add(decorativeItem1);
-        decorativeItems1.add(decorativeItem2);
-        decorativeItems1.add(decorativeItem3);
-        decorativeItems2.add(decorativeItem4);
-
+        
         //CATEGORY
         ArrayList<String> category1 = new ArrayList<>();
         ArrayList<String> category2 = new ArrayList<>();
