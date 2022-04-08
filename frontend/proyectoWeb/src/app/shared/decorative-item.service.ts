@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DecorativeItem } from '../model/decorative-item';
+import { Room } from '../model/room';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,8 +10,8 @@ export class DecorativeItemService {
 
   constructor(private http : HttpClient) { }
 
-  decorativeItemList() : Observable<DecorativeItem>
+  decorativeItemList() : Observable<Room>
   {
-    return this.http.get<DecorativeItem>("http://localhost:8080/decorative_item_api/list");
+    return this.http.get<Room>("http://localhost:8080/decorative_item_api/list");
   }
 }
