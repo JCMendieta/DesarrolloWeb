@@ -1,6 +1,6 @@
 export class DecorativeItem 
 {
-    constructor(
+   constructor(
         public id : number,
         public name : string,
         public idRoom : any,

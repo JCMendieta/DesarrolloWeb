@@ -1,0 +1,10 @@
+<h2>Decorative item</h2>
+<div>
+    <ul>
+        <li *ngFor="let dI of decorativeItems">
+            <a [routerLink]="['/decorative_item/list', dI.id]">
+                {{dI.name}}
+            </a>
+        </li>      
+    </ul>
+</div>

@@ -120,13 +120,13 @@ public class DatabaseInit implements ApplicationRunner
 
 
         //ROOMS
-        Room room1 = new Room (items2, decorativeItems1, monster1, exits1, players1);
-        Room room2 = new Room (items3, decorativeItems2, monster2, exits2, players2);
+        Room room1 = new Room (null, null, null, null, null);
+        Room room2 = new Room (null, null, null, null, null);
         roomRepository.save(room1);
         roomRepository.save(room2);
 
         //MONSTER // ROOM
-        monster1.setIdRoom(room1);
+        /*monster1.setIdRoom(room1);
         monster2.setIdRoom(room2);
         monsterRepository.save(monster1);
         monsterRepository.save(monster2);
@@ -137,7 +137,7 @@ public class DatabaseInit implements ApplicationRunner
 
     
         //EXITS // ROOM
-        Exit exit = new Exit (room1, room2);
+        Exit exit = new Exit (null, null);
         exits1.add(exit);
         exitRepository.save(exit);
 

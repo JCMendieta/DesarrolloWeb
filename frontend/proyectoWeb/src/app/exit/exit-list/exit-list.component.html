@@ -1,0 +1,10 @@
+<h2>Exit</h2>
+<div>
+    <ul>
+        <li *ngFor="let e of exits">
+            <a [routerLink]="['/exit/list']">
+                {{e.id}}
+            </a>
+        </li>      
+    </ul>
+</div>
