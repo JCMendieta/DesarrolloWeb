@@ -58,6 +58,7 @@ public class RoomApiController
     }
 
     @GetMapping("/edit/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Room edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
         List<Room> rooms = roomRepository.findAll();
@@ -78,12 +79,14 @@ public class RoomApiController
     }
 
     @PostMapping("/save")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Room save(@ModelAttribute Room room, Model model) 
     {
         return roomRepository.save(room);
     }
 
     @PostMapping("/create")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Room create(Model model) 
     {
         Room room = new Room(new ArrayList<Item>(), new ArrayList<DecorativeItem>(), new Monster(), new ArrayList<Exit>(), new ArrayList<Player>());
@@ -92,6 +95,7 @@ public class RoomApiController
     }
 
     @GetMapping("/delete/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void delete(Model model, @PathVariable Long id)
     {
         for (Room room : roomRepository.findAll())
@@ -150,6 +154,7 @@ public class RoomApiController
     }
 
     @GetMapping("/view_item_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Item> viewCurrentItems(Model model, @PathVariable Long id)
     {
         Room room = roomRepository.findById(id).get();
@@ -160,6 +165,7 @@ public class RoomApiController
     }
 
     @GetMapping("/view_decorativeItem_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<DecorativeItem> viewCurrentDecorativeItems(Model model, @PathVariable Long id)
     {
         Room room = roomRepository.findById(id).get();
@@ -170,6 +176,7 @@ public class RoomApiController
     }
 
     @GetMapping("view_exit_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Exit> viewCurrentExits(Model model, @PathVariable Long id)
     {
         Room room = roomRepository.findById(id).get();
@@ -180,6 +187,7 @@ public class RoomApiController
     }
 
     @GetMapping("view_player_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Player> viewCurrentPlayers(Model model, @PathVariable Long id)
     {
         Room room = roomRepository.findById(id).get();
@@ -190,6 +198,7 @@ public class RoomApiController
     }
     
     @GetMapping("/item_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Item> itemList (Model model, @PathVariable Long id)
     {
         List<Item> items = itemRepository.findAll();
@@ -201,6 +210,7 @@ public class RoomApiController
     }
 
     @GetMapping("/item_list_c/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Item> currentItems(Model model, @PathVariable Long id)
     {
         
@@ -212,6 +222,7 @@ public class RoomApiController
     }
 
     @GetMapping("/add_item/{idRoom}/{idItem}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Item addItem (@PathVariable Long idRoom, @PathVariable Long idItem)
     {
         Room r = roomRepository.findById(idRoom).get();
@@ -223,6 +234,7 @@ public class RoomApiController
     }
 
     @GetMapping("/ditem_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<DecorativeItem> decorativeItemList (Model model, @PathVariable Long id)
     {
         List<DecorativeItem> decorativeItems = decorativeItemRepository.findAll();
@@ -234,6 +246,7 @@ public class RoomApiController
     }
 
     @GetMapping("/ditem_list_c/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<DecorativeItem> currentDecorativeItems(Model model, @PathVariable Long id)
     {
         Room r = roomRepository.findById(id).get();
@@ -244,6 +257,7 @@ public class RoomApiController
     }
 
     @GetMapping("/add_ditem/{idRoom}/{idItem}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public DecorativeItem addDecorativeItem (@PathVariable Long idRoom, @PathVariable Long idItem)
     {
         Room r = roomRepository.findById(idRoom).get();

@@ -1,3 +1,12 @@
 <div>
     <h1>Inside room #{{room?.id}}</h1>
+    <h2>Current items</h2>
+</div>
+
+<div>
+    <ul>
+        <li *ngFor="let is of items">
+            <div class="linebreaks">{{is.name}}</div>
+        </li>      
+    </ul>
 </div>

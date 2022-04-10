@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,7 @@ public class PlayerApiController
     ItemRepository itemRepository;
 
     @GetMapping("/list")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Player> list(Model model)
     {
         List<Player> players = playerRepository.findAll();
@@ -45,6 +47,7 @@ public class PlayerApiController
     }
 
     @GetMapping("/edit/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Player edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Player p = playerRepository.findById(id).get();
@@ -61,12 +64,14 @@ public class PlayerApiController
     }
 
     @PostMapping("/save")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Player save(@ModelAttribute Player player, Model model) 
     {
         return playerRepository.save(player);
     }
 
     @GetMapping("/delete/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void delete(Model model, @PathVariable Long id)
     {
         Player player = playerRepository.findById(id).get();
@@ -88,6 +93,7 @@ public class PlayerApiController
     }
 
     @GetMapping("/view/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Player view(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Player p = playerRepository.findById(id).get();
@@ -105,6 +111,7 @@ public class PlayerApiController
     }
 
     @GetMapping("/item_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Item> currentItems(Model model, @PathVariable Long id)
     {
         Player p = playerRepository.findById(id).get();

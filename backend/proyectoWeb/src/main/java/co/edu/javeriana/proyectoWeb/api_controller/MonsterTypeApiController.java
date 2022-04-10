@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class MonsterTypeApiController
     MonsterRepository monsterRepository;
 
     @GetMapping("/list")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<MonsterType> list(Model model)
     {
         List<MonsterType> monsterTypes = monsterTypeRepository.findAll();
@@ -42,6 +44,7 @@ public class MonsterTypeApiController
     }
 
     @GetMapping("/edit/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public MonsterType edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
         MonsterType p = monsterTypeRepository.findById(id).get();
@@ -58,6 +61,7 @@ public class MonsterTypeApiController
     }
 
     @GetMapping("/delete/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void delete(Model model, @PathVariable Long id)
     {
         MonsterType monsterType=monsterTypeRepository.findById(id).get();
@@ -73,12 +77,14 @@ public class MonsterTypeApiController
     }
 
     @PostMapping("/save")
+    @CrossOrigin(origins = "http://localhost:4200")
     public MonsterType save(@ModelAttribute MonsterType monsterType, Model model) 
     {
         return monsterTypeRepository.save(monsterType);
     }
 
     @PostMapping("/create")
+    @CrossOrigin(origins = "http://localhost:4200")
     public MonsterType create(Model model) 
     {
         MonsterType monsterType = new MonsterType("", "", (long)0, (long)0, (long)0, (long)0, new ArrayList<String>(), new ArrayList<Monster>(), "", "");
@@ -87,6 +93,7 @@ public class MonsterTypeApiController
     }
 
     @GetMapping("/view/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public MonsterType view(Model model, @PathVariable Long id) throws NotFoundException 
     {
         MonsterType p = monsterTypeRepository.findById(id).get();
@@ -103,6 +110,7 @@ public class MonsterTypeApiController
         }
     }
     @GetMapping("view_monsters_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Monster> viewMonsters(Model model, @PathVariable Long id)
     {
         MonsterType monsterType = monsterTypeRepository.findById(id).get();

@@ -43,6 +43,7 @@ public class DecorativeItemApiController
     }
 
     @GetMapping("/edit/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public DecorativeItem edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
         DecorativeItem p = decorativeItemRepository.findById(id).get();
@@ -59,6 +60,7 @@ public class DecorativeItemApiController
     }
 
     @GetMapping("/delete/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void delete(Model model, @PathVariable Long id)
     {
         for (Room room : roomRepository.findAll())
@@ -70,12 +72,14 @@ public class DecorativeItemApiController
     }
 
     @PostMapping("/save")
+    @CrossOrigin(origins = "http://localhost:4200")
     public DecorativeItem save(@ModelAttribute DecorativeItem decorativeItem, Model model) 
     {
         return decorativeItemRepository.save(decorativeItem);
     }
 
     @PostMapping("/create")
+    @CrossOrigin(origins = "http://localhost:4200")
     public DecorativeItem create(Model model) 
     {
         DecorativeItem decorativeItem = new DecorativeItem("", new ArrayList<Room>());
@@ -84,6 +88,7 @@ public class DecorativeItemApiController
     }
 
     @GetMapping("/view/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public DecorativeItem view(Model model, @PathVariable Long id) throws NotFoundException 
     {
         DecorativeItem p = decorativeItemRepository.findById(id).get();

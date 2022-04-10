@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class ItemApiController
     RoomRepository roomRepository;
 
     @GetMapping("/list")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Item> list(Model model)
     {
         List<Item> items = itemRepository.findAll();
@@ -42,6 +44,7 @@ public class ItemApiController
     }
 
     @GetMapping("/edit/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Item edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Item p = itemRepository.findById(id).get();
@@ -58,6 +61,7 @@ public class ItemApiController
     }
 
     @GetMapping("/delete/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void delete(Model model, @PathVariable Long id)
     {
         for (Room room : roomRepository.findAll())
@@ -69,12 +73,14 @@ public class ItemApiController
     }
 
     @PostMapping("/save")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Item save(@ModelAttribute Item item, Model model) 
     {
         return itemRepository.save(item);
     }
 
     @PostMapping("/create")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Item create(Model model) 
     {
         Item item = new Item("", "", (long)0, (long)0, "", "", new ArrayList<Room>(), new Player());
@@ -83,6 +89,7 @@ public class ItemApiController
     }
 
     @GetMapping("/view/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Item view(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Item p = itemRepository.findById(id).get();
@@ -100,6 +107,7 @@ public class ItemApiController
     }
 
     @GetMapping("view_room_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Room> viewCurrentRoomsWithItem(Model model, @PathVariable Long id)
     {
         Item item = itemRepository.findById(id).get();
@@ -109,6 +117,7 @@ public class ItemApiController
     }
 
     @GetMapping("view_player_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Player viewCurrentPlayerWithItem(Model model, @PathVariable Long id)
     {
         Item item = itemRepository.findById(id).get();

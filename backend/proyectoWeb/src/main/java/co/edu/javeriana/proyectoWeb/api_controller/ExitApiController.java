@@ -42,6 +42,7 @@ public class ExitApiController
     }
 
     @GetMapping("/edit/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Exit edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Exit p = exitRepository.findById(id).get();
@@ -58,6 +59,7 @@ public class ExitApiController
     }
 
     @GetMapping("/delete/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void delete(Model model, @PathVariable Long id)
     {
         for (Room room : roomRepository.findAll())
@@ -70,12 +72,14 @@ public class ExitApiController
 
 
     @PostMapping("/save")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Exit save(@ModelAttribute Exit exit, Model model) 
     {
         return exitRepository.save(exit);
     }
 
     @PostMapping("/create")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Exit create(Model model) 
     {
         Exit exit = new Exit(new Room(), new Room());
@@ -84,6 +88,7 @@ public class ExitApiController
     }
 
     @GetMapping("/view/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Exit view(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Exit p = exitRepository.findById(id).get();

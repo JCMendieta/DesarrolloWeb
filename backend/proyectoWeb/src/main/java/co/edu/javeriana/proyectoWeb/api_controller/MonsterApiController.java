@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +37,7 @@ public class MonsterApiController
     RoomRepository roomRepository;
 
     @GetMapping("/list")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Monster> list(Model model)
     {
         List<Monster> monsters = monsterRepository.findAll();
@@ -44,6 +46,7 @@ public class MonsterApiController
     }
 
     @GetMapping("/edit/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Monster edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Monster p = monsterRepository.findById(id).get();
@@ -60,6 +63,7 @@ public class MonsterApiController
     }
 
     @GetMapping("/delete/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void delete(Model model, @PathVariable Long id)
     {
         Monster monster = monsterRepository.findById(id).get();
@@ -76,12 +80,14 @@ public class MonsterApiController
     }
 
     @PostMapping("/save")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Monster save(@ModelAttribute Monster monster, Model model) 
     {
         return monsterRepository.save(monster);
     }
 
     @PostMapping("/create")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Monster create(Model model) 
     {
         Monster monster = new Monster ((long)0, new Room (), new MonsterType ());
@@ -90,6 +96,7 @@ public class MonsterApiController
     }
 
     @GetMapping("/view/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Monster view(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Monster p = monsterRepository.findById(id).get();
@@ -107,6 +114,7 @@ public class MonsterApiController
     }
 
     @GetMapping("/room/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Room currentRoom(Model model, @PathVariable Long id)
     {
         
@@ -117,6 +125,7 @@ public class MonsterApiController
     }
 
     @GetMapping("/monster_type/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Monster monsterType(Model model, @PathVariable Long id)
     {
         Monster monster = monsterRepository.findById(id).get();
@@ -126,6 +135,7 @@ public class MonsterApiController
 
     //REVISAR TIPO DE RETORNO.
     @GetMapping("/monster_type_list/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<MonsterType> monsterType_list (Model model, @PathVariable Long id)
     {
         List<MonsterType> monsterTypes = monsterTypeRepository.findAll();
@@ -136,6 +146,7 @@ public class MonsterApiController
     }
 
     @GetMapping("/monster_type_select/{idMonster}/{idMonsterType}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Monster setMonsterTypetoMonster (@PathVariable Long idMonster, @PathVariable Long idMonsterType)
     {
         Monster m = monsterRepository.findById(idMonster).get();
