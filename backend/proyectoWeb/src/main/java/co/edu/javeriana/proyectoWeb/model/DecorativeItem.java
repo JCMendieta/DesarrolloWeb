@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class DecorativeItem 
 {
@@ -17,6 +19,7 @@ public class DecorativeItem
 
     String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "idDecorativeItem")
     List<Room> idRoom = new ArrayList<>();
 

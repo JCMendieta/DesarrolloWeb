@@ -14,9 +14,7 @@ export class DecorativeItemListComponent implements OnInit {
   decorativeItems : DecorativeItem[] = [];
 
   constructor(
-    private decorativeItemService : DecorativeItemService, 
-    private route: ActivatedRoute,
-    private router: Router) { }
+    private decorativeItemService : DecorativeItemService) { }
 
   ngOnInit(): void 
   {

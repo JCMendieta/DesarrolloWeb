@@ -4,6 +4,7 @@
         
     </head>
 
+    
     <body>
         <h1>Room</h1>
         <h3 th:text="'>Id: ' +${room.id}"></h3>
@@ -21,4 +22,5 @@
             >Players: <a th:href="@{/room/view_player_list/{id}(id=${room.id})}">Current players in the room</a>
         </h3>
     </body>
+    
 </html>

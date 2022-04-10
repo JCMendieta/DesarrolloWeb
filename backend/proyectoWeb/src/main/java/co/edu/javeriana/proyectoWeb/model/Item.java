@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Item 
 {
@@ -24,7 +26,7 @@ public class Item
     String examine;
     String wiki_url;
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "rItems")
     List<Room> idRoom = new ArrayList<>();
 

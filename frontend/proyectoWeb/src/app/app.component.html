@@ -1,4 +1,11 @@
 <h1>Main page</h1>
-<app-decorative-item-list></app-decorative-item-list>
-<app-exit-list></app-exit-list>
-<app-room-list></app-room-list>
+<div>
+    <nav>
+        <ul>
+            <li routerLinkActive="menuSelected">
+                <a [routerLink]="['/room/list']" >Rooms</a> 
+            </li>
+        </ul>
+    </nav>
+    <router-outlet></router-outlet>
+</div>

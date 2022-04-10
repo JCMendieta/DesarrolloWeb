@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Player 
 {
@@ -26,9 +28,11 @@ public class Player
     Long clock;
     Long max_time;
 
+    @JsonIgnore
     @ManyToOne
     Room idRoom;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "idPlayer")
     List<Item> items = new ArrayList<>();
 

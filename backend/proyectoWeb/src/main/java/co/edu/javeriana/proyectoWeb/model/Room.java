@@ -3,12 +3,15 @@ package co.edu.javeriana.proyectoWeb.model;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Room 
@@ -17,6 +20,8 @@ public class Room
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+
+    @JsonIgnore
     @ManyToMany
     List<Item> rItems = new ArrayList<>();
 
@@ -26,7 +31,8 @@ public class Room
     @OneToOne
     Monster rMonster;
 
-    @OneToMany(mappedBy = "idFRoom")
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idFRoom")
     List<Exit> rExits = new ArrayList<>();
 
     @OneToMany(mappedBy = "idRoom")

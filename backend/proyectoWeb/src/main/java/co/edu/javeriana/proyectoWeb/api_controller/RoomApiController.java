@@ -132,6 +132,7 @@ public class RoomApiController
     }
 
     @GetMapping("/view/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Room view(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Room p = roomRepository.findById(id).get();

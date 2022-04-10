@@ -1,8 +1,8 @@
 <h2>Rooms</h2>
 <div>
     <ul>
-        <li *ngFor="let r of rooms">
-            <a [routerLink]="['/decorative_item/list', r.id]">
+        <li *ngFor="let r of rooms ; let i = index">
+            <a [routerLink]="['/room/view', r.id]">
                 {{r.id}}
             </a>
         </li>      

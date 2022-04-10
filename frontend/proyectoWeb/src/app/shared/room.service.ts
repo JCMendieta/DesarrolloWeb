@@ -14,4 +14,9 @@ export class RoomService {
   {
     return this.http.get<Room[]>("http://localhost:8080/room_api/list");
   }
+
+  view(id : number) : Observable<Room>
+  {
+    return this.http.get<Room>("http://localhost:8080/room_api/view/" + id);
+  }
 }

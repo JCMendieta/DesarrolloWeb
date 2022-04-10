@@ -7,12 +7,15 @@ import { DecorativeItemListComponent } from './decorative-item/decorative-item-l
 import { HttpClientModule } from '@angular/common/http';
 import { ExitListComponent } from './exit/exit-list/exit-list.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
+import { RoomViewComponent } from './room/room-view/room-view.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
     DecorativeItemListComponent, 
-    ExitListComponent, RoomListComponent
+    ExitListComponent, 
+    RoomListComponent, 
+    RoomViewComponent,
   ],
   imports: [
     BrowserModule,
