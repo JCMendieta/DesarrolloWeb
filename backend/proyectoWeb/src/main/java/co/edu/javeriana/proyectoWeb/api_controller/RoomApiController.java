@@ -153,6 +153,18 @@ public class RoomApiController
         }
     }
 
+    @GetMapping("/view_monster/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Monster viewMonster(Model model, @PathVariable Long id) throws NotFoundException 
+    {
+        Room room = roomRepository.findById(id).get();
+        Monster monster = room.getrMonster();
+
+        model.addAttribute("monster", monster);
+
+        return monster;
+    }
+
     @GetMapping("/view_item_list/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
     public List<Item> viewCurrentItems(Model model, @PathVariable Long id)

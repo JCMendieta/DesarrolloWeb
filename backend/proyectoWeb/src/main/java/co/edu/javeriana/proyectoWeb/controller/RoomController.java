@@ -147,6 +147,17 @@ public class RoomController
         }
     }
 
+    @GetMapping("/view_monster/{id}")
+    public String viewMonster(Model model, @PathVariable Long id) throws NotFoundException 
+    {
+        Room room = roomRepository.findById(id).get();
+        Monster monster = room.getrMonster();
+
+        model.addAttribute("monster", monster);
+
+        return "room-view-monster";
+    }
+
     @GetMapping("/view_item_list/{id}")
     public String viewCurrentItems(Model model, @PathVariable Long id)
     {

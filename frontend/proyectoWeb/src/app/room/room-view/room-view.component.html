@@ -1,12 +1,68 @@
 <div>
     <h1>Inside room #{{room?.id}}</h1>
-    <h2>Current items</h2>
+    <h2>Items</h2>
 </div>
 
 <div>
     <ul>
         <li *ngFor="let is of items">
             <div class="linebreaks">{{is.name}}</div>
+        </li>    
+    </ul>
+</div>
+
+<div>
+    <h2>Decorative items</h2>
+</div>
+
+<div>
+    <ul>
+        <li *ngFor="let dis of decorativeItems">
+            <div class="linebreaks">
+                    {{dis.name}}
+            </div>
+        </li>      
+    </ul>
+</div>
+
+<div>
+    <h2>Monster</h2>
+</div>
+
+<ul>
+    <li *ngIf="monster; else noMonster" >
+        <div class="linebreaks">Name: {{monster.idMonsterType.name}}</div>
+        <div class="linebreaks">Hitpoints: {{monster.hitpoints}}</div>
+        <div class="linebreaks">Attack level: {{monster.idMonsterType.attack_level}}</div>
+        <div class="linebreaks">Defense slash: {{monster.idMonsterType.defence_slash}}</div>
+        <div class="linebreaks">Size: {{monster.idMonsterType.size}}</div>
+    </li>  
+
+    <ng-template #noMonster>
+        There's no monster in this room.
+    </ng-template>
+</ul>
+
+<div>
+    <h2>Exits</h2>
+</div>
+
+<div>
+    <ul>
+        <li *ngFor="let e of exits">
+            <div class="linebreaks">Exit #{{e.id}}</div>
+        </li>      
+    </ul>
+</div>
+
+<div>
+    <h2>Players</h2>
+</div>
+
+<div>
+    <ul>
+        <li *ngFor="let p of players">
+            <div class="linebreaks">{{p.name}}</div>
         </li>      
     </ul>
 </div>

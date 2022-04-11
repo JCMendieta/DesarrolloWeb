@@ -126,8 +126,10 @@ public class DatabaseInit implements ApplicationRunner
         //ROOMS
         Room room1 = new Room (items1, decorativeItems1, monster1, exits1, players1);
         Room room2 = new Room (items2, decorativeItems2, monster2, exits2, players2);
+        Room room3 = new Room(null, null, null, null, null);
         roomRepository.save(room1);
         roomRepository.save(room2);
+        roomRepository.save(room3);
 
         //MONSTER // ROOM
         monster1.setIdRoom(room1);
