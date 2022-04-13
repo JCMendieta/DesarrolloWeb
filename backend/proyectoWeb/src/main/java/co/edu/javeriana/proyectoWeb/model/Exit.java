@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Exit 
 {
@@ -46,6 +48,7 @@ public class Exit
         this.id = id;
     }
 
+    @JsonBackReference
     public Room getIdFRoom() 
     {
         return idFRoom;

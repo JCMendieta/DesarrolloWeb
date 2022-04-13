@@ -8,8 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Player 
@@ -19,7 +22,9 @@ public class Player
     Long id;
 
     String name;
+    String password;
     String last_updated;
+
     Long attack_level;
     Long defence_slash;
     Long size;
@@ -28,13 +33,13 @@ public class Player
     Long clock;
     Long max_time;
 
-    @JsonIgnore
     @ManyToOne
     Room idRoom;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "idPlayer")
     List<Item> items = new ArrayList<>();
+
+    Role role;
 
     public Player() 
     {
@@ -46,11 +51,13 @@ public class Player
         this.name = name;
     }
 
-    public Player(String name, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
-            Long maxWeight, Long clock, Long max_time, Room idRoom, List<Item> items) 
+    public Player(String name, String password, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
+            Long maxWeight, Long clock, Long max_time, Room idRoom, List<Item> items, Role role) 
     {
         this.name = name;
+        this.password = password;
         this.last_updated = last_updated;
+        this.role = role;
         this.attack_level = attack_level;
         this.defence_slash = defence_slash;
         this.size = size;
@@ -60,11 +67,14 @@ public class Player
         this.max_time = max_time;
         this.idRoom = idRoom;
         this.items = items;
+        this.role = role;
     }
-    public Player(String name, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
+
+    public Player(String name, String password, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
             Long maxWeight, Long clock, Long max_time, List<Item> items) 
     {
         this.name = name;
+        this.password = password;
         this.last_updated = last_updated;
         this.attack_level = attack_level;
         this.defence_slash = defence_slash;
@@ -176,6 +186,7 @@ public class Player
         this.max_time = max_time;
     }
 
+    @JsonManagedReference
     public List<Item> getItems() 
     {
         return items;
@@ -186,6 +197,7 @@ public class Player
         this.items = items;
     }
 
+    @JsonBackReference
     public Room getIdRoom() 
     {
         return idRoom;
@@ -196,9 +208,29 @@ public class Player
         this.idRoom = idRoom;
     }
 
-    public void unlinkRoomPlayer(Room r){
+    public void unlinkRoomPlayer(Room r)
+    {
         this.idRoom=null;
         r.setrPlayers(null); 
     }
 
+    public String getPassword() 
+    {
+        return password;
+    }
+
+    public void setPassword(String password) 
+    {
+        this.password = password;
+    }
+
+    public Role getRole() 
+    {
+        return role;
+    }
+
+    public void setRole(Role role) 
+    {
+        this.role = role;
+    } 
 }

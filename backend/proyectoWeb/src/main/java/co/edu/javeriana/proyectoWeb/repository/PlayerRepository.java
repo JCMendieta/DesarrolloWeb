@@ -8,5 +8,4 @@ import co.edu.javeriana.proyectoWeb.model.Player;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Long>
 {
-    
 }

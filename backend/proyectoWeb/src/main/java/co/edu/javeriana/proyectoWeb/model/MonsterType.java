@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class MonsterType
@@ -28,7 +28,6 @@ public class MonsterType
     @ElementCollection(targetClass = String.class)
     List<String> category = new ArrayList<>();
 
-    @JsonIgnore
     @OneToMany(mappedBy = "idMonsterType")
     List<Monster> monsters = new ArrayList<>();
     
@@ -139,6 +138,7 @@ public class MonsterType
         this.category = category;
     }
 
+    @JsonManagedReference
     public List<Monster> getMonsters() 
     {
         return monsters;

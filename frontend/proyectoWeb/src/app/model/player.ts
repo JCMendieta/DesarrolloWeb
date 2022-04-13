@@ -5,6 +5,7 @@ export class Player
     constructor(
         public id : number,
         public name : string,
+        public password : string,
         public last_updated : string,
         public attack_level : number,
         public defence_slash : number,
@@ -15,5 +16,6 @@ export class Player
         public max_time : number,
         public idRoom : Room,
         public items : any,
+        public role : string,
     ) {}
 }

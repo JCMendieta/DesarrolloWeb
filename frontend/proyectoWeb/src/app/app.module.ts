@@ -8,6 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ExitListComponent } from './exit/exit-list/exit-list.component';
 import { RoomListComponent } from './room/room-list/room-list.component';
 import { RoomViewComponent } from './room/room-view/room-view.component';
+import { LoginComponent } from './login/login/login.component';
+import { HomeComponent } from './home/home/home.component';
+import { GameComponent } from './game/game/game.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,12 +19,13 @@ import { RoomViewComponent } from './room/room-view/room-view.component';
     DecorativeItemListComponent, 
     ExitListComponent, 
     RoomListComponent, 
-    RoomViewComponent,
+    RoomViewComponent, LoginComponent, HomeComponent, GameComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

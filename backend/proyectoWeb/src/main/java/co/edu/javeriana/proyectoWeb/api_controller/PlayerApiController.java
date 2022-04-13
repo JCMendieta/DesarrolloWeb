@@ -119,4 +119,35 @@ public class PlayerApiController
         model.addAttribute("items", items);
         return items;
     }
+
+    @GetMapping("/{username}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Player findPlayerByUsername(@PathVariable String username) 
+    {
+        Player player = null;
+
+        for (Player p : playerRepository.findAll())
+        {
+            if (p.getName().equals(username))
+            {
+                player = p;
+            }
+        }
+
+        return player;
+    }
+
+    @GetMapping("/spawn/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Player spawn (@PathVariable Long id)
+    {
+        Player player = playerRepository.findById(id).get();
+        List<Room> rooms = roomRepository.findAll();
+        Long r = (long)(Math.random() * (rooms.get(rooms.size()).getId() - rooms.get(0).getId()));
+
+        player.setIdRoom(roomRepository.getById((long)Math.floor(r)));
+        playerRepository.save(player);
+
+        return player;
+    }
 }

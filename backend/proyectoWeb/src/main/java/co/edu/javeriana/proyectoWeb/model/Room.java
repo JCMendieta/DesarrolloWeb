@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Room 
@@ -20,8 +20,6 @@ public class Room
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-
-    @JsonIgnore
     @ManyToMany
     List<Item> rItems = new ArrayList<>();
 
@@ -31,8 +29,7 @@ public class Room
     @OneToOne
     Monster rMonster;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idFRoom")
+    @OneToMany(mappedBy = "idFRoom")
     List<Exit> rExits = new ArrayList<>();
 
     @OneToMany(mappedBy = "idRoom")
@@ -78,6 +75,7 @@ public class Room
         this.id = id;
     }
 
+    @JsonManagedReference
     public List<Item> getrItems() 
     {
         return rItems;
@@ -88,6 +86,7 @@ public class Room
         this.rItems = rItems;
     }
 
+    @JsonManagedReference
     public List<DecorativeItem> getIdDecorativeItem() 
     {
         return idDecorativeItem;
@@ -108,6 +107,7 @@ public class Room
         this.rMonster = rMonster;
     }
 
+    @JsonManagedReference
     public List<Exit> getrExits()
     {
         return rExits;
@@ -118,6 +118,7 @@ public class Room
         this.rExits = rExits;
     }
 
+    @JsonManagedReference
     public List<Player> getrPlayers() 
     {
         return rPlayers;
@@ -128,15 +129,17 @@ public class Room
         this.rPlayers = rPlayers;
     }
 
-    public void unlinkRoomAttributes(){
-        if(getrMonster()!= null){
+    public void unlinkRoomAttributes()
+    {
+        if(getrMonster()!= null)
+        {
             getrMonster().setIdRoom(null);
             setrMonster(null);
         } 
+
         getIdDecorativeItem().removeAll(idDecorativeItem);
         getrExits().removeAll(rExits);
         getrItems().removeAll(rItems);
         getrPlayers().removeAll(rPlayers);
     }
-
 }

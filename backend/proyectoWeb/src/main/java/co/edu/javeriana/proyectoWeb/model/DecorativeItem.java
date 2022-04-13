@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class DecorativeItem 
@@ -19,7 +19,6 @@ public class DecorativeItem
 
     String name;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "idDecorativeItem")
     List<Room> idRoom = new ArrayList<>();
 
@@ -58,6 +57,7 @@ public class DecorativeItem
         this.name = name;
     }
 
+    @JsonBackReference
     public List<Room> getIdRoom() 
     {
         return idRoom;
