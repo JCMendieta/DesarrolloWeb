@@ -11,8 +11,6 @@ export class LoginComponent implements OnInit
 {
   username : string = "";
   password : string = "";
-  message : any;
-  result : any;
 
   constructor(
     private router : Router,
@@ -27,7 +25,6 @@ export class LoginComponent implements OnInit
     console.log(this.username + ' - ' + this.password);
     this.sessionService.logIn(this.username, this.password).subscribe(
       (player) => {
-        
         sessionStorage.setItem("currentPlayer", JSON.stringify(player));
         this.router.navigate(['home']);
       });

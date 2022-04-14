@@ -19,7 +19,7 @@ export class SessionService
 
   logIn (username: string, password: string) : Observable<Player>
   {
-    return this.http.get<Player>("http://localhost:8080/player_api/" + username);
+    return this.http.get<Player>("http://localhost:8080/player_api/" + username + "/" + password);
   }
 
   spawn (player : Player) : Observable<Player>

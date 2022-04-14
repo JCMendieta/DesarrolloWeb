@@ -19,7 +19,10 @@ import { FormsModule } from '@angular/forms';
     DecorativeItemListComponent, 
     ExitListComponent, 
     RoomListComponent, 
-    RoomViewComponent, LoginComponent, HomeComponent, GameComponent,
+    RoomViewComponent, 
+    LoginComponent, 
+    HomeComponent, 
+    GameComponent,
   ],
   imports: [
     BrowserModule,

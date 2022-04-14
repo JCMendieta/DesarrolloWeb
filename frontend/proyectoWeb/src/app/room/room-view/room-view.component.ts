@@ -18,7 +18,7 @@ import { RoomService } from 'src/app/shared/room.service';
 
 export class RoomViewComponent implements OnInit 
 {
-  room : Room | undefined;
+  room : Room | undefined 
   items : Item[] = [];
   decorativeItems : DecorativeItem [] = [];
   monster : Monster | undefined;

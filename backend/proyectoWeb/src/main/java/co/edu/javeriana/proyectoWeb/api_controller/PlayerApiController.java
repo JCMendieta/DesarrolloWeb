@@ -120,15 +120,15 @@ public class PlayerApiController
         return items;
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/{username}/{password}")
     @CrossOrigin(origins = "http://localhost:4200")
-    public Player findPlayerByUsername(@PathVariable String username) 
+    public Player findPlayerByUsername(@PathVariable String username, @PathVariable String password) 
     {
         Player player = null;
 
         for (Player p : playerRepository.findAll())
         {
-            if (p.getName().equals(username))
+            if (p.getName().equals(username) && p.getPassword().equals(password))
             {
                 player = p;
             }

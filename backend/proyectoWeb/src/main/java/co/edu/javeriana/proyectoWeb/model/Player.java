@@ -86,6 +86,10 @@ public class Player
         this.items = items;
     }
 
+    public Player(String string, String string2, String string3, long l, long m, long n, long o, long p, long q, long r,
+            ArrayList<Item> items1, String string4) {
+    }
+
     public Long getId() 
     {
         return id;

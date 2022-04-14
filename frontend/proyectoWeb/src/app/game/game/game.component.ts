@@ -18,6 +18,6 @@ export class GameComponent implements OnInit
 
   ngOnInit(): void 
   {
-    
+    this.currentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer")!);
   }
 }
