@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaderResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Item } from '../model/item';
 import { Player } from '../model/player';
 
 @Injectable({
@@ -24,6 +25,16 @@ export class SessionService
 
   spawn (player : Player) : Observable<Player>
   {
-    return this.http.get<Player>("http://localhost:8080/player_api/spawn" + player.id);
+    return this.http.get<Player>("http://localhost:8080/player_api/spawn/" + player.id);
+  }
+
+  discard (player : Player, item : Item) : Observable<Player>
+  {
+    return this.http.get<Player>("http://localhost:8080/player_api/discard/" + player.id + "/" + item.id);
+  }
+
+  collect (player : Player, item : Item) : Observable<Player>
+  {
+    return this.http.get<Player>("http://localhost:8080/player_api/collect/" + player.id + "/" + item.id);
   }
 }

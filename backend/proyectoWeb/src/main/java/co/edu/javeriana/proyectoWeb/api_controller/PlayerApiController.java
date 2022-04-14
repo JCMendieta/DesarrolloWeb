@@ -137,16 +137,53 @@ public class PlayerApiController
         return player;
     }
 
+    @GetMapping("/discard/{idPlayer}/{idItem}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Player discard (@PathVariable Long idPlayer, @PathVariable Long idItem)
+    {
+        Player player = playerRepository.findById(idPlayer).get();
+        Item item = itemRepository.findById(idItem).get();
+
+        player.getItems().remove(item);
+        item.setIdPlayer(null);
+        player.getIdRoom().getrItems().add(item);
+        playerRepository.save(player);
+        itemRepository.save(item);
+        roomRepository.save(player.getIdRoom());
+        
+        return player;
+    }
+
     @GetMapping("/spawn/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
     public Player spawn (@PathVariable Long id)
     {
         Player player = playerRepository.findById(id).get();
         List<Room> rooms = roomRepository.findAll();
-        Long r = (long)(Math.random() * (rooms.get(rooms.size()).getId() - rooms.get(0).getId()));
-
-        player.setIdRoom(roomRepository.getById((long)Math.floor(r)));
+        //Long r = (long)(Math.random() * (rooms.get(rooms.size() - 1).getId() - rooms.get(0).getId()));
+        player.setIdRoom(roomRepository.findById((long)15).get());
         playerRepository.save(player);
+
+        return player;
+    }
+
+    @GetMapping("/collect/{idPlayer}/{idItem}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Player collect (@PathVariable Long idPlayer, @PathVariable Long idItem)
+    {
+        Player player = playerRepository.findById(idPlayer).get();
+        Item item = itemRepository.findById(idItem).get();
+        Room room = player.getIdRoom();
+        
+        if (room.getrMonster() == null)
+        {
+            player.getItems().add(item);
+            item.setIdPlayer(player);
+            room.getrItems().remove(item);
+            playerRepository.save(player);
+            itemRepository.save(item);
+            roomRepository.save(room);
+        }
 
         return player;
     }

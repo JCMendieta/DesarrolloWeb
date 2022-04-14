@@ -14,6 +14,7 @@ import co.edu.javeriana.proyectoWeb.model.Item;
 import co.edu.javeriana.proyectoWeb.model.Monster;
 import co.edu.javeriana.proyectoWeb.model.MonsterType;
 import co.edu.javeriana.proyectoWeb.model.Player;
+import co.edu.javeriana.proyectoWeb.model.Role;
 import co.edu.javeriana.proyectoWeb.model.Room;
 import co.edu.javeriana.proyectoWeb.repository.DecorativeItemRepository;
 import co.edu.javeriana.proyectoWeb.repository.ExitRepository;
@@ -106,12 +107,15 @@ public class DatabaseInit implements ApplicationRunner
         //PLAYER
         ArrayList<Player> players1 = new ArrayList<>();
         ArrayList<Player> players2 = new ArrayList<>();
-        Player player1 = new Player("Samy", "xd", "2021-09-02",(long)40,(long)45,(long)1,(long)52,(long)20,(long)0,(long)100,items1);
+        Player player1 = new Player("Samy", "xd", "2021-09-02",(long)40,(long)45,(long)1,(long)52,(long)20,(long)0,(long)100,items1, Role.ROLE_DESIGNER);
         playerRepository.save(player1);
         players1.add(player1);
-        Player player2 = new Player("Mendieta", "dx", "2022-10-03",(long)62,(long)78,(long)2,(long)12,(long)4,(long)0,(long)99,items2);
+        Player player2 = new Player("Mendieta", "dx", "2022-10-03",(long)62,(long)78,(long)2,(long)12,(long)4,(long)0,(long)99,items2, Role.ROLE_ADMIN);
         playerRepository.save(player2);
         players2.add(player2);
+        Player player3 = new Player("Carlos", "a", "2022-10-03",(long)62,(long)78,(long)2,(long)12,(long)4,(long)0,(long)99,items2, Role.ROLE_PLAYER);
+        playerRepository.save(player3);
+        players2.add(player3);
 
         //ITEM // PLAYER
         item1.setIdPlayer(player1);
@@ -124,7 +128,7 @@ public class DatabaseInit implements ApplicationRunner
         ArrayList<Exit> exits2 = new ArrayList<>(); 
 
         //ROOMS
-        Room room1 = new Room (items1, decorativeItems1, monster1, exits1, players1);
+        Room room1 = new Room (items1, decorativeItems1, null, exits1, players1);
         Room room2 = new Room (items2, decorativeItems2, monster2, exits2, players2);
         Room room3 = new Room(null, null, null, null, null);
         roomRepository.save(room1);
@@ -142,6 +146,8 @@ public class DatabaseInit implements ApplicationRunner
         playerRepository.save(player1);
         player2.setIdRoom(room2);
         playerRepository.save(player2);
+        player3.setIdRoom(room1);
+        playerRepository.save(player3);
 
         //EXITS // ROOM
         Exit exit = new Exit (room1, room2);

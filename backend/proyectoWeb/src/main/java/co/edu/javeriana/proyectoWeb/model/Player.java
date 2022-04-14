@@ -71,7 +71,7 @@ public class Player
     }
 
     public Player(String name, String password, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
-            Long maxWeight, Long clock, Long max_time, List<Item> items) 
+            Long maxWeight, Long clock, Long max_time, List<Item> items, Role role) 
     {
         this.name = name;
         this.password = password;
@@ -84,10 +84,7 @@ public class Player
         this.clock = clock;
         this.max_time = max_time;
         this.items = items;
-    }
-
-    public Player(String string, String string2, String string3, long l, long m, long n, long o, long p, long q, long r,
-            ArrayList<Item> items1, String string4) {
+        this.role = role;
     }
 
     public Long getId() 
@@ -201,7 +198,7 @@ public class Player
         this.items = items;
     }
 
-    @JsonBackReference
+    @JsonManagedReference
     public Room getIdRoom() 
     {
         return idRoom;

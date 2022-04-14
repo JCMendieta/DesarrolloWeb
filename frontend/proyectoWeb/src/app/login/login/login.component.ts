@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit
 
   logIn() : void 
   {
-    console.log(this.username + ' - ' + this.password);
     this.sessionService.logIn(this.username, this.password).subscribe(
       (player) => {
         sessionStorage.setItem("currentPlayer", JSON.stringify(player));

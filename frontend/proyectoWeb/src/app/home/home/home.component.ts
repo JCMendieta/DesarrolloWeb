@@ -26,21 +26,25 @@ export class HomeComponent implements OnInit
   {
     this.currentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer")!);
 
-    if (this.currentPlayer?.role == 'PLAYER')
+    if (this.currentPlayer?.role == 'ROLE_PLAYER')
     {
       this.player = false;
     }
-    else if (this.currentPlayer?.role == 'DESIGNER')
+    else if (this.currentPlayer?.role == 'ROLE_DESIGNER')
     {
       this.designer = false;
     }
-    else
+    else if (this.currentPlayer?.role == 'ROLE_ADMIN')
     {
       this.admin = false;
     }
+    else
+    {
+      this.router.navigate(['login']);
+    }
   }
 
-  startGame() : void
+  start() : void
   {
     this.sessionService.spawn(this.currentPlayer as Player)
     .subscribe(player => {
@@ -48,7 +52,5 @@ export class HomeComponent implements OnInit
       sessionStorage.setItem("currentPlayer", JSON.stringify(player));
       this.router.navigate(['game']);
     });
-
-
   }
 }

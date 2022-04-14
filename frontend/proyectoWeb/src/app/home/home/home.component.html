@@ -1,7 +1,30 @@
-<p>
-    {{currentPlayer?.id}}
-</p>
+<div class = "home-wrapper">
+    <h1 class = "title">
+        MULTI USER DUNGEON
+    </h1>
 
-<div [hidden] = "player" id = "player">
-    <button (click) = "startGame()"></button>
+    <p class = "paragraph">
+        Un MUD es un juego multijugador donde los participantes 
+        exploran un calabozo con monstruos y tesoros. 
+        El objetivo esrecolectar la mayor cantidad de tesoros, 
+        sin morir, en un tiempo determinado.
+    </p>
+</div>
+
+<h1>Menu</h1>
+
+<div [hidden] = "player && designer">
+    <button (click) = "start()">PLAY</button>
+</div>
+
+<div [hidden] = "admin">
+    <li><a href = "http://localhost:8080/room/list">Rooms</a></li>
+    <li><a href = "http://localhost:8080/monster/list">Monsters</a></li>
+    <li><a href = "http://localhost:8080/monster_type/list">Monster types</a></li>
+    <li><a href = "http://localhost:8080/item/list">Items</a></li>
+    <li><a href = "http://localhost:8080/decorative_item/list">Decorative items</a></li>
+</div>
+
+<div [hidden] = "designer">
+    <li><a href = "http://localhost:8080/player/list">Players</a></li>
 </div>

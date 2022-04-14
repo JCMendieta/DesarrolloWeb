@@ -1,1 +1,12 @@
-<p>game works!</p>
+<p>{{currentPlayer?.name}}</p>
+<p>{{currentPlayer?.hitpoints}}</p>
+<p *ngFor = "let i of currentPlayer?.items">
+    <li>{{i.name}}</li>
+    <button (click) = "discard(i)">Throw</button> 
+</p>
+
+<p>{{currentPlayer?.idRoom?.id}}</p>
+<p *ngFor = "let i of currentPlayer?.idRoom?.rItems">
+    <li>{{i.name}}</li>
+    <button (click) = "collect(i)">Collect</button> 
+</p>
