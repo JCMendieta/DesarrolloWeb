@@ -143,7 +143,6 @@ public class PlayerApiController
     {
         Player player = playerRepository.findById(idPlayer).get();
         Item item = itemRepository.findById(idItem).get();
-
         player.getItems().remove(item);
         item.setIdPlayer(null);
         player.getIdRoom().getrItems().add(item);
@@ -161,7 +160,7 @@ public class PlayerApiController
         Player player = playerRepository.findById(id).get();
         List<Room> rooms = roomRepository.findAll();
         //Long r = (long)(Math.random() * (rooms.get(rooms.size() - 1).getId() - rooms.get(0).getId()));
-        player.setIdRoom(roomRepository.findById((long)15).get());
+        player.setIdRoom(roomRepository.findById((long)16).get());
         playerRepository.save(player);
 
         return player;
@@ -174,8 +173,14 @@ public class PlayerApiController
         Player player = playerRepository.findById(idPlayer).get();
         Item item = itemRepository.findById(idItem).get();
         Room room = player.getIdRoom();
-        
-        if (room.getrMonster() == null)
+        Long actualWeight = (long)0;
+
+        for (Item i : player.getItems())
+        {
+            actualWeight = actualWeight + i.getWeight();
+        }
+
+        if (room.getrMonster() == null && actualWeight + item.getWeight() <= player.getMaxWeight())
         {
             player.getItems().add(item);
             item.setIdPlayer(player);

@@ -53,13 +53,16 @@ public class DatabaseInit implements ApplicationRunner
         Item item1 = new Item("Dwarf remains","2021-09-24",(long)1,(long)16,"The body of a Dwarf savaged by Goblins.","https://oldschool.runescape.wiki/w/Dwarf_remains");
         items1.add(item1);
         itemRepository.save(item1);
-        Item item2 = new Item("Steel arrowtips","2021-08-05",(long)6,(long)0,"I can make some arrows with these.","https://oldschool.runescape.wiki/w/Steel_arrowtips");
+        Item item2 = new Item("Steel arrowtips","2021-08-05",(long)6,(long)1,"I can make some arrows with these.","https://oldschool.runescape.wiki/w/Steel_arrowtips");
         items1.add(item2);
         itemRepository.save(item2);
-        Item item3 = new Item("Armadyl mitre","2021-08-05",(long)5000,(long)0.3,"An Armadyl mitre.","https://oldschool.runescape.wiki/w/Armadyl_mitre");
+        Item item3 = new Item("Armadyl mitre","2021-08-05",(long)5000,(long)4,"An Armadyl mitre.","https://oldschool.runescape.wiki/w/Armadyl_mitre");
+        items1.add(item3);
         itemRepository.save(item3);
-        items2.add(item3);
-
+        Item item4 = new Item("xd","2021-08-05",(long)5000,(long)4,"An Armadyl mitre.","https://oldschool.runescape.wiki/w/Armadyl_mitre");
+        items2.add(item4);
+        itemRepository.save(item4);
+        
         //DECORATIVE ITEMS
         ArrayList<DecorativeItem> decorativeItems1 = new ArrayList<>();
         ArrayList<DecorativeItem> decorativeItems2 = new ArrayList<>();
@@ -119,9 +122,13 @@ public class DatabaseInit implements ApplicationRunner
 
         //ITEM // PLAYER
         item1.setIdPlayer(player1);
-        item2.setIdPlayer(player2);
+        item2.setIdPlayer(player1);
+        item3.setIdPlayer(player1);
+        item4.setIdPlayer(player3);
         itemRepository.save(item1);
         itemRepository.save(item2);
+        itemRepository.save(item3);
+        itemRepository.save(item4);
 
         //EXITS
         ArrayList<Exit> exits1 = new ArrayList<>(); 
