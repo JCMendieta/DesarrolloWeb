@@ -19,5 +19,6 @@ export class Player
         public idPlayerxRoom : Playerxroom,
         public items : any,
         public role : string,
+        public weight : number,
     ) {}
 }

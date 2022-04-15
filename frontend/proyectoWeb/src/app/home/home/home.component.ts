@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit
 {
 
   currentPlayer : Player | undefined;
+  logBook : String[] = [];
   player : boolean = true;
   designer : boolean = true;
   admin : boolean = true;
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit
   ngOnInit(): void 
   {
     this.currentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer")!);
+    this.logBook = JSON.parse(sessionStorage.getItem("logBook")!);
 
     if (this.currentPlayer?.role == 'ROLE_PLAYER')
     {
@@ -50,6 +52,7 @@ export class HomeComponent implements OnInit
     .subscribe(player => {
       this.currentPlayer = player;
       sessionStorage.setItem("currentPlayer", JSON.stringify(player));
+      sessionStorage.setItem("logbook", JSON.stringify(this.logBook));
       this.router.navigate(['game']);
     });
   }

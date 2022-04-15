@@ -32,6 +32,7 @@ public class Player
     Long maxWeight;
     Long clock;
     Long max_time;
+    Long weight;
 
     @ManyToOne
     Room idRoom;
@@ -55,7 +56,7 @@ public class Player
     }
 
     public Player(String name, String password, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
-            Long maxWeight, Long clock, Long max_time, Room idRoom, PlayerxRoom idPlayerxRoom, List<Item> items, Role role) 
+            Long maxWeight, Long clock, Long max_time, Room idRoom, PlayerxRoom idPlayerxRoom, List<Item> items, Role role, Long weight) 
     {
         this.name = name;
         this.password = password;
@@ -72,10 +73,11 @@ public class Player
         this.idPlayerxRoom = idPlayerxRoom;
         this.items = items;
         this.role = role;
+        this.weight = weight;
     }
 
     public Player(String name, String password, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
-            Long maxWeight, Long clock, Long max_time, PlayerxRoom idPlayerxRoom, List<Item> items, Role role) 
+            Long maxWeight, Long clock, Long max_time, PlayerxRoom idPlayerxRoom, List<Item> items, Role role, Long weight) 
     {
         this.name = name;
         this.password = password;
@@ -90,6 +92,7 @@ public class Player
         this.idPlayerxRoom = idPlayerxRoom;
         this.items = items;
         this.role = role;
+        this.weight = weight;
     }
 
     public Long getId() 
@@ -110,6 +113,15 @@ public class Player
     public void setName(String name) 
     {
         this.name = name;
+    }
+    public Long getweight() 
+    {
+        return weight;
+    }
+
+    public void setweight(Long weight) 
+    {
+        this.weight = weight;
     }
 
     public String getLast_updated() 

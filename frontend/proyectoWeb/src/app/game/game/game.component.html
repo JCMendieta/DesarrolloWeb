@@ -49,3 +49,8 @@ Refresh the page to see every other player in the room.
 <ng-template #justMe>    
     You
 </ng-template>
+
+<h2>LogBook</h2>
+<li *ngFor = "let action of logBook">
+    {{action}}
+ </li>

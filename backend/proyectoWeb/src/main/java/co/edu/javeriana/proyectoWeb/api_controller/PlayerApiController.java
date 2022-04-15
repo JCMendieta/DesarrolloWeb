@@ -200,6 +200,7 @@ public class PlayerApiController
         {
             actualWeight = actualWeight + i.getWeight();
         }
+        player.setweight(actualWeight);
 
         if (room.getrMonster() == null && actualWeight + item.getWeight() <= player.getMaxWeight())
         {
