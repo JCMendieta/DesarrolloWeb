@@ -165,7 +165,7 @@ public class PlayerApiController
         Player player = playerRepository.findById(id).get();
         List<Room> rooms = roomRepository.findAll();
         //Long r = (long)(Math.random() * (rooms.get(rooms.size() - 1).getId() - rooms.get(0).getId()));
-        player.setIdRoom(roomRepository.findById((long)16).get());
+        player.setIdRoom(roomRepository.findById((long)18).get());
         playerRepository.save(player);
 
         return player;

@@ -11,6 +11,28 @@
     <button (click) = "collect(i)">Collect</button> 
 </p>
 
+<p *ngFor = "let di of currentPlayer?.idRoom?.idDecorativeItem">
+    <li>{{di.name}}</li>
+</p>
+
 <p *ngFor = "let e of currentPlayer?.idRoom?.rExits">
     <button (click) = "move(e)">Room #{{e.id}}</button> 
+</p>
+
+<ul>
+    <li *ngIf="currentPlayer?.idRoom?.rMonster; else noMonster" >
+        <div class="linebreaks">Name: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.name}}</div>
+        <div class="linebreaks">Hitpoints: {{currentPlayer?.idRoom?.rMonster?.hitpoints}}</div>
+        <div class="linebreaks">Attack level: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.attack_level}}</div>
+        <div class="linebreaks">Defense slash: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.defence_slash}}</div>
+        <div class="linebreaks">Size: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.size}}</div>
+    </li>  
+
+    <ng-template #noMonster>
+        There's no monster in this room.
+    </ng-template>
+</ul>
+
+<p *ngFor="let p of currentPlayer?.idPlayerxRoom?.rPlayers">
+    <li>{{p.name}}</li>
 </p>

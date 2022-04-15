@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Exit } from 'src/app/model/exit';
 import { Item } from 'src/app/model/item';
 import { Player } from 'src/app/model/player';
+import { Playerxroom } from 'src/app/model/playerxroom';
+import { Room } from 'src/app/model/room';
 import { SessionService } from 'src/app/shared/session.service';
 
 @Component({
@@ -13,6 +15,7 @@ import { SessionService } from 'src/app/shared/session.service';
 export class GameComponent implements OnInit 
 {
   currentPlayer : Player | undefined;
+  currentPlayers : Player[] = [];
 
   constructor(
     private router : Router,

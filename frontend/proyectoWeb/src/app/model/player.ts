@@ -1,4 +1,5 @@
 import { Room } from "./room";
+import { Playerxroom } from './playerxroom';
 
 export class Player 
 {
@@ -15,6 +16,7 @@ export class Player
         public clock : number,
         public max_time : number,
         public idRoom : Room,
+        public idPlayerxRoom : Playerxroom,
         public items : any,
         public role : string,
     ) {}

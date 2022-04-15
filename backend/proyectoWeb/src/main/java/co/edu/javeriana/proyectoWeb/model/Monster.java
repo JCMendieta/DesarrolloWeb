@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Monster
@@ -84,7 +85,7 @@ public class Monster
         this.idRoom = idRoom;
     }
 
-    @JsonBackReference
+    @JsonManagedReference
     public MonsterType getIdMonsterType() 
     {
         return idMonsterType;

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Exit } from '../model/exit';
 import { Item } from '../model/item';
 import { Player } from '../model/player';
+import { Playerxroom } from '../model/playerxroom';
+import { Room } from '../model/room';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +44,10 @@ export class SessionService
   move (player : Player, exit : Exit) : Observable<Player>
   {
     return this.http.get<Player>("http://localhost:8080/player_api/move/" + player.id + "/" + exit.id);
+  }
+
+  currentPlayers (playerxroom : Playerxroom) : Observable<Playerxroom>
+  {
+    return this.http.get<Playerxroom>("http://localhost:8080/room_api/currenPlayers/" + playerxroom.id);
   }
 }
