@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Exit } from 'src/app/model/exit';
 import { Item } from 'src/app/model/item';
 import { Player } from 'src/app/model/player';
 import { SessionService } from 'src/app/shared/session.service';
@@ -38,7 +39,17 @@ export class GameComponent implements OnInit
     .subscribe(player =>
       {
         this.currentPlayer = player;
-        sessionStorage.setItem("currentItem", JSON.stringify(player));
+        sessionStorage.setItem("currentPlayer", JSON.stringify(player));
       });
+  }
+
+  move (exit : Exit) : void
+  {
+    this.sessionService.move(this.currentPlayer as Player, exit)
+    .subscribe(player =>
+      {
+        this.currentPlayer = player;
+        sessionStorage.setItem("currentPlayer", JSON.stringify(player));
+      })
   }
 }

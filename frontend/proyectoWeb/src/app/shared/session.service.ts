@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaderResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Exit } from '../model/exit';
 import { Item } from '../model/item';
 import { Player } from '../model/player';
 
@@ -36,5 +37,10 @@ export class SessionService
   collect (player : Player, item : Item) : Observable<Player>
   {
     return this.http.get<Player>("http://localhost:8080/player_api/collect/" + player.id + "/" + item.id);
+  }
+
+  move (player : Player, exit : Exit) : Observable<Player>
+  {
+    return this.http.get<Player>("http://localhost:8080/player_api/move/" + player.id + "/" + exit.id);
   }
 }

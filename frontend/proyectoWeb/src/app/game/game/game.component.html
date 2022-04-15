@@ -10,3 +10,7 @@
     <li>{{i.name}}</li>
     <button (click) = "collect(i)">Collect</button> 
 </p>
+
+<p *ngFor = "let e of currentPlayer?.idRoom?.rExits">
+    <button (click) = "move(e)">Room #{{e.id}}</button> 
+</p>

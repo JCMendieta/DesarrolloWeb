@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.javeriana.proyectoWeb.model.Exit;
 import co.edu.javeriana.proyectoWeb.model.Item;
 import co.edu.javeriana.proyectoWeb.model.Player;
 import co.edu.javeriana.proyectoWeb.model.Room;
+import co.edu.javeriana.proyectoWeb.repository.ExitRepository;
 import co.edu.javeriana.proyectoWeb.repository.ItemRepository;
 import co.edu.javeriana.proyectoWeb.repository.PlayerRepository;
 import co.edu.javeriana.proyectoWeb.repository.RoomRepository;
@@ -36,6 +38,9 @@ public class PlayerApiController
 
     @Autowired
     ItemRepository itemRepository;
+
+    @Autowired
+    ExitRepository exitRepository;
 
     @GetMapping("/list")
     @CrossOrigin(origins = "http://localhost:4200")
@@ -189,6 +194,21 @@ public class PlayerApiController
             itemRepository.save(item);
             roomRepository.save(room);
         }
+
+        return player;
+    }
+
+    @GetMapping("/move/{idPlayer}/{idExit}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Player move (@PathVariable Long idPlayer, @PathVariable Long idExit)
+    {
+        Player player = playerRepository.findById(idPlayer).get();
+        Exit exit = exitRepository.findById(idExit).get();
+        
+        player.setIdRoom(exit.getIdSRoom());
+
+        playerRepository.save(player);
+        exitRepository.save(exit);
 
         return player;
     }

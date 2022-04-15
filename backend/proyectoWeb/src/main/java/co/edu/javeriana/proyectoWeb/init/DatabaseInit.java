@@ -46,7 +46,7 @@ public class DatabaseInit implements ApplicationRunner
     @Transactional
     public void run(ApplicationArguments args) throws Exception
     {
-        //ITEMS
+        //ITEMS//PLAYER
         ArrayList<Item> items1 = new ArrayList<>();
         ArrayList<Item> items2 = new ArrayList<>();
 
@@ -56,13 +56,13 @@ public class DatabaseInit implements ApplicationRunner
         Item item2 = new Item("Steel arrowtips","2021-08-05",(long)6,(long)1,"I can make some arrows with these.","https://oldschool.runescape.wiki/w/Steel_arrowtips");
         items1.add(item2);
         itemRepository.save(item2);
-        Item item3 = new Item("Armadyl mitre","2021-08-05",(long)5000,(long)4,"An Armadyl mitre.","https://oldschool.runescape.wiki/w/Armadyl_mitre");
+        Item item3 = new Item("Armadyl mitre","2021-08-05",(long)5000,(long)3,"An Armadyl mitre.","https://oldschool.runescape.wiki/w/Armadyl_mitre");
         items1.add(item3);
         itemRepository.save(item3);
         Item item4 = new Item("xd","2021-08-05",(long)5000,(long)4,"An Armadyl mitre.","https://oldschool.runescape.wiki/w/Armadyl_mitre");
         items2.add(item4);
         itemRepository.save(item4);
-        
+
         //DECORATIVE ITEMS
         ArrayList<DecorativeItem> decorativeItems1 = new ArrayList<>();
         ArrayList<DecorativeItem> decorativeItems2 = new ArrayList<>();
@@ -120,16 +120,6 @@ public class DatabaseInit implements ApplicationRunner
         playerRepository.save(player3);
         players2.add(player3);
 
-        //ITEM // PLAYER
-        item1.setIdPlayer(player1);
-        item2.setIdPlayer(player1);
-        item3.setIdPlayer(player1);
-        item4.setIdPlayer(player3);
-        itemRepository.save(item1);
-        itemRepository.save(item2);
-        itemRepository.save(item3);
-        itemRepository.save(item4);
-
         //EXITS
         ArrayList<Exit> exits1 = new ArrayList<>(); 
         ArrayList<Exit> exits2 = new ArrayList<>(); 
@@ -157,8 +147,11 @@ public class DatabaseInit implements ApplicationRunner
         playerRepository.save(player3);
 
         //EXITS // ROOM
-        Exit exit = new Exit (room1, room2);
-        exits1.add(exit);
-        exitRepository.save(exit);
+        Exit exit1 = new Exit (room1, room2);
+        exits1.add(exit1);
+        exitRepository.save(exit1);
+        Exit exit2 = new Exit (room1, room3);
+        exits1.add(exit2);
+        exitRepository.save(exit2);
     }
 }
