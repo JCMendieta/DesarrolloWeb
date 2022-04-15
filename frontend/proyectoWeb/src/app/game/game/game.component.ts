@@ -7,6 +7,7 @@ import { Player } from 'src/app/model/player';
 import { Playerxroom } from 'src/app/model/playerxroom';
 import { Room } from 'src/app/model/room';
 import { SessionService } from 'src/app/shared/session.service';
+import { Monster } from 'src/app/model/monster';
 
 @Component({
   selector: 'app-game',
@@ -52,6 +53,16 @@ export class GameComponent implements OnInit
   move (exit : Exit) : void
   {
     this.sessionService.move(this.currentPlayer as Player, exit)
+    .subscribe(player =>
+      {
+        this.currentPlayer = player;
+        sessionStorage.setItem("currentPlayer", JSON.stringify(player));
+      })
+  }
+
+  attack (rMonster : Monster) : void
+  {
+    this.sessionService.attack(this.currentPlayer as Player, rMonster)
     .subscribe(player =>
       {
         this.currentPlayer = player;

@@ -6,6 +6,7 @@ import { Item } from '../model/item';
 import { Player } from '../model/player';
 import { Playerxroom } from '../model/playerxroom';
 import { Room } from '../model/room';
+import { Monster} from '../model/monster';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,11 @@ export class SessionService
   move (player : Player, exit : Exit) : Observable<Player>
   {
     return this.http.get<Player>("http://localhost:8080/player_api/move/" + player.id + "/" + exit.id);
+  }
+
+  attack (player : Player, rMonster : Monster) : Observable<Player>
+  {
+    return this.http.get<Player>("http://localhost:8080/player_api/attack/" + player.id + "/" + rMonster.id);
   }
 
   players (room : Room) : Observable<Player[]>

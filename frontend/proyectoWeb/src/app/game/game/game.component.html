@@ -25,6 +25,7 @@
         <div class="linebreaks">Attack level: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.attack_level}}</div>
         <div class="linebreaks">Defense slash: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.defence_slash}}</div>
         <div class="linebreaks">Size: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.size}}</div>
+        <button (click) = "attack(currentPlayer!.idRoom.rMonster)">Attack Monster</button>
 </li>  
 <ng-template #noMonster>
     <li></li>

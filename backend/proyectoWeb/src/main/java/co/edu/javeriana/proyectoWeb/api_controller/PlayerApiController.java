@@ -1,6 +1,7 @@
 package co.edu.javeriana.proyectoWeb.api_controller;
 
 import java.util.List;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +21,13 @@ import co.edu.javeriana.proyectoWeb.model.Item;
 import co.edu.javeriana.proyectoWeb.model.Player;
 import co.edu.javeriana.proyectoWeb.model.PlayerxRoom;
 import co.edu.javeriana.proyectoWeb.model.Room;
+import co.edu.javeriana.proyectoWeb.model.Monster;
 import co.edu.javeriana.proyectoWeb.repository.ExitRepository;
 import co.edu.javeriana.proyectoWeb.repository.ItemRepository;
 import co.edu.javeriana.proyectoWeb.repository.PlayerRepository;
 import co.edu.javeriana.proyectoWeb.repository.PlayerxRoomRepository;
 import co.edu.javeriana.proyectoWeb.repository.RoomRepository;
+import co.edu.javeriana.proyectoWeb.repository.MonsterRepository;
 
 @RestController
 @RequestMapping("/player_api")
@@ -46,6 +49,10 @@ public class PlayerApiController
 
     @Autowired
     PlayerxRoomRepository playerxRoomRepository;
+
+    @Autowired
+    MonsterRepository monsterRepository;
+
 
     @GetMapping("/list")
     @CrossOrigin(origins = "http://localhost:4200")
@@ -234,4 +241,56 @@ public class PlayerApiController
         
         return room.getrPlayers();
     }
+
+    @GetMapping("/attack/{idPlayer}/{idMonster}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Player attack (@PathVariable Long idPlayer, @PathVariable Long idMonster)
+    {
+        Player player = playerRepository.findById(idPlayer).get();
+        Monster monster = monsterRepository.findById(idMonster).get();
+        Room room = monster.getIdRoom();
+
+        Random random = new Random();
+        Long damagePlayer = (long)random.nextLong((player.getAttack_level()+1));
+        Long damageMonster = (long)random.nextLong((monster.getIdMonsterType().getAttack_level()+1));
+        Long defenseMonster = (long)random.nextLong((monster.getIdMonsterType().getDefence_slash()+1));
+        Long defensePlayer = (long)random.nextLong((player.getDefence_slash()+1));
+
+        Long totalDamageToMonster = defenseMonster - damagePlayer;
+        Long totalDamageToPlayer = defensePlayer - damageMonster;
+        if(totalDamageToMonster > 0){
+            totalDamageToMonster = (long)0;
+        }
+        else if(totalDamageToMonster < 0){
+            totalDamageToMonster = totalDamageToMonster * -1;
+        }
+        if(totalDamageToPlayer > 0){
+            totalDamageToPlayer = (long)0;
+        }
+        else if(totalDamageToPlayer < 0){
+            totalDamageToPlayer = totalDamageToPlayer *-1;
+        }
+        Long newHpMonster = monster.getHitpoints()-(long)totalDamageToMonster;
+        Long newHpPlayer = player.getHitpoints()-(long)totalDamageToPlayer;
+        if(newHpMonster <= 0){
+            monster.setHitpoints((long)0);
+            room.setrMonster(null); 
+        }
+        else{
+            monster.setHitpoints(newHpMonster);
+            if(newHpPlayer <=0){
+                player.setHitpoints((long)0);
+                //COMPLETAR CON QUE OCURRE CUANDO EL JUGADOR MUERE
+            }
+            else{
+                player.setHitpoints(newHpPlayer);
+            }
+        }
+        roomRepository.save(room);
+        playerRepository.save(player);
+        monsterRepository.save(monster);
+
+        return player;
+    }
+
 }
