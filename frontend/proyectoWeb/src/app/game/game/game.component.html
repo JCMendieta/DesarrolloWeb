@@ -1,38 +1,50 @@
 <p>{{currentPlayer?.name}}</p>
 <p>{{currentPlayer?.hitpoints}}</p>
+
+<h2>Your items</h2>
 <p *ngFor = "let i of currentPlayer?.items">
     <li>{{i.name}}</li>
-    <button (click) = "discard(i)">Throw</button> 
+    <button (click) = "discard(i)">Discard</button> 
 </p>
 
-<p>{{currentPlayer?.idRoom?.id}}</p>
+<h2>Items in the room</h2>
 <p *ngFor = "let i of currentPlayer?.idRoom?.rItems">
     <li>{{i.name}}</li>
     <button (click) = "collect(i)">Collect</button> 
 </p>
 
-<p *ngFor = "let di of currentPlayer?.idRoom?.idDecorativeItem">
-    <li>{{di.name}}</li>
-</p>
+<h2>Decorative items</h2>
+<li *ngFor = "let di of currentPlayer?.idRoom?.idDecorativeItem">
+   {{di.name}}
+</li>
 
-<p *ngFor = "let e of currentPlayer?.idRoom?.rExits">
-    <button (click) = "move(e)">Room #{{e.id}}</button> 
-</p>
-
-<ul>
-    <li *ngIf="currentPlayer?.idRoom?.rMonster; else noMonster" >
+<li *ngIf="currentPlayer?.idRoom?.rMonster; else noMonster">
+    <h2>Monster</h2>
         <div class="linebreaks">Name: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.name}}</div>
         <div class="linebreaks">Hitpoints: {{currentPlayer?.idRoom?.rMonster?.hitpoints}}</div>
         <div class="linebreaks">Attack level: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.attack_level}}</div>
         <div class="linebreaks">Defense slash: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.defence_slash}}</div>
         <div class="linebreaks">Size: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.size}}</div>
-    </li>  
+</li>  
+<ng-template #noMonster>
+    <li></li>
+    <h3>There's no monster in this room.</h3>
+</ng-template>
+<li></li>
 
-    <ng-template #noMonster>
-        There's no monster in this room.
-    </ng-template>
-</ul>
-
-<p *ngFor="let p of currentPlayer?.idPlayerxRoom?.rPlayers">
-    <li>{{p.name}}</li>
+<h2>Exits</h2>
+<p *ngFor = "let e of currentPlayer?.idRoom?.rExits">
+    <button (click) = "move(e)">Go through exit #{{e.id}}</button> 
 </p>
+
+
+<h2>Players in the room</h2>
+Refresh the page to see every other player in the room.
+<li *ngFor="let ps of currentPlayers">
+    <p *ngIf="ps.name != currentPlayer?.name; else justMe">
+        {{ps.name}}
+    </p>
+</li>   
+<ng-template #justMe>    
+    You
+</ng-template>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { Exit } from 'src/app/model/exit';
 import { Item } from 'src/app/model/item';
 import { Player } from 'src/app/model/player';
@@ -19,11 +20,13 @@ export class GameComponent implements OnInit
 
   constructor(
     private router : Router,
+    private route: ActivatedRoute,
     private sessionService : SessionService) { }
 
   ngOnInit(): void 
   {
     this.currentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer")!);
+    this.players();
   }
 
   discard (item : Item) : void 
@@ -54,5 +57,12 @@ export class GameComponent implements OnInit
         this.currentPlayer = player;
         sessionStorage.setItem("currentPlayer", JSON.stringify(player));
       })
+  }
+
+  players () : void
+  {
+    this.sessionService.players(this.currentPlayer?.idRoom!)
+    .subscribe(ps => 
+      this.currentPlayers = ps);
   }
 }

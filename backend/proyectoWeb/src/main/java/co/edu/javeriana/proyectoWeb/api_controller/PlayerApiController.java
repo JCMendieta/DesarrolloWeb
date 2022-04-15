@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.javeriana.proyectoWeb.model.Exit;
 import co.edu.javeriana.proyectoWeb.model.Item;
 import co.edu.javeriana.proyectoWeb.model.Player;
+import co.edu.javeriana.proyectoWeb.model.PlayerxRoom;
 import co.edu.javeriana.proyectoWeb.model.Room;
 import co.edu.javeriana.proyectoWeb.repository.ExitRepository;
 import co.edu.javeriana.proyectoWeb.repository.ItemRepository;
 import co.edu.javeriana.proyectoWeb.repository.PlayerRepository;
+import co.edu.javeriana.proyectoWeb.repository.PlayerxRoomRepository;
 import co.edu.javeriana.proyectoWeb.repository.RoomRepository;
 
 @RestController
@@ -41,6 +43,9 @@ public class PlayerApiController
 
     @Autowired
     ExitRepository exitRepository;
+
+    @Autowired
+    PlayerxRoomRepository playerxRoomRepository;
 
     @GetMapping("/list")
     @CrossOrigin(origins = "http://localhost:4200")
@@ -148,12 +153,16 @@ public class PlayerApiController
     {
         Player player = playerRepository.findById(idPlayer).get();
         Item item = itemRepository.findById(idItem).get();
+        Room room = player.getIdRoom();
+
         player.getItems().remove(item);
+        item.getIdRoom().add(room);
         item.setIdPlayer(null);
-        player.getIdRoom().getrItems().add(item);
+        room.getrItems().add(item);
+
         playerRepository.save(player);
         itemRepository.save(item);
-        roomRepository.save(player.getIdRoom());
+        roomRepository.save(room);
         
         return player;
     }
@@ -189,7 +198,9 @@ public class PlayerApiController
         {
             player.getItems().add(item);
             item.setIdPlayer(player);
+            item.getIdRoom().remove(room);
             room.getrItems().remove(item);
+
             playerRepository.save(player);
             itemRepository.save(item);
             roomRepository.save(room);
@@ -204,12 +215,23 @@ public class PlayerApiController
     {
         Player player = playerRepository.findById(idPlayer).get();
         Exit exit = exitRepository.findById(idExit).get();
-        
-        player.setIdRoom(exit.getIdSRoom());
+        Room nextRoom = exit.getIdSRoom();
+        player.setIdRoom(nextRoom);
+        nextRoom.getrPlayers().add(player);
 
         playerRepository.save(player);
         exitRepository.save(exit);
+        roomRepository.save(nextRoom);
 
         return player;
+    }
+
+    @GetMapping("/currentPlayers/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<Player> players (@PathVariable Long id)
+    {
+        Room room = roomRepository.findById(id).get();
+        
+        return room.getrPlayers();
     }
 }

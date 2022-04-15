@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -36,8 +37,20 @@ public class Room
     @OneToMany(mappedBy = "idRoom")
     List<Player> rPlayers = new ArrayList<>();
 
+    @ManyToOne
+    PlayerxRoom idPlayerxRoom;
+
     public Room() 
     {
+    }
+
+    @JsonManagedReference
+    public PlayerxRoom getIdPlayerxRoom() {
+        return idPlayerxRoom;
+    }
+
+    public void setIdPlayerxRoom(PlayerxRoom idPlayerxRoom) {
+        this.idPlayerxRoom = idPlayerxRoom;
     }
 
     public Room(Monster rMonster) 

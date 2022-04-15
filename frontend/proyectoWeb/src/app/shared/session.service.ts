@@ -46,8 +46,8 @@ export class SessionService
     return this.http.get<Player>("http://localhost:8080/player_api/move/" + player.id + "/" + exit.id);
   }
 
-  currentPlayers (playerxroom : Playerxroom) : Observable<Playerxroom>
+  players (room : Room) : Observable<Player[]>
   {
-    return this.http.get<Playerxroom>("http://localhost:8080/room_api/currenPlayers/" + playerxroom.id);
+    return this.http.get<Player[]>("http://localhost:8080/player_api/currentPlayers/" + room.id);
   }
 }
