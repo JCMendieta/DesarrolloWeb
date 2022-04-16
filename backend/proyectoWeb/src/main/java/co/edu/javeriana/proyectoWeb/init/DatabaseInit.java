@@ -116,7 +116,7 @@ public class DatabaseInit implements ApplicationRunner
         //PLAYER
         ArrayList<Player> players1 = new ArrayList<>();
         ArrayList<Player> players2 = new ArrayList<>();
-        Player player1 = new Player("Samy", "xd", "2021-09-02",(long)40,(long)45,(long)1,(long)52,(long)20,(long)0,(long)100, items1, Role.ROLE_DESIGNER,(long)0);
+        Player player1 = new Player("Samy", "xd", "2021-09-02",(long)40,(long)1,(long)1,(long)1,(long)20,(long)0,(long)100, items1, Role.ROLE_DESIGNER,(long)0);
         playerRepository.save(player1);
         players1.add(player1);
         Player player2 = new Player("Mendieta", "dx", "2022-10-03",(long)62,(long)78,(long)2,(long)12,(long)4,(long)0,(long)99, items2, Role.ROLE_ADMIN,(long)0);

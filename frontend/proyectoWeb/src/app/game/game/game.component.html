@@ -58,3 +58,7 @@ Refresh the page to see every other player in the room.
 <li *ngIf = "currentPlayer?.clock == 20">
     {{finish()}}
 </li>
+
+<li *ngIf = "currentPlayer?.hitpoints == 0">
+    {{finish()}}
+</li>
