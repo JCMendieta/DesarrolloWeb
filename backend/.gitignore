@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 mydatabase.mv.db
 /mydatabase.mv.db
+backend/mydatabase.mv.db
