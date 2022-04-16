@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Exit } from '../model/exit';
 import { Item } from '../model/item';
 import { Player } from '../model/player';
-import { Playerxroom } from '../model/playerxroom';
 import { Room } from '../model/room';
 import { Monster} from '../model/monster';
 
@@ -55,5 +54,10 @@ export class SessionService
   players (room : Room) : Observable<Player[]>
   {
     return this.http.get<Player[]>("http://localhost:8080/player_api/currentPlayers/" + room.id);
+  }
+
+  finish (player : Player) : Observable<number>
+  {
+    return this.http.get<number>("http://localhost:8080/player_api/finish/" + player.id);
   }
 }

@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { Router } from '@angular/router';
 import { Exit } from 'src/app/model/exit';
 import { Item } from 'src/app/model/item';
 import { Player } from 'src/app/model/player';
-import { Playerxroom } from 'src/app/model/playerxroom';
-import { Room } from 'src/app/model/room';
 import { SessionService } from 'src/app/shared/session.service';
 import { Monster } from 'src/app/model/monster';
 
@@ -14,6 +11,7 @@ import { Monster } from 'src/app/model/monster';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
+
 export class GameComponent implements OnInit 
 {
   currentPlayer : Player | undefined;
@@ -24,7 +22,6 @@ export class GameComponent implements OnInit
 
   constructor(
     private router : Router,
-    private route: ActivatedRoute,
     private sessionService : SessionService) { }
 
   ngOnInit(): void 
@@ -57,7 +54,10 @@ export class GameComponent implements OnInit
         
         sessionStorage.setItem("currentPlayer", JSON.stringify(player));
         if(this.currentPlayer.weight + item.weight > this.currentPlayer.maxWeight){
-          this.logBook.push(this.currentPlayer.name +" tried to pick "+ item.name +" from the room, but he is carrying too much weight!!.");
+          this.logBook.push(this.currentPlayer.name +" tried to pick "+ item.name +" from the room, but is carrying too much weight!!.");
+        }
+        else if(this.currentPlayer.idRoom.rMonster != null){
+          this.logBook.push(this.currentPlayer.name + "tried to pick "+item.name + " from the room, but " + this.currentPlayer.idRoom.rMonster.idMonsterType.name + " is watching...")
         }
         else{
           this.logBook.push(this.currentPlayer.name +" took "+ item.name +" from the room.");
@@ -79,15 +79,14 @@ export class GameComponent implements OnInit
   attack (rMonster : Monster) : void
   {
     this.monsterHp = rMonster.hitpoints;
+
     this.sessionService.attack(this.currentPlayer as Player, rMonster)
     .subscribe(player =>
       {
         this.currentPlayer = player;
-        
         sessionStorage.setItem("currentPlayer", JSON.stringify(player));
         this.logBook.push(this.currentPlayer.name +" attacked "+this.currentPlayer.idRoom.rMonster.idMonsterType.name+" and inflicted "+(this.monsterHp-this.currentPlayer.idRoom.rMonster.hitpoints)+ " of damage.");
         sessionStorage.setItem("logBook",JSON.stringify(this.logBook));
-      
       })
   }
 
@@ -96,5 +95,14 @@ export class GameComponent implements OnInit
     this.sessionService.players(this.currentPlayer?.idRoom!)
     .subscribe(ps => 
       this.currentPlayers = ps);
+  }
+
+  finish () : void
+  {
+    this.sessionService.finish(this.currentPlayer as Player)
+    .subscribe(score => {
+      sessionStorage.setItem("score", JSON.stringify(score));
+      this.router.navigate(['finish']);
+    });
   }
 }

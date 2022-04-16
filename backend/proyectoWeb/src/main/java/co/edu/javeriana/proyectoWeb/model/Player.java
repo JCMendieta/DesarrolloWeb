@@ -8,10 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -37,9 +34,6 @@ public class Player
     @ManyToOne
     Room idRoom;
 
-    @ManyToOne
-    PlayerxRoom idPlayerxRoom;
-
     @OneToMany(mappedBy = "idPlayer")
     List<Item> items = new ArrayList<>();
 
@@ -56,7 +50,7 @@ public class Player
     }
 
     public Player(String name, String password, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
-            Long maxWeight, Long clock, Long max_time, Room idRoom, PlayerxRoom idPlayerxRoom, List<Item> items, Role role, Long weight) 
+            Long maxWeight, Long clock, Long max_time, Room idRoom, List<Item> items, Role role, Long weight) 
     {
         this.name = name;
         this.password = password;
@@ -70,14 +64,13 @@ public class Player
         this.clock = clock;
         this.max_time = max_time;
         this.idRoom = idRoom;
-        this.idPlayerxRoom = idPlayerxRoom;
         this.items = items;
         this.role = role;
         this.weight = weight;
     }
 
     public Player(String name, String password, String last_updated, Long attack_level, Long defence_slash, Long size, Long hitpoints,
-            Long maxWeight, Long clock, Long max_time, PlayerxRoom idPlayerxRoom, List<Item> items, Role role, Long weight) 
+            Long maxWeight, Long clock, Long max_time, List<Item> items, Role role, Long weight) 
     {
         this.name = name;
         this.password = password;
@@ -89,7 +82,6 @@ public class Player
         this.maxWeight = maxWeight;
         this.clock = clock;
         this.max_time = max_time;
-        this.idPlayerxRoom = idPlayerxRoom;
         this.items = items;
         this.role = role;
         this.weight = weight;
@@ -250,16 +242,5 @@ public class Player
     public void setRole(Role role) 
     {
         this.role = role;
-    }
-
-    @JsonManagedReference
-    public PlayerxRoom getIdPlayerxRoom() 
-    {
-        return idPlayerxRoom;
-    }
-
-    public void setIdPlayerxRoom(PlayerxRoom idPlayerxRoom) 
-    {
-        this.idPlayerxRoom = idPlayerxRoom;
-    }     
+    }  
 }

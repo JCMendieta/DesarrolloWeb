@@ -19,13 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.javeriana.proyectoWeb.model.Exit;
 import co.edu.javeriana.proyectoWeb.model.Item;
 import co.edu.javeriana.proyectoWeb.model.Player;
-import co.edu.javeriana.proyectoWeb.model.PlayerxRoom;
 import co.edu.javeriana.proyectoWeb.model.Room;
 import co.edu.javeriana.proyectoWeb.model.Monster;
 import co.edu.javeriana.proyectoWeb.repository.ExitRepository;
 import co.edu.javeriana.proyectoWeb.repository.ItemRepository;
 import co.edu.javeriana.proyectoWeb.repository.PlayerRepository;
-import co.edu.javeriana.proyectoWeb.repository.PlayerxRoomRepository;
 import co.edu.javeriana.proyectoWeb.repository.RoomRepository;
 import co.edu.javeriana.proyectoWeb.repository.MonsterRepository;
 
@@ -48,11 +46,7 @@ public class PlayerApiController
     ExitRepository exitRepository;
 
     @Autowired
-    PlayerxRoomRepository playerxRoomRepository;
-
-    @Autowired
     MonsterRepository monsterRepository;
-
 
     @GetMapping("/list")
     @CrossOrigin(origins = "http://localhost:4200")
@@ -181,7 +175,8 @@ public class PlayerApiController
         Player player = playerRepository.findById(id).get();
         List<Room> rooms = roomRepository.findAll();
         //Long r = (long)(Math.random() * (rooms.get(rooms.size() - 1).getId() - rooms.get(0).getId()));
-        player.setIdRoom(roomRepository.findById((long)18).get());
+        player.setIdRoom(roomRepository.findById((long)16).get());
+        player.setClock((long)0);
         playerRepository.save(player);
 
         return player;
@@ -197,9 +192,10 @@ public class PlayerApiController
         Long actualWeight = (long)0;
 
         for (Item i : player.getItems())
-        {
+        {   
             actualWeight = actualWeight + i.getWeight();
         }
+        
         player.setweight(actualWeight);
 
         if (room.getrMonster() == null && actualWeight + item.getWeight() <= player.getMaxWeight())
@@ -224,9 +220,11 @@ public class PlayerApiController
         Player player = playerRepository.findById(idPlayer).get();
         Exit exit = exitRepository.findById(idExit).get();
         Room nextRoom = exit.getIdSRoom();
-        player.setIdRoom(nextRoom);
-        nextRoom.getrPlayers().add(player);
 
+        player.setIdRoom(nextRoom);
+        player.setClock(player.getClock() + 1);
+        nextRoom.getrPlayers().add(player);
+        
         playerRepository.save(player);
         exitRepository.save(exit);
         roomRepository.save(nextRoom);
@@ -250,7 +248,6 @@ public class PlayerApiController
         Player player = playerRepository.findById(idPlayer).get();
         Monster monster = monsterRepository.findById(idMonster).get();
         Room room = monster.getIdRoom();
-
         Random random = new Random();
         Long damagePlayer = (long)random.nextLong((player.getAttack_level()+1));
         Long damageMonster = (long)random.nextLong((monster.getIdMonsterType().getAttack_level()+1));
@@ -290,8 +287,21 @@ public class PlayerApiController
         roomRepository.save(room);
         playerRepository.save(player);
         monsterRepository.save(monster);
-
         return player;
     }
 
+    @GetMapping("/finish/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Long finish (@PathVariable Long id)
+    {
+        Player player = playerRepository.findById(id).get();
+        Long score = (long)0;
+
+        for (Item i : player.getItems())
+        {
+            score = score + i.getCost();
+        }
+
+        return score;
+    }
 }

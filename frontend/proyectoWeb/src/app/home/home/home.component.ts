@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginComponent } from 'src/app/login/login/login.component';
 import { Player } from 'src/app/model/player';
 import { SessionService } from 'src/app/shared/session.service';
 

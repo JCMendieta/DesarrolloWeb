@@ -6,7 +6,7 @@
     <p class = "paragraph">
         Un MUD es un juego multijugador donde los participantes 
         exploran un calabozo con monstruos y tesoros. 
-        El objetivo esrecolectar la mayor cantidad de tesoros, 
+        El objetivo es recolectar la mayor cantidad de tesoros, 
         sin morir, en un tiempo determinado.
     </p>
 </div>
@@ -17,7 +17,7 @@
     <button (click) = "start()">PLAY</button>
 </div>
 
-<div [hidden] = "admin">
+<div [hidden] = "designer">
     <li><a href = "http://localhost:8080/room/list">Rooms</a></li>
     <li><a href = "http://localhost:8080/monster/list">Monsters</a></li>
     <li><a href = "http://localhost:8080/monster_type/list">Monster types</a></li>
@@ -25,6 +25,6 @@
     <li><a href = "http://localhost:8080/decorative_item/list">Decorative items</a></li>
 </div>
 
-<div [hidden] = "designer">
+<div [hidden] = "admin">
     <li><a href = "http://localhost:8080/player/list">Players</a></li>
 </div>

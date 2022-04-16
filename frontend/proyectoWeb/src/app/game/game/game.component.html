@@ -54,3 +54,7 @@ Refresh the page to see every other player in the room.
 <li *ngFor = "let action of logBook">
     {{action}}
  </li>
+
+<li *ngIf = "currentPlayer?.clock == 20">
+    {{finish()}}
+</li>
