@@ -222,7 +222,8 @@ public class PlayerApiController
         Room nextRoom = exit.getIdSRoom();
 
         player.setIdRoom(nextRoom);
-        player.setClock(player.getClock() + 1);
+        Long newClock = player.getClock() + 1;
+        player.setClock(newClock);
         nextRoom.getrPlayers().add(player);
         
         playerRepository.save(player);

@@ -1,5 +1,7 @@
 <p>{{currentPlayer?.name}}</p>
 <p>{{currentPlayer?.hitpoints}}</p>
+<p>{{currentPlayer?.clock}} "Reloj"</p>
+<p>{{currentPlayer?.max_time}} Max_time</p>
 
 <h2>Your items</h2>
 <p *ngFor = "let i of currentPlayer?.items">
@@ -53,7 +55,7 @@ Refresh the page to see every other player in the room.
 <h2>LogBook</h2>
 <li *ngFor = "let action of logBook">
     {{action}}
- </li>
+</li>
 
 <li *ngIf = "currentPlayer?.clock == 20">
     {{finish()}}
