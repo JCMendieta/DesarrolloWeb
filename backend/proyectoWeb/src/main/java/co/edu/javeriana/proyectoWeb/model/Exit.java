@@ -58,6 +58,7 @@ public class Exit
     {
         this.idFRoom = idFRoom;
     }
+    
     @JsonBackReference
     public Room getIdSRoom() 
     {
@@ -68,7 +69,9 @@ public class Exit
     {
         this.idSRoom = idSRoom;
     }
-    public void unlinkRoomExit(Room r){
+
+    public void unlinkRoomExit(Room r)
+    {
         if(idFRoom!= null){
             this.idFRoom=null;
         }

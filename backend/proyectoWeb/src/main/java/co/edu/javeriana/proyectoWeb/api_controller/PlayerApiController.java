@@ -158,6 +158,7 @@ public class PlayerApiController
         Room room = player.getIdRoom();
 
         player.getItems().remove(item);
+        player.setWeight(player.getWeight() - item.getWeight());
         item.getIdRoom().add(room);
         item.setIdPlayer(null);
         room.getrItems().add(item);
@@ -191,18 +192,11 @@ public class PlayerApiController
         Player player = playerRepository.findById(idPlayer).get();
         Item item = itemRepository.findById(idItem).get();
         Room room = player.getIdRoom();
-        Long actualWeight = (long)0;
 
-        for (Item i : player.getItems())
-        {   
-            actualWeight = actualWeight + i.getWeight();
-        }
-        
-        player.setweight(actualWeight);
-
-        if (room.getrMonster() == null && actualWeight + item.getWeight() <= player.getMaxWeight())
+        if (room.getrMonster() == null && player.getWeight() + item.getWeight() <= player.getMaxWeight())
         {
             player.getItems().add(item);
+            player.setWeight(player.getWeight() + item.getWeight());
             item.setIdPlayer(player);
             item.getIdRoom().remove(room);
             room.getrItems().remove(item);
@@ -256,9 +250,9 @@ public class PlayerApiController
         Long damageMonster = (long)random.nextLong((monster.getIdMonsterType().getAttack_level()+1));
         Long defenseMonster = (long)random.nextLong((monster.getIdMonsterType().getDefence_slash()+1));
         Long defensePlayer = (long)random.nextLong((player.getDefence_slash()+1));
-
         Long totalDamageToMonster = defenseMonster - damagePlayer;
         Long totalDamageToPlayer = defensePlayer - damageMonster;
+
         if(totalDamageToMonster > 0){
             totalDamageToMonster = (long)0;
         }
@@ -271,8 +265,10 @@ public class PlayerApiController
         else if(totalDamageToPlayer < 0){
             totalDamageToPlayer = totalDamageToPlayer *-1;
         }
+
         Long newHpMonster = monster.getHitpoints()-(long)totalDamageToMonster;
         Long newHpPlayer = player.getHitpoints()-(long)totalDamageToPlayer;
+
         if(newHpMonster <= 0){
             monster.setHitpoints((long)0);
             room.setrMonster(null); 
@@ -287,9 +283,11 @@ public class PlayerApiController
                 player.setHitpoints(newHpPlayer);
             }
         }
+
         roomRepository.save(room);
         playerRepository.save(player);
         monsterRepository.save(monster);
+        
         return player;
     }
 

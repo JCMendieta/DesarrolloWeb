@@ -155,7 +155,8 @@ public class Item
         this.idPlayer = idPlayer;
     }
 
-    public void unlinkRoomItem(Room r){
+    public void unlinkRoomItem(Room r)
+    {
         this.idRoom.remove(r);
         r.getrItems().remove(this);
     }

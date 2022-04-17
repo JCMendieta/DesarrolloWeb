@@ -106,12 +106,12 @@ public class Player
     {
         this.name = name;
     }
-    public Long getweight() 
+    public Long getWeight() 
     {
         return weight;
     }
 
-    public void setweight(Long weight) 
+    public void setWeight(Long weight) 
     {
         this.weight = weight;
     }
