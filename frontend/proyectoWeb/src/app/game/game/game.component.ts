@@ -54,13 +54,13 @@ export class GameComponent implements OnInit
         
         sessionStorage.setItem("currentPlayer", JSON.stringify(player));
         if(this.currentPlayer.weight + item.weight > this.currentPlayer.maxWeight){
-          this.logBook.push(this.currentPlayer.name +" tried to pick "+ item.name +" from the room, but is carrying too much weight!!.");
+          this.logBook.push(this.currentPlayer.name +" tried to pick "+ item.name +" from the room, but is carrying too much weight!!. (it weights "+item.weight+" and cost "+item.cost+")");
         }
         else if(this.currentPlayer.idRoom.rMonster != null){
           this.logBook.push(this.currentPlayer.name + "tried to pick "+item.name + " from the room, but " + this.currentPlayer.idRoom.rMonster.idMonsterType.name + " is watching...")
         }
         else{
-          this.logBook.push(this.currentPlayer.name +" took "+ item.name +" from the room.");
+          this.logBook.push(this.currentPlayer.name +" took "+ item.name +" from the room. (it weights "+item.weight+" and cost "+item.cost+")");
         }
       });
   }

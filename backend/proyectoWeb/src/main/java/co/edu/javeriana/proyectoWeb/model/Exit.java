@@ -58,7 +58,7 @@ public class Exit
     {
         this.idFRoom = idFRoom;
     }
-
+    @JsonBackReference
     public Room getIdSRoom() 
     {
         return idSRoom;

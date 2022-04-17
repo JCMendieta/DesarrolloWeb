@@ -119,21 +119,22 @@ public class DatabaseInit implements ApplicationRunner
         Player player1 = new Player("Samy", "xd", "2021-09-02",(long)40,(long)6,(long)1,(long)1,(long)20,(long)0,(long)20, items1, Role.ROLE_DESIGNER,(long)0);
         playerRepository.save(player1);
         players1.add(player1);
-        Player player2 = new Player("Mendieta", "dx", "2022-10-03",(long)62,(long)78,(long)2,(long)12,(long)4,(long)0,(long)99, items2, Role.ROLE_ADMIN,(long)0);
+        Player player2 = new Player("Mendieta", "dx", "2022-10-03",(long)62,(long)78,(long)2,(long)12,(long)4,(long)0,(long)20, items2, Role.ROLE_ADMIN,(long)0);
         playerRepository.save(player2);
         players2.add(player2);
-        Player player3 = new Player("Carlos", "a", "2022-10-03",(long)62,(long)78,(long)2,(long)12,(long)4,(long)0,(long)99, items2, Role.ROLE_PLAYER,(long)0);
+        Player player3 = new Player("Carlos", "a", "2022-10-03",(long)62,(long)78,(long)2,(long)12,(long)4,(long)0,(long)20, items2, Role.ROLE_PLAYER,(long)0);
         playerRepository.save(player3);
         players1.add(player3);
 
         //EXITS
         ArrayList<Exit> exits1 = new ArrayList<>(); 
         ArrayList<Exit> exits2 = new ArrayList<>(); 
+        ArrayList<Exit> exits3 = new ArrayList<>(); 
 
         //ROOMS
         Room room1 = new Room (items1, decorativeItems1, null, exits1, players1);
         Room room2 = new Room (items2, decorativeItems2, monster2, exits2, players2);
-        Room room3 = new Room(null, null, null, null, null);
+        Room room3 = new Room(null, null, null, exits3, null);
         roomRepository.save(room1);
         roomRepository.save(room2);
         roomRepository.save(room3);
@@ -159,5 +160,12 @@ public class DatabaseInit implements ApplicationRunner
         Exit exit2 = new Exit (room1, room3);
         exits1.add(exit2);
         exitRepository.save(exit2);
+        Exit exit3 = new Exit (room2, room1);
+        exits2.add(exit3);
+        exitRepository.save(exit3);
+        Exit exit4 = new Exit (room3, room1);
+        exits3.add(exit4);
+        exitRepository.save(exit4);
+        
     }
 }

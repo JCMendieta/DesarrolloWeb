@@ -1,5 +1,6 @@
 package co.edu.javeriana.proyectoWeb.api_controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -174,9 +175,10 @@ public class PlayerApiController
     {
         Player player = playerRepository.findById(id).get();
         List<Room> rooms = roomRepository.findAll();
-        //Long r = (long)(Math.random() * (rooms.get(rooms.size() - 1).getId() - rooms.get(0).getId()));
         player.setIdRoom(roomRepository.findById((long)16).get());
         player.setClock((long)0);
+        player.setHitpoints((long)40);
+        player.setItems(new ArrayList<Item>());
         playerRepository.save(player);
 
         return player;

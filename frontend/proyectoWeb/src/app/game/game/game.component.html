@@ -1,24 +1,28 @@
-<p>{{currentPlayer?.name}}</p>
-<p>{{currentPlayer?.hitpoints}}</p>
-<p>{{currentPlayer?.clock}} "Reloj"</p>
-<p>{{currentPlayer?.max_time}} Max_time</p>
+<p>Player name : {{currentPlayer?.name}}</p>
+<p>Player hitpoints : {{currentPlayer?.hitpoints}}</p>
+<p>Player attack level : {{currentPlayer?.attack_level}}</p>
+<p>Player defense slash : {{currentPlayer?.defence_slash}}</p>
+<p>Player weight capacity : {{currentPlayer?.maxWeight}}</p>
+<p>Player actual weight : {{currentPlayer?.weight}}</p>
+<p>Clock counter : {{currentPlayer?.clock}}</p>
+<p>Max time : {{currentPlayer?.max_time}}</p>
 
-<h2>Your items</h2>
+<h2>Your items:</h2>
 <p *ngFor = "let i of currentPlayer?.items">
     <li>{{i.name}}</li>
     <button (click) = "discard(i)">Discard</button> 
 </p>
 
-<h2>Items in the room</h2>
+<h2>Items in the room:</h2>
 <p *ngFor = "let i of currentPlayer?.idRoom?.rItems">
     <li>{{i.name}}</li>
     <button (click) = "collect(i)">Collect</button> 
 </p>
 
-<h2>Decorative items</h2>
-<li *ngFor = "let di of currentPlayer?.idRoom?.idDecorativeItem">
-   {{di.name}}
-</li>
+<h2>Decorative items:</h2>
+<p *ngFor = "let di of currentPlayer?.idRoom?.idDecorativeItem">
+   <li>{{di.name}}</li>
+</p>
 
 <li *ngIf="currentPlayer?.idRoom?.rMonster; else noMonster">
     <h2>Monster</h2>
@@ -30,10 +34,8 @@
         <button (click) = "attack(currentPlayer!.idRoom.rMonster)">Attack Monster</button>
 </li>  
 <ng-template #noMonster>
-    <li></li>
     <h3>There's no monster in this room.</h3>
 </ng-template>
-<li></li>
 
 <h2>Exits</h2>
 <p *ngFor = "let e of currentPlayer?.idRoom?.rExits">
@@ -42,22 +44,20 @@
 
 
 <h2>Players in the room</h2>
-Refresh the page to see every other player in the room.
-<li *ngFor="let ps of currentPlayers">
-    <p *ngIf="ps.name != currentPlayer?.name; else justMe">
+<p *ngFor="let ps of currentPlayers">
+    <li *ngIf = "ps.name != currentPlayer?.name; else isCurrentPlayer">
         {{ps.name}}
-    </p>
-</li>   
-<ng-template #justMe>    
-    You
-</ng-template>
+    </li>
+</p>   
+
+<ng-template #isCurrentPlayer ><li>You</li></ng-template>
 
 <h2>LogBook</h2>
 <li *ngFor = "let action of logBook">
     {{action}}
 </li>
 
-<li *ngIf = "currentPlayer?.clock == 20">
+<li *ngIf = "currentPlayer?.clock == currentPlayer?.max_time">
     {{finish()}}
 </li>
 
