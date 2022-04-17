@@ -18,6 +18,7 @@ export class GameComponent implements OnInit
   currentPlayers : Player[] = [];
   logBook : String[] = [];
   monsterHp : any;
+  playerHP : any;
   monsterHpafterHit : any; 
 
   constructor(
@@ -76,9 +77,10 @@ export class GameComponent implements OnInit
       })
   }
 
-  attack (rMonster : Monster) : void
+  attack (rMonster : Monster, myPlayer : Player) : void
   {
     this.monsterHp = rMonster.hitpoints;
+    this.playerHP = myPlayer.hitpoints;
 
     this.sessionService.attack(this.currentPlayer as Player, rMonster)
     .subscribe(player =>
@@ -86,6 +88,7 @@ export class GameComponent implements OnInit
         this.currentPlayer = player;
         sessionStorage.setItem("currentPlayer", JSON.stringify(player));
         this.logBook.push(this.currentPlayer.name +" attacked "+this.currentPlayer.idRoom.rMonster.idMonsterType.name+" and inflicted "+(this.monsterHp-this.currentPlayer.idRoom.rMonster.hitpoints)+ " of damage.");
+        this.logBook.push(this.currentPlayer.idRoom.rMonster.idMonsterType.name +" attacked "+this.currentPlayer.name+" and inflicted "+(this.playerHP-this.currentPlayer.hitpoints)+ " of damage.");
         sessionStorage.setItem("logBook",JSON.stringify(this.logBook));
       })
   }

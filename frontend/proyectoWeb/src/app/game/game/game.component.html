@@ -31,7 +31,7 @@
         <div class="linebreaks">Attack level: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.attack_level}}</div>
         <div class="linebreaks">Defense slash: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.defence_slash}}</div>
         <div class="linebreaks">Size: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.size}}</div>
-        <button (click) = "attack(currentPlayer!.idRoom.rMonster)">Attack Monster</button>
+        <button (click) = "attack(currentPlayer!.idRoom.rMonster, currentPlayer!)">Attack Monster</button>
 </li>  
 <ng-template #noMonster>
     <h3>There's no monster in this room.</h3>
