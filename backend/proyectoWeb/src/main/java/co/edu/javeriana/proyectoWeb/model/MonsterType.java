@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class MonsterType
@@ -138,7 +139,7 @@ public class MonsterType
         this.category = category;
     }
 
-    @JsonBackReference
+    @JsonManagedReference(value = "monster-list")
     public List<Monster> getMonsters() 
     {
         return monsters;

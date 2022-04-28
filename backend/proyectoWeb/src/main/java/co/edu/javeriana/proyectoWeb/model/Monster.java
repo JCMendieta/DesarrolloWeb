@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -84,7 +85,7 @@ public class Monster
         this.idRoom = idRoom;
     }
 
-    @JsonManagedReference
+    @JsonBackReference(value = "monster-list")
     public MonsterType getIdMonsterType() 
     {
         return idMonsterType;

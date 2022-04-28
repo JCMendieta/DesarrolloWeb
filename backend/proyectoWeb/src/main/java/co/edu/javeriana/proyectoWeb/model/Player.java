@@ -87,6 +87,12 @@ public class Player
         this.weight = weight;
     }
 
+    public Player(String name, String password) 
+    {
+        this.name = name;
+        this.password = password;
+    }
+
     public Long getId() 
     {
         return id;
@@ -196,7 +202,7 @@ public class Player
         this.max_time = max_time;
     }
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "playerItem-list")
     public List<Item> getItems() 
     {
         return items;
@@ -207,7 +213,6 @@ public class Player
         this.items = items;
     }
 
-    @JsonManagedReference
     public Room getIdRoom() 
     {
         return idRoom;

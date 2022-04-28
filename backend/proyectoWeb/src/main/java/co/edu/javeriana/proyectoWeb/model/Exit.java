@@ -48,7 +48,7 @@ public class Exit
         this.id = id;
     }
 
-    @JsonBackReference
+    @JsonBackReference(value = "exit-list")
     public Room getIdFRoom() 
     {
         return idFRoom;

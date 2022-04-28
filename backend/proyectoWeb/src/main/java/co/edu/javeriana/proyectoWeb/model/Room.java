@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -75,7 +76,6 @@ public class Room
         this.id = id;
     }
 
-    @JsonManagedReference
     public List<Item> getrItems() 
     {
         return rItems;
@@ -86,7 +86,6 @@ public class Room
         this.rItems = rItems;
     }
 
-    @JsonManagedReference
     public List<DecorativeItem> getIdDecorativeItem() 
     {
         return idDecorativeItem;
@@ -107,7 +106,7 @@ public class Room
         this.rMonster = rMonster;
     }
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "exit-list")
     public List<Exit> getrExits()
     {
         return rExits;
@@ -118,7 +117,7 @@ public class Room
         this.rExits = rExits;
     }
 
-    @JsonBackReference
+    @JsonIgnore
     public List<Player> getrPlayers() 
     {
         return rPlayers;

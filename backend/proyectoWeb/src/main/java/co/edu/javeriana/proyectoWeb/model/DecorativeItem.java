@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class DecorativeItem 
@@ -57,7 +58,7 @@ public class DecorativeItem
         this.name = name;
     }
 
-    @JsonBackReference
+    @JsonIgnore
     public List<Room> getIdRoom() 
     {
         return idRoom;

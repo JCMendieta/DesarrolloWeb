@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Item 
@@ -133,7 +135,7 @@ public class Item
         this.wiki_url = wiki_url;
     }
 
-    @JsonBackReference
+    @JsonIgnore
     public List<Room> getIdRoom() 
     {
         return idRoom;
@@ -144,7 +146,7 @@ public class Item
         this.idRoom = idRoom;
     }
 
-    @JsonBackReference
+    @JsonBackReference(value = "playerItem-list")
     public Player getIdPlayer() 
     {
         return idPlayer;

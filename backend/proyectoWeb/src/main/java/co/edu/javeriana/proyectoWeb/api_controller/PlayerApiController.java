@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -51,6 +54,7 @@ public class PlayerApiController
 
     @GetMapping("/list")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public List<Player> list(Model model)
     {
         List<Player> players = playerRepository.findAll();
@@ -60,6 +64,7 @@ public class PlayerApiController
 
     @GetMapping("/edit/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public Player edit(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Player p = playerRepository.findById(id).get();
@@ -77,6 +82,7 @@ public class PlayerApiController
 
     @PostMapping("/save")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public Player save(@ModelAttribute Player player, Model model) 
     {
         return playerRepository.save(player);
@@ -84,6 +90,7 @@ public class PlayerApiController
 
     @GetMapping("/delete/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public void delete(Model model, @PathVariable Long id)
     {
         Player player = playerRepository.findById(id).get();
@@ -106,6 +113,7 @@ public class PlayerApiController
 
     @GetMapping("/view/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public Player view(Model model, @PathVariable Long id) throws NotFoundException 
     {
         Player p = playerRepository.findById(id).get();
@@ -124,6 +132,7 @@ public class PlayerApiController
 
     @GetMapping("/item_list/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public List<Item> currentItems(Model model, @PathVariable Long id)
     {
         Player p = playerRepository.findById(id).get();
@@ -134,6 +143,7 @@ public class PlayerApiController
 
     @GetMapping("/{username}/{password}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public Player findPlayerByUsername(@PathVariable String username, @PathVariable String password) 
     {
         Player player = null;
@@ -151,6 +161,7 @@ public class PlayerApiController
 
     @GetMapping("/discard/{idPlayer}/{idItem}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public Player discard (@PathVariable Long idPlayer, @PathVariable Long idItem)
     {
         Player player = playerRepository.findById(idPlayer).get();
@@ -172,6 +183,7 @@ public class PlayerApiController
 
     @GetMapping("/spawn/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public Player spawn (@PathVariable Long id)
     {
         Player player = playerRepository.findById(id).get();
@@ -187,6 +199,7 @@ public class PlayerApiController
 
     @GetMapping("/collect/{idPlayer}/{idItem}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public Player collect (@PathVariable Long idPlayer, @PathVariable Long idItem)
     {
         Player player = playerRepository.findById(idPlayer).get();
@@ -211,6 +224,7 @@ public class PlayerApiController
 
     @GetMapping("/move/{idPlayer}/{idExit}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public Player move (@PathVariable Long idPlayer, @PathVariable Long idExit)
     {
         Player player = playerRepository.findById(idPlayer).get();
@@ -231,6 +245,7 @@ public class PlayerApiController
 
     @GetMapping("/currentPlayers/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public List<Player> players (@PathVariable Long id)
     {
         Room room = roomRepository.findById(id).get();
@@ -240,13 +255,14 @@ public class PlayerApiController
 
     @GetMapping("/attack/{idPlayer}/{idMonster}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public Player attack (@PathVariable Long idPlayer, @PathVariable Long idMonster)
     {
         Player player = playerRepository.findById(idPlayer).get();
         Monster monster = monsterRepository.findById(idMonster).get();
         Room room = monster.getIdRoom();
         Random random = new Random();
-        Long damagePlayer = (long)random.nextLong((player.getAttack_level()+1));
+        /*Long damagePlayer = (long)random.nextLong((player.getAttack_level()+1));
         Long damageMonster = (long)random.nextLong((monster.getIdMonsterType().getAttack_level()+1));
         Long defenseMonster = (long)random.nextLong((monster.getIdMonsterType().getDefence_slash()+1));
         Long defensePlayer = (long)random.nextLong((player.getDefence_slash()+1));
@@ -286,13 +302,14 @@ public class PlayerApiController
 
         roomRepository.save(room);
         playerRepository.save(player);
-        monsterRepository.save(monster);
+        monsterRepository.save(monster);*/
         
         return player;
     }
 
     @GetMapping("/finish/{id}")
     @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
     public Long finish (@PathVariable Long id)
     {
         Player player = playerRepository.findById(id).get();
