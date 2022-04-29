@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-finish',
@@ -9,10 +10,15 @@ export class FinishComponent implements OnInit
 {
   score : number | undefined;
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit(): void 
   {
     this.score = JSON.parse(sessionStorage.getItem("score")!);
+  }
+
+  accept() : void
+  {
+    this.router.navigate(['login']);
   }
 }

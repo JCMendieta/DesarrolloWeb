@@ -5,6 +5,8 @@ import { Item } from 'src/app/model/item';
 import { Player } from 'src/app/model/player';
 import { SessionService } from 'src/app/shared/session.service';
 import { Monster } from 'src/app/model/monster';
+import { MonsterType } from 'src/app/model/monster-type';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-game',
@@ -19,6 +21,7 @@ export class GameComponent implements OnInit
   logBook : String[] = [];
   monsterHp : any;
   monsterHpafterHit : any; 
+  monsterTyp : MonsterType | undefined;
 
   constructor(
     private router : Router,
@@ -29,8 +32,8 @@ export class GameComponent implements OnInit
     this.currentPlayer = JSON.parse(sessionStorage.getItem("currentPlayer")!);
     this.logBook = JSON.parse(sessionStorage.getItem("loogBook")!);
     sessionStorage.setItem("logBook",JSON.stringify(this.logBook));
-
     this.players();
+    this.monsterType();
   }
 
   discard (item : Item) : void 
@@ -104,5 +107,12 @@ export class GameComponent implements OnInit
       sessionStorage.setItem("score", JSON.stringify(score));
       this.router.navigate(['finish']);
     });
+  }
+
+  monsterType () : void
+  {
+    this.sessionService.monsterType(this.currentPlayer?.idRoom?.rMonster!)
+    .subscribe(mt => 
+      this.monsterTyp = mt);
   }
 }

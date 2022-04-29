@@ -24,24 +24,24 @@
    <li>{{di.name}}</li>
 </p>
 
-<li *ngIf="currentPlayer?.idRoom?.rMonster; else noMonster">
-    <h2>Monster</h2>
-        <div class="linebreaks">Name: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.name}}</div>
-        <div class="linebreaks">Hitpoints: {{currentPlayer?.idRoom?.rMonster?.hitpoints}}</div>
-        <div class="linebreaks">Attack level: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.attack_level}}</div>
-        <div class="linebreaks">Defense slash: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.defence_slash}}</div>
-        <div class="linebreaks">Size: {{currentPlayer?.idRoom?.rMonster?.idMonsterType?.size}}</div>
-        <button (click) = "attack(currentPlayer!.idRoom.rMonster)">Attack Monster</button>
-</li>  
-<ng-template #noMonster>
-    <h3>There's no monster in this room.</h3>
-</ng-template>
-
 <h2>Exits</h2>
 <p *ngFor = "let e of currentPlayer?.idRoom?.rExits">
     <button (click) = "move(e)">Go through exit #{{e.id}}</button> 
 </p>
 
+<h3>Refresh the page to see actual monster stats and actual players in the room.</h3>
+<li *ngIf="currentPlayer?.idRoom?.rMonster; else noMonster">
+    <h2>Monster</h2>
+        <div class="linebreaks">Name: {{monsterTyp?.name}}</div>
+        <div class="linebreaks">Hitpoints: {{currentPlayer?.idRoom?.rMonster?.hitpoints}}</div>
+        <div class="linebreaks">Attack level: {{monsterTyp?.attack_level}}</div>
+        <div class="linebreaks">Defense slash: {{monsterTyp?.defence_slash}}</div>
+        <div class="linebreaks">Size: {{monsterTyp?.size}}</div>
+        <button (click) = "attack(currentPlayer!.idRoom.rMonster)">Attack Monster</button>
+</li>  
+<ng-template #noMonster>
+    <h3>There's no monster in this room.</h3>
+</ng-template>
 
 <h2>Players in the room</h2>
 <p *ngFor="let ps of currentPlayers">

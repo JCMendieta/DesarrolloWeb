@@ -6,6 +6,7 @@ import { Item } from '../model/item';
 import { Player } from '../model/player';
 import { Room } from '../model/room';
 import { Monster} from '../model/monster';
+import { MonsterType } from '../model/monster-type';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +60,10 @@ export class SessionService
   finish (player : Player) : Observable<number>
   {
     return this.http.get<number>("http://localhost:8080/player_api/finish/" + player.id);
+  }
+
+  monsterType (monster : Monster) : Observable<MonsterType>
+  {
+    return this.http.get<MonsterType>("http://localhost:8080/monster_type_api/currentMonsterType/" + monster.id);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MonsterType } from 'src/app/model/monster-type';
 import { Player } from 'src/app/model/player';
 import { SessionService } from 'src/app/shared/session.service';
 
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit
 
   currentPlayer : Player | undefined;
   logBook : String[] = [];
+  monsterType : MonsterType | undefined;
   player : boolean = true;
   designer : boolean = true;
   admin : boolean = true;
