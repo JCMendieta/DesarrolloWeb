@@ -1,1 +1,1 @@
-GET http://localhost:8080/player_api/Samy/xd HTTP/1.1
+GET http://localhost:8080/player_api/discard/13/1 HTTP/1.1

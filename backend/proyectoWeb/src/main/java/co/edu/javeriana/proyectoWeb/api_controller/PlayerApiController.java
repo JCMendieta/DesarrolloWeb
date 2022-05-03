@@ -52,95 +52,6 @@ public class PlayerApiController
     @Autowired
     MonsterRepository monsterRepository;
 
-    @GetMapping("/list")
-    @CrossOrigin(origins = "http://localhost:4200")
-    @Transactional
-    public List<Player> list(Model model)
-    {
-        List<Player> players = playerRepository.findAll();
-        model.addAttribute("players", players);
-        return players;
-    }
-
-    @GetMapping("/edit/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
-    @Transactional
-    public Player edit(Model model, @PathVariable Long id) throws NotFoundException 
-    {
-        Player p = playerRepository.findById(id).get();
-        
-        if (p != null) 
-        {
-            model.addAttribute("player", p);
-            return p;
-        } 
-        else 
-        {
-            throw new NotFoundException();
-        }
-    }
-
-    @PostMapping("/save")
-    @CrossOrigin(origins = "http://localhost:4200")
-    @Transactional
-    public Player save(@ModelAttribute Player player, Model model) 
-    {
-        return playerRepository.save(player);
-    }
-
-    @GetMapping("/delete/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
-    @Transactional
-    public void delete(Model model, @PathVariable Long id)
-    {
-        Player player = playerRepository.findById(id).get();
-        Room r = player.getIdRoom();
-
-        if (r != null)
-        {
-            player.unlinkRoomPlayer(r);
-            roomRepository.save(r);
-        }
-
-        for (Item item : player.getItems())
-        {
-            item.setIdPlayer(null);
-            itemRepository.save(item);
-        }
-        
-        playerRepository.deleteById(id);
-    }
-
-    @GetMapping("/view/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
-    @Transactional
-    public Player view(Model model, @PathVariable Long id) throws NotFoundException 
-    {
-        Player p = playerRepository.findById(id).get();
-
-        if (p != null) 
-        {
-            Player player = playerRepository.findById(id).get();
-            model.addAttribute("player", player);
-            return player;
-        } 
-        else 
-        {
-            throw new NotFoundException();
-        }
-    }
-
-    @GetMapping("/item_list/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
-    @Transactional
-    public List<Item> currentItems(Model model, @PathVariable Long id)
-    {
-        Player p = playerRepository.findById(id).get();
-        List<Item> items = p.getItems();
-        model.addAttribute("items", items);
-        return items;
-    }
-
     @GetMapping("/{username}/{password}")
     @CrossOrigin(origins = "http://localhost:4200")
     @Transactional
@@ -156,28 +67,6 @@ public class PlayerApiController
             }
         }
 
-        return player;
-    }
-
-    @GetMapping("/discard/{idPlayer}/{idItem}")
-    @CrossOrigin(origins = "http://localhost:4200")
-    @Transactional
-    public Player discard (@PathVariable Long idPlayer, @PathVariable Long idItem)
-    {
-        Player player = playerRepository.findById(idPlayer).get();
-        Item item = itemRepository.findById(idItem).get();
-        Room room = player.getIdRoom();
-
-        player.getItems().remove(item);
-        player.setWeight(player.getWeight() - item.getWeight());
-        item.getIdRoom().add(room);
-        item.setIdPlayer(null);
-        room.getrItems().add(item);
-
-        playerRepository.save(player);
-        itemRepository.save(item);
-        roomRepository.save(room);
-        
         return player;
     }
 
@@ -219,6 +108,28 @@ public class PlayerApiController
             roomRepository.save(room);
         }
 
+        return player;
+    }
+
+    @GetMapping("/discard/{idPlayer}/{idItem}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @Transactional
+    public Player discard (@PathVariable Long idPlayer, @PathVariable Long idItem)
+    {
+        Player player = playerRepository.findById(idPlayer).get();
+        Item item = itemRepository.findById(idItem).get();
+        Room room = player.getIdRoom();
+
+        player.getItems().remove(item);
+        player.setWeight(player.getWeight() - item.getWeight());
+        item.getIdRoom().add(room);
+        item.setIdPlayer(null);
+        room.getrItems().add(item);
+
+        playerRepository.save(player);
+        itemRepository.save(item);
+        roomRepository.save(room);
+        
         return player;
     }
 
