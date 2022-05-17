@@ -3,7 +3,6 @@ package co.edu.javeriana.proyectoWeb;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
@@ -34,11 +31,11 @@ import co.edu.javeriana.proyectoWeb.repository.MonsterTypeRepository;
 import co.edu.javeriana.proyectoWeb.repository.PlayerRepository;
 import co.edu.javeriana.proyectoWeb.repository.RoomRepository;
 
-// mvn test -Dtest=PlayerIntegrationTestController
-@ActiveProfiles("playerIntegrationTest")
+// mvn test -Dtest=MonsterTypeIntegrationTestController
+@ActiveProfiles("monsterTypeIntegrationTest")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class PlayerIntegrationTestController 
+class MonsterTypeIntegrationTestController 
 {
 	@LocalServerPort
     private int port;
@@ -187,119 +184,11 @@ class PlayerIntegrationTestController
 	}
 
 	@Test
-    void findPlayerByUsername() throws Exception 
+    void monsterType() throws Exception 
 	{
-        Player player = REST.getForObject("http://localhost:" + port + "/player_api/Samy/xd", Player.class);
+        MonsterType monsterType = REST.getForObject("http://localhost:" + port + "/monster_type_api/currentMonsterType/9", MonsterType.class);
+        Monster monster = monsterRepository.findById((long)9).get();
 
-        assertEquals("Samy", player.getName());
-		assertEquals("xd", player.getPassword());
+        assertEquals(monster.getIdMonsterType().getId(), monsterType.getId());
     }
-
-	@Test
-    void spawn() throws Exception 
-	{
-        Player player = REST.getForObject("http://localhost:" + port + "/player_api/spawn/13", Player.class);
-
-        assertEquals((long)13, player.getId());
-		assertEquals((long)16, player.getIdRoom().getId());
-		assertEquals((long)0, player.getClock());
-		assertEquals((long)40, player.getHitpoints());
-		assertEquals(new ArrayList<Item>(), player.getItems());
-    }
-
-	@Test
-    void collect() throws Exception 
-	{
-        Player player = REST.getForObject("http://localhost:" + port + "/player_api/collect/13/1", Player.class);
-		Item item = itemRepository.getById((long)1);
-		Boolean isPlayerItem = false;
-		Room room = roomRepository.getById(player.getIdRoom().getId());
-
-		for (Item i : player.getItems()) 
-		{
-			if (i.getId().equals(item.getId()))
-			{
-				isPlayerItem = true;
-			}
-		}
-
-		assertEquals(isPlayerItem, true);
-		assertEquals(item.getIdPlayer().getId(), player.getId());
-		assertEquals(item.getIdRoom().contains(room), false);
-		assertEquals(room.getrItems().contains(item), false);
-    }
-
-	@Test
-    void discard() throws Exception 
-	{
-        Player player = REST.getForObject("http://localhost:" + port + "/player_api/discard/14/4", Player.class);
-		Item item = itemRepository.getById((long)4);
-		Boolean isRoomItem = false, isItemRoom = false;
-		Room room = roomRepository.getById(player.getIdRoom().getId());
-
-		for (Item i : room.getrItems()) 
-		{
-			if (i.getId().equals(item.getId()))
-			{
-				isRoomItem = true;
-			}
-		}
-
-		for (Room r : item.getIdRoom()) 
-		{
-			if (r.getId().equals(room.getId()))
-			{
-				isItemRoom = true;
-			}
-		}
-
-		assertEquals(isRoomItem, true);
-		assertEquals(isItemRoom, true);
-		assertEquals(player.getItems().contains(item), false);
-		assertEquals(item.getIdPlayer(), null);
-    }
-
-	@Test
-    void move() throws Exception 
-	{
-        Player player = REST.getForObject("http://localhost:" + port + "/player_api/move/13/19", Player.class);
-		Exit exit = exitRepository.getById((long)19);
-		Boolean isOnNextRoom = false;
-
-		for (Player p : exit.getIdSRoom().getrPlayers()) 
-		{
-			if (p.getId().equals(player.getId()))
-			{
-				isOnNextRoom = true;
-			}
-		}
-
-		
-		assertEquals(isOnNextRoom, true);
-		assertEquals(player.getIdRoom().getId(), exit.getIdSRoom().getId());
-		assertEquals(exit.getIdFRoom().getrPlayers().contains(player), false);
-    }
-
-	@Test
-    void players() throws Exception 
-	{
-		ResponseEntity<List> response = REST.getForEntity("http://localhost:" + port + "/player_api/currentPlayers/16", List.class);
-		
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-    }
-
-	@Test
-    void finish() throws Exception 
-	{
-        Long score = REST.getForObject("http://localhost:" + port + "/player_api/finish/14", Long.class);
-		List<Item> items = playerRepository.findById((long)14).get().getItems();
-		Long playerScore = (long)0;
-
-		for (Item item : items) 
-		{
-			playerScore = playerScore + item.getCost();
-		}
-
-		assertEquals(playerScore, score);
-    }
-}		
+}

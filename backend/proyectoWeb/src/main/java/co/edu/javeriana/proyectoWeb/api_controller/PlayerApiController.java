@@ -173,7 +173,7 @@ public class PlayerApiController
         Monster monster = monsterRepository.findById(idMonster).get();
         Room room = monster.getIdRoom();
         Random random = new Random();
-        /*Long damagePlayer = (long)random.nextLong((player.getAttack_level()+1));
+        Long damagePlayer = (long)random.nextLong((player.getAttack_level()+1));
         Long damageMonster = (long)random.nextLong((monster.getIdMonsterType().getAttack_level()+1));
         Long defenseMonster = (long)random.nextLong((monster.getIdMonsterType().getDefence_slash()+1));
         Long defensePlayer = (long)random.nextLong((player.getDefence_slash()+1));
@@ -213,7 +213,7 @@ public class PlayerApiController
 
         roomRepository.save(room);
         playerRepository.save(player);
-        monsterRepository.save(monster);*/
+        monsterRepository.save(monster);
         
         return player;
     }
