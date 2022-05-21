@@ -1,6 +1,7 @@
 package co.edu.javeriana.proyectoWeb;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +113,7 @@ class PlayerIntegrationTestController
 		//MONSTERS
 		ArrayList<Monster> monsters1 = new ArrayList<>();
 		ArrayList<Monster> monsters2 = new ArrayList<>();
-		Monster monster1 = new Monster((long)1000);
+		Monster monster1 = new Monster((long)100);
 		monsters1.add(monster1);
 		monsterRepository.save(monster1);
 		Monster monster2 = new Monster((long)50);
@@ -120,7 +121,7 @@ class PlayerIntegrationTestController
 		monsterRepository.save(monster2);
 
 		//MONSTERS TYPE
-		MonsterType monsterTypes1 = new MonsterType("Molanisk","2021-09-02",(long)40,(long)45,(long)1,(long)52,category1,monsters1,"A strange mole-like being.","https://oldschool.runescape.wiki/w/Molanisk");
+		MonsterType monsterTypes1 = new MonsterType("Molanisk","2021-09-02",(long)50,(long)0,(long)1,(long)100,category1,monsters1,"A strange mole-like being.","https://oldschool.runescape.wiki/w/Molanisk");
 		MonsterType monsterTypes2 = new MonsterType("Zombie","2021-09-02",(long)8,(long)0,(long)1,(long)22,category2,monsters2,"Dead man walking.","https://oldschool.runescape.wiki/w/Zombie#Level_13");
 		monsterTypeRepository.save(monsterTypes1);
 		monsterTypeRepository.save(monsterTypes2);
@@ -134,7 +135,7 @@ class PlayerIntegrationTestController
 		//PLAYER
 		ArrayList<Player> players1 = new ArrayList<>();
 		ArrayList<Player> players2 = new ArrayList<>();
-		Player player1 = new Player("Samy", "xd", "2021-09-02",(long)40,(long)6,(long)1,(long)1,(long)20,(long)0,(long)20, null, Role.ROLE_DESIGNER,(long)0);
+		Player player1 = new Player("Samy", "xd", "2021-09-02",(long)50,(long)0,(long)1,(long)100,(long)20,(long)0,(long)20, null, Role.ROLE_DESIGNER,(long)0);
 		playerRepository.save(player1);
 		players1.add(player1);
 		Player player2 = new Player("Mendieta", "dx", "2022-10-03",(long)62,(long)78,(long)2,(long)12,(long)4,(long)0,(long)20, items2, Role.ROLE_ADMIN,(long)0);
@@ -184,6 +185,8 @@ class PlayerIntegrationTestController
 		Exit exit4 = new Exit (room3, room1);
 		exits3.add(exit4);
 		exitRepository.save(exit4);
+
+		
 	}
 
 	@Test
@@ -302,4 +305,18 @@ class PlayerIntegrationTestController
 
 		assertEquals(playerScore, score);
     }
+
+	@Test
+    void attack() throws Exception 
+	{
+        Player playerT = REST.getForObject("http://localhost:" + port + "/player_api/attack/13/9", Player.class);
+		Room room = roomRepository.getById(playerT.getIdRoom().getId());
+		Monster monster = monsterRepository.getById((long)9);
+
+
+		assertNotEquals((long)100, playerT.getHitpoints());
+		assertNotEquals((long)100, monster.getHitpoints());
+		
+    }
+
 }		
