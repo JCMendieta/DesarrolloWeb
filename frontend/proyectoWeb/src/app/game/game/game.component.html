@@ -1,59 +1,59 @@
-<p>Player name : {{currentPlayer?.name}}</p>
-<p>Player hitpoints : {{currentPlayer?.hitpoints}}</p>
-<p>Player attack level : {{currentPlayer?.attack_level}}</p>
-<p>Player defense slash : {{currentPlayer?.defence_slash}}</p>
-<p>Player weight capacity : {{currentPlayer?.maxWeight}}</p>
-<p>Player actual weight : {{currentPlayer?.weight}}</p>
-<p>Clock counter : {{currentPlayer?.clock}}</p>
-<p>Max time : {{currentPlayer?.max_time}}</p>
+<p class = "player" id = "playerName">Player name : {{currentPlayer?.name}}</p>
+<p class = "player" id = "playerHP">Player hitpoints : {{currentPlayer?.hitpoints}}</p>
+<p class = "player" id = "playerAL">Player attack level : {{currentPlayer?.attack_level}}</p>
+<p class = "player" id = "playerDS">Player defense slash : {{currentPlayer?.defence_slash}}</p>
+<p class = "player" id = "playerWC">Player weight capacity : {{currentPlayer?.maxWeight}}</p>
+<p class = "player" id = "playerAW">Player actual weight : {{currentPlayer?.weight}}</p>
+<p class = "player" id = "playerCC">Clock counter : {{currentPlayer?.clock}}</p>
+<p class = "player" id = "playerMT">Max time : {{currentPlayer?.max_time}}</p>
 
-<h2>Your items:</h2>
+<h2 class = "text" id = "subtitle">Your items:</h2>
 <p *ngFor = "let i of currentPlayer?.items">
-    <li>{{i.name}}</li>
-    <button (click) = "discard(i)">Discard</button> 
+    <li class = "vText">{{i.name}}</li>
+    <button (click) = "discard(i)" class = "button" id = "discard">Discard</button> 
 </p>
 
-<h2>Items in the room:</h2>
+<h2 class = "text" id = "subtitle2">Items in the room:</h2>
 <p *ngFor = "let i of currentPlayer?.idRoom?.rItems">
-    <li>{{i.name}}</li>
-    <button (click) = "collect(i)">Collect</button> 
+    <li class = "vText">{{i.name}}</li>
+    <button (click) = "collect(i)" class = "button" id = "collect">Collect</button> 
 </p>
 
-<h2>Decorative items:</h2>
+<h2 class = "text" id = "subtitle3">Decorative items:</h2>
 <p *ngFor = "let di of currentPlayer?.idRoom?.idDecorativeItem">
-   <li>{{di.name}}</li>
+   <li class = "vText">{{di.name}}</li>
 </p>
 
-<h2>Exits</h2>
+<h2 class = "text" id = "subtitle4">Exits</h2>
 <p *ngFor = "let e of currentPlayer?.idRoom?.rExits">
-    <button (click) = "move(e)">Go through exit #{{e.id}}</button> 
+    <button (click) = "move(e)" class = "button" id = "move">Go through exit #{{e.id}}</button> 
 </p>
 
-<h3>Refresh the page to see actual monster stats and actual players in the room.</h3>
+<h3 class = "text" id = "subtitle5">Refresh the page to see actual monster stats and actual players in the room.</h3>
 <li *ngIf="currentPlayer?.idRoom?.rMonster; else noMonster">
-    <h2>Monster</h2>
-        <div class="linebreaks">Name: {{monsterTyp?.name}}</div>
-        <div class="linebreaks">Hitpoints: {{currentPlayer?.idRoom?.rMonster?.hitpoints}}</div>
-        <div class="linebreaks">Attack level: {{monsterTyp?.attack_level}}</div>
-        <div class="linebreaks">Defense slash: {{monsterTyp?.defence_slash}}</div>
-        <div class="linebreaks">Size: {{monsterTyp?.size}}</div>
-        <button (click) = "attack(currentPlayer!.idRoom.rMonster)">Attack Monster</button>
+    <h2 class = "text" id = "subtitle6">Monster</h2>
+        <div class="monster" id = "monsterName">Name: {{monsterTyp?.name}}</div>
+        <div class="monster" id = "monsterHP">Hitpoints: {{currentPlayer?.idRoom?.rMonster?.hitpoints}}</div>
+        <div class="monster" id = "monsterAL">Attack level: {{monsterTyp?.attack_level}}</div>
+        <div class="monster" id = "monsterDS">Defense slash: {{monsterTyp?.defence_slash}}</div>
+        <div class="monster" id = "monsterSize">Size: {{monsterTyp?.size}}</div>
+        <button (click) = "attack(currentPlayer!.idRoom.rMonster)" class = "button" id = "attack">Attack Monster</button>
 </li>  
 <ng-template #noMonster>
-    <h3>There's no monster in this room.</h3>
+    <h3 class = "text" id = "noMonsters">There's no monster in this room.</h3>
 </ng-template>
 
-<h2>Players in the room</h2>
+<h2 class = "text" id = "subtitle7">Players in the room</h2>
 <p *ngFor="let ps of currentPlayers">
-    <li *ngIf = "ps.name != currentPlayer?.name; else isCurrentPlayer">
+    <li *ngIf = "ps.name != currentPlayer?.name; else isCurrentPlayer" id = "currentPlayers">
         {{ps.name}}
     </li>
 </p>   
 
-<ng-template #isCurrentPlayer ><li>You</li></ng-template>
+<ng-template #isCurrentPlayer><li class = "text" id = "subtitle8">You</li></ng-template>
 
-<h2>LogBook</h2>
-<li *ngFor = "let action of logBook">
+<h2 class = "text" id = "subtitle9">LogBook</h2>
+<li *ngFor = "let action of logBook" id = "logbook">
     {{action}}
 </li>
 

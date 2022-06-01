@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit
     }
     else
     {
-      this.router.navigate(['login']);
+      this.router.navigate(['']);
     }
   }
 

@@ -1,9 +1,9 @@
 <div class = "home-wrapper">
-    <h1 class = "title">
+    <h1 class = "text" id = "title">
         MULTI USER DUNGEON
     </h1>
 
-    <p class = "paragraph">
+    <p class = "text" id = "paragraph">
         Un MUD es un juego multijugador donde los participantes 
         exploran un calabozo con monstruos y tesoros. 
         El objetivo es recolectar la mayor cantidad de tesoros, 
@@ -11,20 +11,20 @@
     </p>
 </div>
 
-<h1>Menu</h1>
+<h1 class = "text" id = "menu">Menu</h1>
 
-<div [hidden] = "player && designer">
-    <button (click) = "start()">PLAY</button>
+<div [hidden] = "player && designer" class = "role" id = "playerAndDesigner">
+    <button (click) = "start()" id = "play">PLAY</button>
 </div>
 
-<div [hidden] = "designer">
-    <li><a href = "http://localhost:8080/room/list">Rooms</a></li>
-    <li><a href = "http://localhost:8080/monster/list">Monsters</a></li>
-    <li><a href = "http://localhost:8080/monster_type/list">Monster types</a></li>
-    <li><a href = "http://localhost:8080/item/list">Items</a></li>
-    <li><a href = "http://localhost:8080/decorative_item/list">Decorative items</a></li>
+<div [hidden] = "designer" class = "role" id = "designer">
+    <li><a href = "http://localhost:8080/room/list" id = "rooms">Rooms</a></li>
+    <li><a href = "http://localhost:8080/monster/list" id = "monsters">Monsters</a></li>
+    <li><a href = "http://localhost:8080/monster_type/list" id = "monsterTypes">Monster types</a></li>
+    <li><a href = "http://localhost:8080/item/list" id = "items">Items</a></li>
+    <li><a href = "http://localhost:8080/decorative_item/list" id = "decorativeItems">Decorative items</a></li>
 </div>
 
-<div [hidden] = "admin">
-    <li><a href = "http://localhost:8080/player/list">Players</a></li>
+<div [hidden] = "admin" class = "role" id = "admin">
+    <li><a href = "http://localhost:8080/player/list" id = "players">Players</a></li>
 </div>

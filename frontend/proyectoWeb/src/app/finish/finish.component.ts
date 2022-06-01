@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LogoutComponent } from '../logout/logout.component';
 
 @Component({
   selector: 'app-finish',
@@ -19,6 +20,6 @@ export class FinishComponent implements OnInit
 
   accept() : void
   {
-    this.router.navigate(['login']);
+    this.router.navigate(['logout']);
   }
 }

@@ -56,11 +56,11 @@ export class GameComponent implements OnInit
         this.currentPlayer = player;
         
         sessionStorage.setItem("currentPlayer", JSON.stringify(player));
-        if(this.currentPlayer.weight + item.weight > this.currentPlayer.maxWeight){
+        if(item.weight + this.currentPlayer.weight > this.currentPlayer.maxWeight){
           this.logBook.push(this.currentPlayer.name +" tried to pick "+ item.name +" from the room, but is carrying too much weight!!. (it weights "+item.weight+" and cost "+item.cost+")");
         }
         else if(this.currentPlayer.idRoom.rMonster != null){
-          this.logBook.push(this.currentPlayer.name + "tried to pick "+item.name + " from the room, but " + this.currentPlayer.idRoom.rMonster.idMonsterType.name + " is watching...")
+          this.logBook.push(this.currentPlayer.name + " tried to pick "+item.name + " from the room, but " + this.monsterTyp?.name + " is watching...")
         }
         else{
           this.logBook.push(this.currentPlayer.name +" took "+ item.name +" from the room. (it weights "+item.weight+" and cost "+item.cost+")");
@@ -82,13 +82,12 @@ export class GameComponent implements OnInit
   attack (rMonster : Monster) : void
   {
     this.monsterHp = rMonster.hitpoints;
-
     this.sessionService.attack(this.currentPlayer as Player, rMonster)
     .subscribe(player =>
       {
         this.currentPlayer = player;
         sessionStorage.setItem("currentPlayer", JSON.stringify(player));
-        this.logBook.push(this.currentPlayer.name +" attacked "+this.currentPlayer.idRoom.rMonster.idMonsterType.name+" and inflicted "+(this.monsterHp-this.currentPlayer.idRoom.rMonster.hitpoints)+ " of damage.");
+        this.logBook.push(this.currentPlayer.name +" attacked "+this.monsterTyp?.name+" and inflicted "+(this.monsterHp-this.currentPlayer.idRoom.rMonster.hitpoints)+ " of damage.");
         sessionStorage.setItem("logBook",JSON.stringify(this.logBook));
       })
   }

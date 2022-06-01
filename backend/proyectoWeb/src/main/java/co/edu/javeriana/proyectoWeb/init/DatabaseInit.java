@@ -112,7 +112,7 @@ public class DatabaseInit implements ApplicationRunner
         monsterRepository.save(monster1);
         monster2.setIdMonsterType(monsterTypes2);
         monsterRepository.save(monster2);
-
+            
         //PLAYER
         ArrayList<Player> players1 = new ArrayList<>();
         ArrayList<Player> players2 = new ArrayList<>();
